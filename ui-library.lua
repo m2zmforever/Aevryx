@@ -645,17 +645,13 @@ InMain.Notification = InMain.Notification
 
 
 
-        local Page = CreateModule.Instance("ScrollingFrame",{
+        local Page = CreateModule.Instance("Frame",{
             Parent = Pages;
             Name = Text;
             BackgroundTransparency = 1;
             BorderSizePixel = 0;
             Position = UDim2.new(0,0,0,0);
             Size = UDim2.new(0.95,0,1,0);
-            CanvasSize = UDim2.new(0,0,0,0);
-            AutomaticCanvasSize = Enum.AutomaticSize.Y;
-            ScrollBarThickness = 4;
-            ScrollBarImageTransparency = 0.5;
         })
 
         local PageList = CreateModule.Instance("Frame",{
@@ -1461,14 +1457,15 @@ InMain.Notification = InMain.Notification
                 local List = CreateModule.Instance("ScrollingFrame",{
                     Parent = Dropdown;
                     Name = 'List';
+                    Active = true;
                     BackgroundTransparency = 1;
                     BorderSizePixel = 0;
                     Position = UDim2.new(0,0,0,20);
                     Size = UDim2.new(1,0,0,0);
                     CanvasSize = UDim2.new(0,0,0,0);
                     AutomaticCanvasSize = Enum.AutomaticSize.Y;
-                    ScrollBarThickness = 0;
-                    ScrollBarImageTransparency = 1;
+                    ScrollBarThickness = 4;
+                    ScrollBarImageTransparency = 0.5;
                 })
 
                 
@@ -1672,14 +1669,15 @@ InMain.Notification = InMain.Notification
                 local List = CreateModule.Instance("ScrollingFrame",{
                     Parent = Dropdown;
                     Name = 'List';
+                    Active = true;
                     BackgroundTransparency = 1;
                     BorderSizePixel = 0;
                     Position = UDim2.new(0,0,0,20);
                     Size = UDim2.new(1,0,0,0);
                     CanvasSize = UDim2.new(0,0,0,0);
                     AutomaticCanvasSize = Enum.AutomaticSize.Y;
-                    ScrollBarThickness = 0;
-                    ScrollBarImageTransparency = 1;
+                    ScrollBarThickness = 4;
+                    ScrollBarImageTransparency = 0.5;
                 })
 
 
