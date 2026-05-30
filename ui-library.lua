@@ -353,6 +353,32 @@ function AtlasLib.Main(Name,X,Y)
         HorizontalAlignment = Enum.HorizontalAlignment.Center;
     })
 
+    local Mouse = game:GetService("Players").LocalPlayer:GetMouse()
+    
+    local function isMouseOverDropdown()
+        local target = Mouse.Target
+        if not target or not target.Parent then return false end
+        
+        local checkParent = target
+        for _ = 1, 10 do
+            if checkParent and checkParent.Name == "List" and checkParent:IsA("ScrollingFrame") then
+                return true
+            end
+            checkParent = checkParent.Parent
+            if not checkParent or checkParent == AtlasLib.ScreenGui then break end
+        end
+        return false
+    end
+    
+    InputService.InputBegan:Connect(function(input, gameProcessed)
+        if input.UserInputType == Enum.UserInputType.MouseWheel and not gameProcessed then
+            if not isMouseOverDropdown() then
+                PageLayout.Enabled = false
+                task.wait(0.01)
+                PageLayout.Enabled = true
+            end
+        end
+    end)
 
     local TabsButtons = CreateModule.Instance("Frame",{
         Parent = Topbar;
