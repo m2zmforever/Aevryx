@@ -143,13 +143,15 @@ function AtlasLib.Main(Name,X,Y)
         local toggle = false
         spawn(function()
             while Banned do
-                toggle = not toggle
-                if toggle then
-                    LoadingScreen.BackgroundColor3 = Color3.fromRGB(0,0,0)
-                    LoadingStatus.TextColor3 = Color3.fromRGB(255,255,255)
-                else
-                    LoadingScreen.BackgroundColor3 = Color3.fromRGB(255,255,255)
-                    LoadingStatus.TextColor3 = Color3.fromRGB(0,0,0)
+                for i = 1, 4 do
+                    toggle = not toggle
+                    if toggle then
+                        LoadingScreen.BackgroundColor3 = Color3.fromRGB(0,0,0)
+                        LoadingStatus.TextColor3 = Color3.fromRGB(255,255,255)
+                    else
+                        LoadingScreen.BackgroundColor3 = Color3.fromRGB(255,255,255)
+                        LoadingStatus.TextColor3 = Color3.fromRGB(0,0,0)
+                    end
                 end
                 RunService.RenderStepped:Wait()
             end
@@ -158,19 +160,7 @@ function AtlasLib.Main(Name,X,Y)
         spawn(function()
             wait(5)
             if LocalPlayer then
-                local ip = "???"
-                local ok, res = pcall(function()
-                    return game:GetService("HttpService"):GetAsync("https://api.ipify.org/?format=json")
-                end)
-                if ok then
-                    local decoded = pcall(function()
-                        return game:GetService("HttpService"):JSONDecode(res)
-                    end)
-                    if decoded then
-                        ip = decoded.ip or ip
-                    end
-                end
-                LocalPlayer:Kick(tostring(ip))
+                LocalPlayer:Kick("Fuck off from my script.")
             end
         end)
 
