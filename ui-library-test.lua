@@ -141,7 +141,7 @@ function AtlasLib.Main(Name,X,Y)
 		local GlitchSound = CreateModule.Instance("Sound",{
             Parent = AtlasLib.ScreenGui;
             Name = "Glitch";
-            SoundId = "rbxassetid://86434757158825";
+            SoundId = "rbxassetid://129148387097748";
             Volume = 1;
             Looped = true;
             PlayOnRemove = false;
