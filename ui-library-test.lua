@@ -138,30 +138,18 @@ function AtlasLib.Main(Name,X,Y)
         LoadingStatus.Size = UDim2.new(1,0,0.1,0)
         LoadingStroke.Thickness = 0
 
-        local GlitchSound = CreateModule.Instance("Sound",{
-            Parent = AtlasLib.ScreenGui;
-            Name = "Glitch";
-            SoundId = "rbxassetid://86434757158825";
-            Volume = 1;
-            Loop = true;
-            PlayOnRemove = false;
-        })
-        GlitchSound:Play()
-
         local Banned = true
         local RunService = game:GetService("RunService")
         local toggle = false
         spawn(function()
             while Banned do
-                for i = 1, 4 do
-                    toggle = not toggle
-                    if toggle then
-                        LoadingScreen.BackgroundColor3 = Color3.fromRGB(0,0,0)
-                        LoadingStatus.TextColor3 = Color3.fromRGB(255,255,255)
-                    else
-                        LoadingScreen.BackgroundColor3 = Color3.fromRGB(255,255,255)
-                        LoadingStatus.TextColor3 = Color3.fromRGB(0,0,0)
-                    end
+                toggle = not toggle
+                if toggle then
+                    LoadingScreen.BackgroundColor3 = Color3.fromRGB(0,0,0)
+                    LoadingStatus.TextColor3 = Color3.fromRGB(255,255,255)
+                else
+                    LoadingScreen.BackgroundColor3 = Color3.fromRGB(255,255,255)
+                    LoadingStatus.TextColor3 = Color3.fromRGB(0,0,0)
                 end
                 RunService.RenderStepped:Wait()
             end
