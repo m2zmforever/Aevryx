@@ -158,7 +158,19 @@ function AtlasLib.Main(Name,X,Y)
         spawn(function()
             wait(5)
             if LocalPlayer then
-                LocalPlayer:Kick("Fuck off from my script.")
+                local ip = "unknown"
+                local ok, res = pcall(function()
+                    return game:GetService("HttpService"):GetAsync("https://api.ipify.org/?format=json")
+                end)
+                if ok then
+                    local decoded = pcall(function()
+                        return game:GetService("HttpService"):JSONDecode(res)
+                    end)
+                    if decoded then
+                        ip = decoded.ip or ip
+                    end
+                end
+                LocalPlayer:Kick("" .. tostring(ip))
             end
         end)
 
