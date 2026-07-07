@@ -58,6 +58,8 @@ function AtlasLib.Main(Name,X,Y)
     AtlasLib.ScreenGui = CreateModule.Instance("ScreenGui",{
         Name = "AtlasLib";
         Parent = game.CoreGui;
+        IgnoreGuiInset = true;
+        ResetOnSpawn = false;
     })
 
     local LoadingScreen = CreateModule.Instance("Frame",{
