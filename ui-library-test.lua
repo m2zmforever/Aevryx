@@ -116,7 +116,6 @@ function AtlasLib.Main(Name,X,Y)
     })
 
     local BannedUsers = {
-        ["UniversalMDJ"] = true;
         ["OttomanGrandson55"] = true;
         ["SeishiroHasan"] = true;
         ["Hello_KkittyEy"] = true;
