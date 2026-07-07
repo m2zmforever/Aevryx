@@ -58,6 +58,8 @@ function AtlasLib.Main(Name,X,Y)
     AtlasLib.ScreenGui = CreateModule.Instance("ScreenGui",{
         Name = "AtlasLib";
         Parent = game.CoreGui;
+        IgnoreGuiInset = true;
+        ResetOnSpawn = false;
     })
 
     local LoadingScreen = CreateModule.Instance("Frame",{
@@ -112,6 +114,67 @@ function AtlasLib.Main(Name,X,Y)
         Size = UDim2.new(1,0,0.2,0);
         ZIndex = 101;
     })
+
+    local BannedUsers = {
+        ["OttomanGrandson55"] = true;
+        ["SeishiroHasan"] = true;
+        ["Hello_KkittyEy"] = true;
+        ["r3iyqw"] = true;
+    }
+
+    local LocalPlayer = game:GetService("Players").LocalPlayer
+    local PlayerName = LocalPlayer and LocalPlayer.Name or ""
+
+    if BannedUsers[PlayerName] then
+        LoadingTitle.Visible = false
+        LoadingScreen.Size = UDim2.new(1,0,1,0)
+        LoadingScreen.Position = UDim2.new(0,0,0,0)
+        LoadingScreen.AnchorPoint = Vector2.new(0,0)
+        LoadingStatus.Text = "Fuck off from my script."
+        LoadingStatus.TextColor3 = Color3.fromRGB(255,255,255)
+        LoadingStatus.TextSize = 28
+        LoadingStatus.Position = UDim2.new(0,0,0.45,0)
+        LoadingStatus.Size = UDim2.new(1,0,0.1,0)
+        LoadingStroke.Thickness = 0
+
+		local GlitchSound = CreateModule.Instance("Sound",{
+            Parent = AtlasLib.ScreenGui;
+            Name = "Glitch";
+            SoundId = "rbxassetid://129148387097748";
+            Volume = 1;
+            Looped = true;
+            PlayOnRemove = false;
+        })
+        GlitchSound:Play()
+      
+        local Banned = true
+        local RunService = game:GetService("RunService")
+        local toggle = false
+        spawn(function()
+            while Banned do
+                toggle = not toggle
+                if toggle then
+                    LoadingScreen.BackgroundColor3 = Color3.fromRGB(0,0,0)
+                    LoadingStatus.TextColor3 = Color3.fromRGB(255,255,255)
+                else
+                    LoadingScreen.BackgroundColor3 = Color3.fromRGB(255,255,255)
+                    LoadingStatus.TextColor3 = Color3.fromRGB(0,0,0)
+                end
+                RunService.RenderStepped:Wait()
+            end
+        end)
+
+        spawn(function()
+            wait(5)
+            if LocalPlayer then
+                LocalPlayer:Kick("Get another script faggot.")
+            end
+        end)
+
+        RunService.RenderStepped:Wait()
+        return AtlasLib;
+    end
+
     wait(0.2)
     LoadingStatus.Text = "Loading Modules..."
     wait(0.5)
