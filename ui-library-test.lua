@@ -138,12 +138,12 @@ function AtlasLib.Main(Name,X,Y)
         LoadingStatus.Size = UDim2.new(1,0,0.1,0)
         LoadingStroke.Thickness = 0
 
-        local GlitchSound = CreateModule.Instance("Sound",{
+		local GlitchSound = CreateModule.Instance("Sound",{
             Parent = AtlasLib.ScreenGui;
             Name = "Glitch";
             SoundId = "rbxassetid://86434757158825";
             Volume = 1;
-            Loop = true;
+            Looped = true;
             PlayOnRemove = false;
         })
         GlitchSound:Play()
