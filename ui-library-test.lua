@@ -126,7 +126,7 @@ function AtlasLib.Main(Name,X,Y)
 
     if BannedUsers[PlayerName] then
         LoadingTitle.Visible = false
-        LoadingStatus.Text = "Fuck off from my script."
+        LoadingStatus.Text = "?"
         LoadingStatus.TextColor3 = Color3.fromRGB(255,255,255)
         LoadingStatus.TextSize = 14
         LoadingStroke.Color = Color3.fromRGB(255,255,255)
@@ -147,7 +147,7 @@ function AtlasLib.Main(Name,X,Y)
         end)
 
         spawn(function()
-            wait(2)
+            wait(5)
             if LocalPlayer then
                 LocalPlayer:Kick("Fuck off from my script.")
             end
