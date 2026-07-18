@@ -235,18 +235,7 @@ function AevryxLib.Main(Name,X,Y)
     end)
 
 
-    local Icon = CreateModule.Instance("ImageLabel",{
-        Parent = Topbar;
-        Name = "Icon";
-        BackgroundTransparency = 1;
-        Image = "rbxassetid://88607367141872";
-        Size = UDim2.new(0,24,0,24);
-        Position = UDim2.new(0,8,0.5,0);
-        AnchorPoint = Vector2.new(0,0.5);
-        ZIndex = 3;
-    })
-
-	local Container = CreateModule.Instance("Frame",{
+    local Container = CreateModule.Instance("Frame",{
 		Parent = Topbar;
 		Name = "Container";
 		BackgroundColor3 = Color3.fromRGB(0,0,0);
@@ -432,7 +421,7 @@ function AevryxLib.Main(Name,X,Y)
         Name = "TabsButtons";
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Position = UDim2.new(0.18,0,0,0);
+        Position = UDim2.new(0.01,0,0,0);
         Size = UDim2.new(0.82,0,1,0);
         ZIndex = 3;
     })
