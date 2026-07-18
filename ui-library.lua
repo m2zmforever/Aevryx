@@ -442,7 +442,7 @@ function AevryxLib.Main(Name,X,Y)
 
     local TabButtonsList = {}
     local CurrentTabPage = 1
-    local TabsPerPage = 7
+    local TabsPerPage = 6
 
     local PrevArrow = CreateModule.Instance("TextButton",{
         Parent = Topbar;
