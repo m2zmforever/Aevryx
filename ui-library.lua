@@ -1,7 +1,7 @@
 local TweenService = game:GetService("TweenService")
 local InputService = game:GetService("UserInputService")
 
-local AtlasLib = {
+local AevryxLib = {
 	["Theme"] = {
 	    ["Font"] = "RobotoMono",
 		["AccentColor"] = Color3.fromRGB(60, 60, 60),
@@ -47,16 +47,16 @@ local function getEnumMember(enumType, memberName)
     return nil
 end
 
-function AtlasLib.Main(Name,X,Y)
+function AevryxLib.Main(Name,X,Y)
 
 	for i,v in next,game.CoreGui:GetChildren() do
-		if v.Name == "AtlasLib" then
+		if v.Name == "AevryxLib" then
 			v:Destroy()
 		end
 	end
 
-    AtlasLib.ScreenGui = CreateModule.Instance("ScreenGui",{
-        Name = "AtlasLib";
+    AevryxLib.ScreenGui = CreateModule.Instance("ScreenGui",{
+        Name = "AevryxLib";
         Parent = game.CoreGui;
         IgnoreGuiInset = true;
         ResetOnSpawn = false;
@@ -64,7 +64,7 @@ function AtlasLib.Main(Name,X,Y)
 
     local LoadingScreen = CreateModule.Instance("Frame",{
         Name = "LoadingScreen";
-        Parent = AtlasLib.ScreenGui;
+        Parent = AevryxLib.ScreenGui;
         BackgroundColor3 = Color3.fromRGB(0,0,0);
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
@@ -84,7 +84,7 @@ function AtlasLib.Main(Name,X,Y)
         Parent = LoadingScreen;
         Name = "Stroke";
         Thickness = 2;
-        Color = AtlasLib["Theme"]["AccentColor"];
+        Color = AevryxLib["Theme"]["AccentColor"];
         Transparency = 0;
     })
 
@@ -92,7 +92,7 @@ function AtlasLib.Main(Name,X,Y)
         Parent = LoadingScreen;
         Name = "Title";
         BackgroundTransparency = 1;
-        Image = "rbxassetid://71331193428603";
+        Image = "rbxassetid://88607367141872";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0.5, 0);
@@ -106,10 +106,10 @@ function AtlasLib.Main(Name,X,Y)
         Parent = LoadingScreen;
         Name = "Status";
         BackgroundTransparency = 1;
-        Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+        Font = Enum.Font[AevryxLib["Theme"]["Font"]];
         Text = "Loading...";
         TextSize = 12;
-        TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
         Position = UDim2.new(0,0,0.75,0);
         Size = UDim2.new(1,0,0.2,0);
         ZIndex = 101;
@@ -138,7 +138,7 @@ function AtlasLib.Main(Name,X,Y)
         LoadingStroke.Thickness = 0
 
 		local GlitchSound = CreateModule.Instance("Sound",{
-            Parent = AtlasLib.ScreenGui;
+            Parent = AevryxLib.ScreenGui;
             Name = "Glitch";
             SoundId = "rbxassetid://129148387097748";
             Volume = 1;
@@ -172,7 +172,7 @@ function AtlasLib.Main(Name,X,Y)
         end)
 
         RunService.RenderStepped:Wait()
-        return AtlasLib;
+        return AevryxLib;
     end
 
     wait(0.2)
@@ -182,7 +182,7 @@ function AtlasLib.Main(Name,X,Y)
     wait(0.5)
     LoadingStatus.Text = "Loading Config..."
     wait(1)
-    LoadingStatus.Text = "Welcome To Atlas..."
+    LoadingStatus.Text = "Welcome To Aevryx..."
     wait(0.3)
 
     TweenService:Create(LoadingScreen, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
@@ -194,7 +194,7 @@ function AtlasLib.Main(Name,X,Y)
 
     local Load = CreateModule.Instance("Frame",{
         Name = "LoadFrame";
-        Parent = AtlasLib.ScreenGui;
+        Parent = AevryxLib.ScreenGui;
 		BackgroundColor3 = Color3.fromRGB(0,0,0);
         BackgroundTransparency = 1;
 		BorderSizePixel = 0;
@@ -211,7 +211,7 @@ function AtlasLib.Main(Name,X,Y)
 
     local Topbar = CreateModule.Instance("Frame",{
         Name = "Topbar";
-        Parent = AtlasLib.ScreenGui;
+        Parent = AevryxLib.ScreenGui;
 		BackgroundColor3 = Color3.fromRGB(0,0,0);
 		BorderSizePixel = 0;
 		Position = UDim2.new(0.3,0,0.25,0);
@@ -239,7 +239,7 @@ function AtlasLib.Main(Name,X,Y)
         Parent = Topbar;
         Name = "Icon";
         BackgroundTransparency = 1;
-        Image = "rbxassetid://71331193428603";
+        Image = "rbxassetid://88607367141872";
         Size = UDim2.new(0,24,0,24);
         Position = UDim2.new(0,8,0.5,0);
         AnchorPoint = Vector2.new(0,0.5);
@@ -248,10 +248,10 @@ function AtlasLib.Main(Name,X,Y)
 
     local NameLabel = CreateModule.Instance("TextLabel",{
         Parent = Topbar;
-        Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+        Font = Enum.Font[AevryxLib["Theme"]["Font"]];
         Text = Name;
         TextSize = 16;
-        TextColor3 = AtlasLib["Theme"]["FontColor"];
+        TextColor3 = AevryxLib["Theme"]["FontColor"];
         TextXAlignment = Enum.TextXAlignment.Left;
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
@@ -279,6 +279,19 @@ function AtlasLib.Main(Name,X,Y)
         Position = UDim2.new(0,0,0,0);
         Size = UDim2.new(1,0,1,0);
         ZIndex = 0;
+    })
+
+    local BannerImage = CreateModule.Instance("ImageLabel",{
+        Name = "BannerImage";
+        Parent = Load;
+        BackgroundTransparency = 1;
+        BorderSizePixel = 0;
+        Image = "rbxassetid://102539129530531";
+        ScaleType = Enum.ScaleType.Fit;
+        Size = UDim2.new(0,100,0,100);
+        Position = UDim2.new(0,8,1,-8);
+        AnchorPoint = Vector2.new(0,1);
+        ZIndex = 6;
     })
 
     local PARTICLE_COUNT = 35
@@ -346,7 +359,7 @@ function AtlasLib.Main(Name,X,Y)
         Parent = Border;
         Name = "Stroke";
         Thickness = 1;
-        Color = AtlasLib["Theme"]["AccentColor"];
+        Color = AevryxLib["Theme"]["AccentColor"];
         Transparency = 0.5;
     })
 
@@ -451,7 +464,7 @@ function AtlasLib.Main(Name,X,Y)
         Font = Enum.Font.GothamBold;
         Text = "‹";
         TextSize = 22;
-        TextColor3 = Darker(AtlasLib["Theme"]["FontColor"], 1.8);
+        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.8);
         AutoButtonColor = false;
         ZIndex = 4;
     })
@@ -467,7 +480,7 @@ function AtlasLib.Main(Name,X,Y)
         Font = Enum.Font.GothamBold;
         Text = "›";
         TextSize = 22;
-        TextColor3 = Darker(AtlasLib["Theme"]["FontColor"], 1.8);
+        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.8);
         AutoButtonColor = false;
         ZIndex = 4;
     })
@@ -537,7 +550,7 @@ function AtlasLib.Main(Name,X,Y)
 
     InputService.InputBegan:Connect(function(input,IsTyping)
         if IsTyping then return end
-        local keyName = AtlasLib["Theme"]["HideKey"]
+        local keyName = AevryxLib["Theme"]["HideKey"]
         local keyEnum = getEnumMember(Enum.KeyCode, keyName)
         local uitEnum = getEnumMember(Enum.UserInputType, keyName)
         if (keyEnum and input.KeyCode == keyEnum) or (uitEnum and input.UserInputType == uitEnum) then
@@ -569,7 +582,7 @@ function AtlasLib.Main(Name,X,Y)
         local yOffset = 0.8 - (NotificationOffset * #ActiveNotifications)
         
         local Bar = CreateModule.Instance("Frame",{
-            Parent = AtlasLib.ScreenGui;
+            Parent = AevryxLib.ScreenGui;
             Name = HeaderText;
             BackgroundColor3 = Color3.fromRGB(0,0,0);
             BorderSizePixel = 0;
@@ -590,13 +603,13 @@ function AtlasLib.Main(Name,X,Y)
             Parent = Bar;
             Name = "Stroke";
             Thickness = 1;
-            Color = AtlasLib["Theme"]["AccentColor"];
+            Color = AevryxLib["Theme"]["AccentColor"];
             Transparency = 0.5;
         })
 
         local HeaderLabel = CreateModule.Instance("TextLabel",{
             Parent = Bar;
-            Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+            Font = Enum.Font[AevryxLib["Theme"]["Font"]];
             Text = HeaderText;
             TextSize = 18;
             TextColor3 = Color3.fromRGB(255, 255, 255);
@@ -610,10 +623,10 @@ function AtlasLib.Main(Name,X,Y)
 
         local InformationLabel = CreateModule.Instance("TextLabel",{
             Parent = Bar;
-            Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+            Font = Enum.Font[AevryxLib["Theme"]["Font"]];
             Text = Text;
             TextSize = 14;
-            TextColor3 = AtlasLib["Theme"]["FontColor"];
+            TextColor3 = AevryxLib["Theme"]["FontColor"];
             TextXAlignment = Enum.TextXAlignment.Left;
             TextYAlignment = Enum.TextYAlignment.Top;
             BackgroundTransparency = 1;
@@ -673,7 +686,7 @@ InMain.Notification = InMain.Notification
 			BorderSizePixel = 0;
 			Position = UDim2.new(0,0,0,0);
 			Size = UDim2.new(0.15,0,1,0);
-			Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+			Font = Enum.Font[AevryxLib["Theme"]["Font"]];
 			Text = Text;
 			TextSize = 15;
 			TextXAlignment = Enum.TextXAlignment.Center;
@@ -688,22 +701,22 @@ InMain.Notification = InMain.Notification
             Value = (TabCount == 1 and true or TabCount ~= 1 and false)
         })
 
-        TabButton.TextColor3 = (IsTabActive.Value and AtlasLib["Theme"]["FontColor"] or not IsTabActive.Value and Darker(AtlasLib["Theme"]["FontColor"],2))
+        TabButton.TextColor3 = (IsTabActive.Value and AevryxLib["Theme"]["FontColor"] or not IsTabActive.Value and Darker(AevryxLib["Theme"]["FontColor"],2))
 
 
 		TabButton.MouseEnter:Connect(function()
             if IsTabActive.Value then
-                TweenService:Create(TabButton,TweenInfo.new(0.3),{TextColor3 = AtlasLib["Theme"]["FontColor"]}):Play()
+                TweenService:Create(TabButton,TweenInfo.new(0.3),{TextColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
             else
-                TweenService:Create(TabButton,TweenInfo.new(0.3),{TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5)}):Play()
+                TweenService:Create(TabButton,TweenInfo.new(0.3),{TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5)}):Play()
             end
 		end)
 
 		TabButton.MouseLeave:Connect(function()
             if not IsTabActive.Value then
-			    TweenService:Create(TabButton,TweenInfo.new(0.3),{TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],2)}):Play()
+			    TweenService:Create(TabButton,TweenInfo.new(0.3),{TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],2)}):Play()
             else
-                TweenService:Create(TabButton,TweenInfo.new(0.3),{TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.2)}):Play()
+                TweenService:Create(TabButton,TweenInfo.new(0.3),{TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.2)}):Play()
             end
 		end)
 
@@ -815,11 +828,11 @@ InMain.Notification = InMain.Notification
             for i,v in next,TabsButtons:GetChildren() do
                 if v.ClassName == "TextButton" and v.Name ~= Text then
                     v.IsActive.Value = false
-                    TweenService:Create(v,TweenInfo.new(0.3),{TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],2)}):Play()
+                    TweenService:Create(v,TweenInfo.new(0.3),{TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],2)}):Play()
                 end
             end
             IsTabActive.Value = true
-            TweenService:Create(TabButton,TweenInfo.new(0.3),{TextColor3 = AtlasLib["Theme"]["FontColor"]}):Play()
+            TweenService:Create(TabButton,TweenInfo.new(0.3),{TextColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
         end)
 
         if TabCount == 1 then
@@ -865,10 +878,10 @@ InMain.Notification = InMain.Notification
 
             local SectionLabel = CreateModule.Instance("TextLabel",{
                 Parent = Section;
-                Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+                Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                 Text = Text;
                 TextSize = 16;
-                TextColor3 = AtlasLib["Theme"]["FontColor"];
+                TextColor3 = AevryxLib["Theme"]["FontColor"];
                 TextXAlignment = Enum.TextXAlignment.Left;
                 BackgroundTransparency = 1;
                 BorderSizePixel = 0;
@@ -922,10 +935,10 @@ InMain.Notification = InMain.Notification
                     BorderColor3 = Color3.fromRGB(20,20,20);
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(0.95,0,0,20);
-                    Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                     Text = Text;
                     TextSize = 16;
-                    TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+                    TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                     TextXAlignment = Enum.TextXAlignment.Center;
                     TextYAlignment = Enum.TextYAlignment.Center;
                     AutoButtonColor = false;
@@ -947,12 +960,12 @@ InMain.Notification = InMain.Notification
                 })
 
                 Button.MouseEnter:Connect(function()
-                    TweenService:Create(Button,TweenInfo.new(0.3),{TextColor3 = AtlasLib["Theme"]["FontColor"]}):Play()
+                    TweenService:Create(Button,TweenInfo.new(0.3),{TextColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
                     TweenService:Create(Button,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(0,0,0)}):Play()
                 end)
         
                 Button.MouseLeave:Connect(function()
-                    TweenService:Create(Button,TweenInfo.new(0.3),{TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5)}):Play()
+                    TweenService:Create(Button,TweenInfo.new(0.3),{TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5)}):Play()
                     TweenService:Create(Button,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(0,0,0)}):Play()
                 end)
                 Button.MouseButton1Click:Connect(function()
@@ -969,10 +982,10 @@ InMain.Notification = InMain.Notification
                     BorderSizePixel = 0;
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(0.95,0,0,25);
-                    Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                     Text = "";
                     TextSize = 16;
-                    TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+                    TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                     TextXAlignment = Enum.TextXAlignment.Left;
                 })
 
@@ -984,8 +997,8 @@ InMain.Notification = InMain.Notification
                     BorderColor3 = Color3.fromRGB(30,30,30);
                     Position = UDim2.new(0,60,0,0);
                     Size = UDim2.new(1,-50,1,0);
-                    Font = Enum.Font[AtlasLib["Theme"]["Font"]];
-                    TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
+                    TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                     Text = Text;
                     TextSize = 16;
                     TextXAlignment = Enum.TextXAlignment.Left;
@@ -1088,10 +1101,10 @@ InMain.Notification = InMain.Notification
                     AnchorPoint = Vector2.new(0,0.5);
                     Position = UDim2.new(0,0,0.5,0);
                     Size = UDim2.new(0,50,0,20);
-                    Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                     Text = displayKey;
                     TextSize = 16;
-                    TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+                    TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                     TextXAlignment = Enum.TextXAlignment.Center;
                     AutoButtonColor = false;
                 })
@@ -1115,7 +1128,7 @@ InMain.Notification = InMain.Notification
                 local Key = defkey or nil
                 InputService.InputBegan:Connect(function(input)
                     if input.UserInputType == Enum.UserInputType.Keyboard and Picking then
-                        local hideKey = getEnumMember(Enum.KeyCode, AtlasLib["Theme"]["HideKey"])
+                        local hideKey = getEnumMember(Enum.KeyCode, AevryxLib["Theme"]["HideKey"])
                         if not (hideKey and input.KeyCode == hideKey) then
                             Key = tostring(input.KeyCode):gsub("Enum.KeyCode.","")
                             Keybinder.Text = GetKeyDisplayName(input.KeyCode)
@@ -1150,7 +1163,7 @@ InMain.Notification = InMain.Notification
                     BorderColor3 = Color3.fromRGB(30,30,30);
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(0.95,0,0,20);
-                    Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                     Text = "";
                     TextSize = 16;
                     TextXAlignment = Enum.TextXAlignment.Left;
@@ -1179,7 +1192,7 @@ InMain.Notification = InMain.Notification
                     BorderColor3 = Color3.fromRGB(30,30,30);
                     Position = UDim2.new(0,27,0,0);
                     Size = UDim2.new(1,-25,1,0);
-                    Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                     Text = Text;
                     TextSize = 16;
                     TextXAlignment = Enum.TextXAlignment.Left;
@@ -1192,13 +1205,13 @@ InMain.Notification = InMain.Notification
 
                 IsActive.Value = defbool or false
 
-                Label.TextColor3 = (IsActive.Value and AtlasLib["Theme"]["FontColor"] or not IsActive.Value and Darker(AtlasLib["Theme"]["FontColor"],1.5))
+                Label.TextColor3 = (IsActive.Value and AevryxLib["Theme"]["FontColor"] or not IsActive.Value and Darker(AevryxLib["Theme"]["FontColor"],1.5))
 
                 local Checked = CreateModule.Instance("Frame",{
                     Parent = Checkbox;
                     Name = 'Cube';
                     BackgroundTransparency = (IsActive.Value and 0 or 1);
-                    BackgroundColor3 = AtlasLib["Theme"]["AccentColor"];
+                    BackgroundColor3 = AevryxLib["Theme"]["AccentColor"];
                     BorderSizePixel = 0;
                     AnchorPoint = Vector2.new(0,0.5);
                     Position = UDim2.new(0,5,0.5,0);
@@ -1220,12 +1233,12 @@ InMain.Notification = InMain.Notification
 
                 IsActive.Changed:Connect(function()
                     if IsActive.Value then
-                        TweenService:Create(Label,TweenInfo.new(0.3),{TextColor3 = AtlasLib["Theme"]["FontColor"]}):Play()
-                        TweenService:Create(Checked,TweenInfo.new(0.3),{BackgroundTransparency = 0, BackgroundColor3 = AtlasLib["Theme"]["AccentColor"]}):Play()
+                        TweenService:Create(Label,TweenInfo.new(0.3),{TextColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
+                        TweenService:Create(Checked,TweenInfo.new(0.3),{BackgroundTransparency = 0, BackgroundColor3 = AevryxLib["Theme"]["AccentColor"]}):Play()
                         pcall(func, IsActive.Value)
                     else
                         TweenService:Create(Checked,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
-                        TweenService:Create(Label,TweenInfo.new(0.3),{TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5)}):Play()
+                        TweenService:Create(Label,TweenInfo.new(0.3),{TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5)}):Play()
                         pcall(func, IsActive.Value)
                     end
                 end)
@@ -1244,10 +1257,10 @@ InMain.Notification = InMain.Notification
                     BorderSizePixel = 0;
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(0.95,0,0,20);
-                    Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                     Text = Text;
                     TextSize = 14;
-                    TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+                    TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                     TextXAlignment = Enum.TextXAlignment.Left;
                     TextYAlignment = Enum.TextYAlignment.Center;
                 })
@@ -1271,13 +1284,13 @@ InMain.Notification = InMain.Notification
                     BorderSizePixel = 0;
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(1,0,1,0);
-                    Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                     Text = defvalue or "";
                     TextSize = 14;
-                    TextColor3 = AtlasLib["Theme"]["FontColor"];
+                    TextColor3 = AevryxLib["Theme"]["FontColor"];
                     TextXAlignment = Enum.TextXAlignment.Left;
                     PlaceholderText = Text;
-                    PlaceholderColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+                    PlaceholderColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                     ClearTextOnFocus = false;
                     ClipsDescendants = true;
                 })
@@ -1310,7 +1323,7 @@ InMain.Notification = InMain.Notification
                         BackgroundColor3 = Color3.fromRGB(0,0,0)
                     }):Play()
                     TweenService:Create(Stroke, TweenInfo.new(0.3), {
-                        Color = AtlasLib["Theme"]["AccentColor"]
+                        Color = AevryxLib["Theme"]["AccentColor"]
                     }):Play()
                 end)
 
@@ -1330,8 +1343,8 @@ InMain.Notification = InMain.Notification
                     BorderColor3 = Color3.fromRGB(30,30,30);
                     Position = UDim2.new(0,22,0,0);
                     Size = UDim2.new(0.95,0,0,40);
-                    Font = Enum.Font[AtlasLib["Theme"]["Font"]];
-                    TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
+                    TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                     Text = Text;
                     TextSize = 16;
                     TextXAlignment = Enum.TextXAlignment.Center;
@@ -1360,8 +1373,8 @@ InMain.Notification = InMain.Notification
                     BorderColor3 = Color3.fromRGB(30,30,30);
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(1,0,1,0);
-                    Font = Enum.Font[AtlasLib["Theme"]["Font"]];
-                    TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
+                    TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                     Text = tostring(defvalue and defvalue or min) .. "/" .. tostring(max);
                     TextSize = 16;
                     TextXAlignment = Enum.TextXAlignment.Center;
@@ -1437,7 +1450,7 @@ InMain.Notification = InMain.Notification
 						Dragging = true
 						IsSliding = false
                         Move(Pressed)
-                        TweenService:Create(Progress,TweenInfo.new(0.3),{BackgroundColor3 = Darker(AtlasLib["Theme"]["AccentColor"],1.2)}):Play()
+                        TweenService:Create(Progress,TweenInfo.new(0.3),{BackgroundColor3 = Darker(AevryxLib["Theme"]["AccentColor"],1.2)}):Play()
 					end
 				end)
 
@@ -1445,7 +1458,7 @@ InMain.Notification = InMain.Notification
 					if Pressed.UserInputType == Enum.UserInputType.MouseButton1 or Pressed.UserInputType == Enum.UserInputType.Touch then
 						Dragging = false
 						IsSliding = false
-                        TweenService:Create(Progress,TweenInfo.new(0.3),{BackgroundColor3 = Darker(AtlasLib["Theme"]["AccentColor"],1.7)}):Play()
+                        TweenService:Create(Progress,TweenInfo.new(0.3),{BackgroundColor3 = Darker(AevryxLib["Theme"]["AccentColor"],1.7)}):Play()
                         Move(Pressed)
 					end
 				end)
@@ -1457,7 +1470,7 @@ InMain.Notification = InMain.Notification
 				end)
 
 				Bar.MouseEnter:Connect(function()
-					TweenService:Create(Progress,TweenInfo.new(0.3),{BackgroundColor3 = Darker(AtlasLib["Theme"]["AccentColor"],1.7)}):Play()
+					TweenService:Create(Progress,TweenInfo.new(0.3),{BackgroundColor3 = Darker(AevryxLib["Theme"]["AccentColor"],1.7)}):Play()
 				end)
 
 				Bar.MouseLeave:Connect(function()
@@ -1493,10 +1506,10 @@ InMain.Notification = InMain.Notification
                     BorderColor3 = Color3.fromRGB(20,20,20);
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(1,0,0,20);
-                    Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                     Text = "  " .. Text;
                     TextSize = 16;
-                    TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+                    TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                     TextXAlignment = Enum.TextXAlignment.Left;
                     TextYAlignment = Enum.TextYAlignment.Center;
                     AutoButtonColor = false;
@@ -1591,10 +1604,10 @@ InMain.Notification = InMain.Notification
                         BorderColor3 = Color3.fromRGB(20,20,20);
                         Position = UDim2.new(0,0,0,0);
                         Size = UDim2.new(0.95,0,0,20);
-                        Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+                        Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                         Text = "  " .. string;
                         TextSize = 16;
-                        TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+                        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                         TextXAlignment = Enum.TextXAlignment.Left;
                         TextYAlignment = Enum.TextYAlignment.Center;
                         AutoButtonColor = false;
@@ -1615,12 +1628,12 @@ InMain.Notification = InMain.Notification
                     })
 
                     Selectable.MouseEnter:Connect(function()
-                        TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = AtlasLib["Theme"]["FontColor"]}):Play()
+                        TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
                         TweenService:Create(Selectable,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(0,0,0)}):Play()
                     end)
             
                     Selectable.MouseLeave:Connect(function()
-                        TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5)}):Play()
+                        TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5)}):Play()
                         TweenService:Create(Selectable,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(0,0,0)}):Play()
                     end)
 
@@ -1705,10 +1718,10 @@ InMain.Notification = InMain.Notification
                     BorderColor3 = Color3.fromRGB(20,20,20);
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(1,0,0,20);
-                    Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                     Text = "  " .. Text;
                     TextSize = 16;
-                    TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+                    TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                     TextXAlignment = Enum.TextXAlignment.Left;
                     TextYAlignment = Enum.TextYAlignment.Center;
                     AutoButtonColor = false;
@@ -1805,10 +1818,10 @@ InMain.Notification = InMain.Notification
                         BorderColor3 = Color3.fromRGB(20,20,20);
                         Position = UDim2.new(0,0,0,0);
                         Size = UDim2.new(0.95,0,0,20);
-                        Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+                        Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                         Text = "  " .. string;
                         TextSize = 16;
-                        TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+                        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                         TextXAlignment = Enum.TextXAlignment.Left;
                         TextYAlignment = Enum.TextYAlignment.Center;
                         AutoButtonColor = false;
@@ -1821,10 +1834,10 @@ InMain.Notification = InMain.Notification
                         BorderSizePixel = 0;
                         Position = UDim2.new(0.88, 0, 0, 0);
                         Size = UDim2.new(0.1,0,0,20);
-                        Font = Enum.Font[AtlasLib["Theme"]["Font"]];
+                        Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                         Text = "";
                         TextSize = 16;
-                        TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5);
+                        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                         TextXAlignment = Enum.TextXAlignment.Center;
                         TextYAlignment = Enum.TextYAlignment.Center;
                     })
@@ -1844,12 +1857,12 @@ InMain.Notification = InMain.Notification
                     })
 
                     Selectable.MouseEnter:Connect(function()
-                        TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = AtlasLib["Theme"]["FontColor"]}):Play()
+                        TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
                         TweenService:Create(Selectable,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(0,0,0)}):Play()
                     end)
             
                     Selectable.MouseLeave:Connect(function()
-                        TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = Darker(AtlasLib["Theme"]["FontColor"],1.5)}):Play()
+                        TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5)}):Play()
                         TweenService:Create(Selectable,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(0,0,0)}):Play()
                     end)
 
@@ -1900,4 +1913,4 @@ InMain.Notification = InMain.Notification
 	
 	return InMain;
 end
-return AtlasLib;
+return AevryxLib;

@@ -1,4 +1,4 @@
-# AtlasLib – UI Library
+# AevryxLib – UI Library
 
 First, thanks to [slf0Dev](https://github.com/slf0Dev) for providing the main code for the UI Library with the old Ocerium_Project.
 
@@ -7,7 +7,7 @@ First, thanks to [slf0Dev](https://github.com/slf0Dev) for providing the main co
 ## Installation
 
 ```lua
-local AtlasLib = loadstring(game:HttpGet("YOUR_RAW_URL_HERE.lua"))()
+local AevryxLib = loadstring(game:HttpGet("YOUR_RAW_URL_HERE.lua"))()
 ```
 
 Replace `YOUR_RAW_URL_HERE` with your hosted or GitHub raw URL.
@@ -18,16 +18,16 @@ Replace `YOUR_RAW_URL_HERE` with your hosted or GitHub raw URL.
 
 ```lua
 -- Configure theme first
-AtlasLib.Theme.AccentColor = Color3.fromRGB(0, 175, 255)
-AtlasLib.Theme.HideKey = "LeftControl"
+AevryxLib.Theme.AccentColor = Color3.fromRGB(0, 175, 255)
+AevryxLib.Theme.HideKey = "LeftControl"
 
-local Main = AtlasLib.Main("Atlas", 600, 450)
+local Main = AevryxLib.Main("Aevryx", 600, 450)
 
 local MainTab = Main.Tab("Main")
 local Section = MainTab.Section("General")
 
 Section.Button("Print Hello", function()
-    print("Hello from AtlasLib!")
+    print("Hello from AevryxLib!")
 end)
 
 Section.Checkbox("Auto Farm", function(enabled)
@@ -45,13 +45,13 @@ Main.Notification("Loaded", "UI initialized successfully.")
 
 ## Theming
 
-Set properties on `AtlasLib.Theme` **before** calling `AtlasLib.Main`.
+Set properties on `AevryxLib.Theme` **before** calling `AevryxLib.Main`.
 
 ```lua
-AtlasLib.Theme.Font = "RobotoMono"
-AtlasLib.Theme.AccentColor = Color3.fromRGB(60, 60, 60)
-AtlasLib.Theme.FontColor = Color3.fromRGB(255, 255, 255)
-AtlasLib.Theme.HideKey = "LeftControl"
+AevryxLib.Theme.Font = "RobotoMono"
+AevryxLib.Theme.AccentColor = Color3.fromRGB(60, 60, 60)
+AevryxLib.Theme.FontColor = Color3.fromRGB(255, 255, 255)
+AevryxLib.Theme.HideKey = "LeftControl"
 ```
 
 ### Theme Properties
@@ -69,7 +69,7 @@ AtlasLib.Theme.HideKey = "LeftControl"
 
 ## API Reference
 
-### `AtlasLib.Main(Name, Width, Height)`
+### `AevryxLib.Main(Name, Width, Height)`
 
 Creates the main draggable window (with fancy loading screen + animated particles).
 
@@ -81,7 +81,7 @@ Creates the main draggable window (with fancy loading screen + animated particle
 **Returns**: `InMain` object
 
 **Behavior**
-- Automatically destroys any previous UI named `AtlasLib`
+- Automatically destroys any previous UI named `AevryxLib`
 - Topbar is draggable
 - Supports many tabs via built-in pagination
 
@@ -89,7 +89,7 @@ Creates the main draggable window (with fancy loading screen + animated particle
 
 ### `InMain` Object
 
-Returned by `AtlasLib.Main`.
+Returned by `AevryxLib.Main`.
 
 #### `InMain.Tab(Text)`
 
@@ -232,7 +232,7 @@ Selects the nth option (1-based) from the **original** options table.
 ## UI Controls
 
 - **Hide / Show**: Press the `Theme.HideKey` (default LeftControl). Includes a quick flash animation.
-- **Auto Cleanup**: Creating a new UI destroys any old `AtlasLib` instance.
+- **Auto Cleanup**: Creating a new UI destroys any old `AevryxLib` instance.
 - **Drag**: Topbar is fully draggable; content follows.
 - **Responsive**: Sections balance across two columns; tabs paginate automatically.
 
