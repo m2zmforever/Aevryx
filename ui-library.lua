@@ -340,21 +340,21 @@ function AevryxLib.Main(Name,X,Y)
 
     local BannerImage = CreateModule.Instance("ImageLabel",{
         Name = "BannerImage";
-        Parent = Load;
+        Parent = Border;
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
         Image = "rbxassetid://138902649769382";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0,1);
-        Position = UDim2.new(0,8,1,-2);
+        Position = UDim2.new(0,8,1,20);
         Size = UDim2.new(0,BANNER_SIZE,0,BANNER_SIZE);
         ZIndex = 6;
     })
 
     Topbar.Changed:Connect(function(Property)
         if Property == "Position" then
-            BannerImage.Position = UDim2.new(0,8,1,-2)
+            BannerImage.Position = UDim2.new(0,8,1,20)
         end
     end)
     local Corner = CreateModule.Instance("UICorner",{
@@ -421,8 +421,8 @@ function AevryxLib.Main(Name,X,Y)
         Name = "TabsButtons";
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Position = UDim2.new(0.01,0,0,0);
-        Size = UDim2.new(0.82,0,1,0);
+        Position = UDim2.new(0,30,0,0);
+        Size = UDim2.new(0.86,0,1,0);
         ZIndex = 3;
     })
 
@@ -436,15 +436,15 @@ function AevryxLib.Main(Name,X,Y)
 
     local TabButtonsList = {}
     local CurrentTabPage = 1
-    local TabsPerPage = 6
+    local TabsPerPage = 8
 
     local PrevArrow = CreateModule.Instance("TextButton",{
         Parent = Topbar;
         Name = "PrevArrow";
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Position = UDim2.new(0, 145, 0.5, 0);
-        AnchorPoint = Vector2.new(1, 0.5);
+        Position = UDim2.new(0, 6, 0.5, 0);
+        AnchorPoint = Vector2.new(0, 0.5);
         Size = UDim2.new(0, 20, 0, 20);
         Font = Enum.Font.GothamBold;
         Text = "‹";
