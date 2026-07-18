@@ -421,8 +421,8 @@ function AevryxLib.Main(Name,X,Y)
         Name = "TabsButtons";
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Position = UDim2.new(0,6,0,0);
-        Size = UDim2.new(0.88,0,1,0);
+        Position = UDim2.new(0,30,0,0);
+        Size = UDim2.new(0.9,0,1,0);
         ZIndex = 3;
     })
 
@@ -436,15 +436,15 @@ function AevryxLib.Main(Name,X,Y)
 
     local TabButtonsList = {}
     local CurrentTabPage = 1
-    local TabsPerPage = 8
+    local TabsPerPage = 7
 
     local PrevArrow = CreateModule.Instance("TextButton",{
         Parent = Topbar;
         Name = "PrevArrow";
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Position = UDim2.new(1, -48, 0.5, 0);
-        AnchorPoint = Vector2.new(0.5, 0.5);
+        Position = UDim2.new(0, 6, 0.5, 0);
+        AnchorPoint = Vector2.new(0, 0.5);
         Size = UDim2.new(0, 20, 0, 20);
         Font = Enum.Font.GothamBold;
         Text = "‹";
