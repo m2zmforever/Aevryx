@@ -347,14 +347,14 @@ function AevryxLib.Main(Name,X,Y)
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0,1);
-        Position = UDim2.new(0,8,1,20);
+        Position = UDim2.new(0,8,1,35);
         Size = UDim2.new(0,BANNER_SIZE,0,BANNER_SIZE);
         ZIndex = 6;
     })
 
     Topbar.Changed:Connect(function(Property)
         if Property == "Position" then
-            BannerImage.Position = UDim2.new(0,8,1,20)
+            BannerImage.Position = UDim2.new(0,8,1,35)
         end
     end)
     local Corner = CreateModule.Instance("UICorner",{
@@ -437,7 +437,7 @@ function AevryxLib.Main(Name,X,Y)
         Parent = TabsButtons;
         FillDirection = Enum.FillDirection.Horizontal;
         SortOrder = Enum.SortOrder.LayoutOrder;
-		Padding = UDim.new(0,4)
+		Padding = UDim.new(0,2)
     })
 
     local TabButtonsList = {}
