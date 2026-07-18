@@ -421,7 +421,7 @@ function AevryxLib.Main(Name,X,Y)
         Name = "TabsButtons";
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Position = UDim2.new(0,30,0,0);
+        Position = UDim2.new(0,28,0,0);
         Size = UDim2.new(0.9,0,1,0);
         ZIndex = 3;
     })
@@ -479,6 +479,7 @@ function AevryxLib.Main(Name,X,Y)
         end
         PrevArrow.Visible = (CurrentTabPage > 1)
         NextArrow.Visible = (CurrentTabPage < totalPages)
+        TabsButtons.Position = UDim2.new(0, PrevArrow.Visible and 28 or 6, 0, 0)
     end
 
     PrevArrow.MouseButton1Click:Connect(function()
