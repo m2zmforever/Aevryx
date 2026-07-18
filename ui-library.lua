@@ -286,7 +286,7 @@ function AevryxLib.Main(Name,X,Y)
         Parent = Load;
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Image = "rbxassetid://102539129530531";
+        Image = "rbxassetid://130334083295026";
         ScaleType = Enum.ScaleType.Fit;
         Size = UDim2.new(0,100,0,100);
         Position = UDim2.new(0,8,1,-8);
