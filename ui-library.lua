@@ -384,11 +384,12 @@ function AevryxLib.Main(Name,X,Y)
         Parent = Banner;
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Image = "rbxassetid://130334083295026";
+        Image = "rbxassetid://88607367141872";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
-        Size = UDim2.new(1,-8,1,-8);
-        Position = UDim2.new(0,4,0,4);
+        AnchorPoint = Vector2.new(0.5,0.5);
+        Position = UDim2.new(0.5,0,0.5,0);
+        Size = UDim2.new(0,120,0,120);
         ZIndex = 6;
     })
 
