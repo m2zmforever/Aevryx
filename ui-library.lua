@@ -281,37 +281,6 @@ function AevryxLib.Main(Name,X,Y)
         ZIndex = 0;
     })
 
-    local BannerImage = CreateModule.Instance("ImageLabel",{
-        Name = "BannerImage";
-        Parent = Border;
-        BackgroundTransparency = 1;
-        BorderSizePixel = 0;
-        Image = "rbxassetid://130334083295026";
-        ImageTransparency = 0;
-        ScaleType = Enum.ScaleType.Fit;
-        Size = UDim2.new(0,130,0,130);
-        Position = UDim2.new(0,8,1,-8);
-        AnchorPoint = Vector2.new(0,1);
-        ZIndex = 10;
-    })
-
-    local BannerBacking = CreateModule.Instance("Frame",{
-        Name = "BannerBacking";
-        Parent = Border;
-        BackgroundColor3 = Color3.fromRGB(255,255,255);
-        BackgroundTransparency = 0;
-        BorderSizePixel = 0;
-        Size = UDim2.new(0,138,0,138);
-        Position = UDim2.new(0,4,1,-4);
-        AnchorPoint = Vector2.new(0,1);
-        ZIndex = 9;
-    })
-
-    local BannerBackingCorner = CreateModule.Instance("UICorner",{
-        Parent = BannerBacking;
-        CornerRadius = UDim.new(0,8);
-    })
-
     local PARTICLE_COUNT = 35
     local PARTICLE_COLOR = Color3.fromRGB(80, 80, 80)
     local PARTICLE_MIN_SIZE = 5
@@ -390,6 +359,51 @@ function AevryxLib.Main(Name,X,Y)
     Load.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
     Border.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
     Topbar.Visible = true
+
+    local BannerVisible = true
+    local BANNER_SIZE = 130
+
+    local Banner = CreateModule.Instance("Frame",{
+        Name = "Banner";
+        Parent = AevryxLib.ScreenGui;
+        BackgroundColor3 = Color3.fromRGB(255,255,255);
+        BackgroundTransparency = 0;
+        BorderSizePixel = 0;
+        Size = UDim2.new(0,BANNER_SIZE + 8,0,BANNER_SIZE + 8);
+        ZIndex = 50;
+    })
+
+    local BannerCorner = CreateModule.Instance("UICorner",{
+        Parent = Banner;
+        CornerRadius = UDim.new(0,8);
+    })
+
+    local BannerImage = CreateModule.Instance("ImageLabel",{
+        Name = "BannerImage";
+        Parent = Banner;
+        BackgroundTransparency = 1;
+        BorderSizePixel = 0;
+        Image = "rbxassetid://130334083295026";
+        ImageTransparency = 0;
+        ScaleType = Enum.ScaleType.Fit;
+        Size = UDim2.new(1,-8,1,-8);
+        Position = UDim2.new(0,4,0,4);
+        ZIndex = 51;
+    })
+
+    local function UpdateBannerPosition()
+        if not (Topbar and Topbar.Parent) then return end
+        local topLeft = Topbar.AbsolutePosition
+        local totalHeight = Topbar.AbsoluteSize.Y + Container.AbsoluteSize.Y - 5
+        Banner.Position = UDim2.new(0, topLeft.X + 8, 0, topLeft.Y + totalHeight - (BANNER_SIZE + 8) - 8)
+    end
+
+    UpdateBannerPosition()
+    Topbar.Changed:Connect(function(prop)
+        if prop == "Position" or prop == "AbsolutePosition" then
+            UpdateBannerPosition()
+        end
+    end)
     local Corner = CreateModule.Instance("UICorner",{
         Parent = Container;
         Name = "Corner";
@@ -578,6 +592,9 @@ function AevryxLib.Main(Name,X,Y)
                 TweenService:Create(Load,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
                 Topbar.Visible = not Topbar.Visible
                 Load.Visible = not Load.Visible
+                BannerVisible = not BannerVisible
+                Banner.Visible = BannerVisible
+                UpdateBannerPosition()
             end)
         end
     end)
