@@ -363,39 +363,23 @@ function AevryxLib.Main(Name,X,Y)
     local BannerVisible = true
     local BANNER_SIZE = 130
 
-    local Banner = CreateModule.Instance("Frame",{
-        Name = "Banner";
-        Parent = Load;
-        BackgroundColor3 = Color3.fromRGB(255,255,255);
-        BackgroundTransparency = 0;
-        BorderSizePixel = 0;
-        Position = UDim2.new(0,8,1,-(BANNER_SIZE + 16));
-        Size = UDim2.new(0,BANNER_SIZE + 8,0,BANNER_SIZE + 8);
-        ZIndex = 5;
-    })
-
-    local BannerCorner = CreateModule.Instance("UICorner",{
-        Parent = Banner;
-        CornerRadius = UDim.new(0,8);
-    })
-
     local BannerImage = CreateModule.Instance("ImageLabel",{
         Name = "BannerImage";
-        Parent = Banner;
+        Parent = Load;
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Image = "rbxassetid://88607367141872";
+        Image = "rbxassetid://138902649769382";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
-        AnchorPoint = Vector2.new(0.5,0.5);
-        Position = UDim2.new(0.5,0,0.5,0);
-        Size = UDim2.new(0,120,0,120);
+        AnchorPoint = Vector2.new(0,1);
+        Position = UDim2.new(0,8,1,-8);
+        Size = UDim2.new(0,BANNER_SIZE,0,BANNER_SIZE);
         ZIndex = 6;
     })
 
     Topbar.Changed:Connect(function(Property)
         if Property == "Position" then
-            Banner.Position = UDim2.new(0,8,1,-(BANNER_SIZE + 16))
+            BannerImage.Position = UDim2.new(0,8,1,-8)
         end
     end)
     local Corner = CreateModule.Instance("UICorner",{
