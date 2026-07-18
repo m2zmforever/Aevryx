@@ -365,12 +365,13 @@ function AevryxLib.Main(Name,X,Y)
 
     local Banner = CreateModule.Instance("Frame",{
         Name = "Banner";
-        Parent = AevryxLib.ScreenGui;
+        Parent = Load;
         BackgroundColor3 = Color3.fromRGB(255,255,255);
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
+        Position = UDim2.new(0,8,1,-(BANNER_SIZE + 16));
         Size = UDim2.new(0,BANNER_SIZE + 8,0,BANNER_SIZE + 8);
-        ZIndex = 50;
+        ZIndex = 5;
     })
 
     local BannerCorner = CreateModule.Instance("UICorner",{
@@ -388,20 +389,12 @@ function AevryxLib.Main(Name,X,Y)
         ScaleType = Enum.ScaleType.Fit;
         Size = UDim2.new(1,-8,1,-8);
         Position = UDim2.new(0,4,0,4);
-        ZIndex = 51;
+        ZIndex = 6;
     })
 
-    local function UpdateBannerPosition()
-        if not (Topbar and Topbar.Parent) then return end
-        local topLeft = Topbar.AbsolutePosition
-        local totalHeight = Topbar.AbsoluteSize.Y + Container.AbsoluteSize.Y - 5
-        Banner.Position = UDim2.new(0, topLeft.X + 8, 0, topLeft.Y + totalHeight - (BANNER_SIZE + 8) - 8)
-    end
-
-    UpdateBannerPosition()
-    Topbar.Changed:Connect(function(prop)
-        if prop == "Position" or prop == "AbsolutePosition" then
-            UpdateBannerPosition()
+    Topbar.Changed:Connect(function(Property)
+        if Property == "Position" then
+            Banner.Position = UDim2.new(0,8,1,-(BANNER_SIZE + 16))
         end
     end)
     local Corner = CreateModule.Instance("UICorner",{
@@ -592,9 +585,6 @@ function AevryxLib.Main(Name,X,Y)
                 TweenService:Create(Load,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
                 Topbar.Visible = not Topbar.Visible
                 Load.Visible = not Load.Visible
-                BannerVisible = not BannerVisible
-                Banner.Visible = BannerVisible
-                UpdateBannerPosition()
             end)
         end
     end)
