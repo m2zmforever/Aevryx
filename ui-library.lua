@@ -246,20 +246,6 @@ function AevryxLib.Main(Name,X,Y)
         ZIndex = 3;
     })
 
-    local NameLabel = CreateModule.Instance("TextLabel",{
-        Parent = Topbar;
-        Font = Enum.Font[AevryxLib["Theme"]["Font"]];
-        Text = Name;
-        TextSize = 16;
-        TextColor3 = AevryxLib["Theme"]["FontColor"];
-        TextXAlignment = Enum.TextXAlignment.Left;
-        BackgroundTransparency = 1;
-        BorderSizePixel = 0;
-        Position = UDim2.new(0,46,0,0);
-        Size = UDim2.new(0,100,1,0);
-        ZIndex = 3;
-    })
-
 	local Container = CreateModule.Instance("Frame",{
 		Parent = Topbar;
 		Name = "Container";
@@ -361,7 +347,7 @@ function AevryxLib.Main(Name,X,Y)
     Topbar.Visible = true
 
     local BannerVisible = true
-    local BANNER_SIZE = 130
+    local BANNER_SIZE = 200
 
     local BannerImage = CreateModule.Instance("ImageLabel",{
         Name = "BannerImage";
