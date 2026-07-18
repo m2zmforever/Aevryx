@@ -287,11 +287,29 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
         Image = "rbxassetid://130334083295026";
+        ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         Size = UDim2.new(0,130,0,130);
         Position = UDim2.new(0,8,1,-8);
         AnchorPoint = Vector2.new(0,1);
         ZIndex = 10;
+    })
+
+    local BannerBacking = CreateModule.Instance("Frame",{
+        Name = "BannerBacking";
+        Parent = Border;
+        BackgroundColor3 = Color3.fromRGB(255,255,255);
+        BackgroundTransparency = 0;
+        BorderSizePixel = 0;
+        Size = UDim2.new(0,138,0,138);
+        Position = UDim2.new(0,4,1,-4);
+        AnchorPoint = Vector2.new(0,1);
+        ZIndex = 9;
+    })
+
+    local BannerBackingCorner = CreateModule.Instance("UICorner",{
+        Parent = BannerBacking;
+        CornerRadius = UDim.new(0,8);
     })
 
     local PARTICLE_COUNT = 35
