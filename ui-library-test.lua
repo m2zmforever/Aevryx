@@ -31,6 +31,17 @@ local function Brighter(Col, coe)
 	return Color3.fromHSV(H, S, math.clamp(V * (coe or 1.5), 0, 1))
 end
 
+function CreateModule.Instance(instance, properties)
+	local CreatedInstance
+	if typeof(instance) == "string" then
+		CreatedInstance = Instance.new(instance)
+		for property, value in next, properties do
+			CreatedInstance[property] = value
+		end
+	end
+	return CreatedInstance
+end
+
 local function getEnumMember(enumType, memberName)
 	local ok, res = pcall(function() return enumType[memberName] end)
 	if ok then return res end
