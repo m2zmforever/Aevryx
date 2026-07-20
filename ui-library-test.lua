@@ -6,11 +6,9 @@ local AevryxLib = {
 	["Theme"] = {
 		["Font"] = "RobotoMono",
 		["AccentColor"] = Color3.fromRGB(60, 60, 60),
-		["AccentColor2"] = Color3.fromRGB(120, 120, 130),
 		["FontColor"] = Color3.fromRGB(255, 255, 255),
-		["BackgroundColor"] = Color3.fromRGB(14, 14, 18),
-		["PanelColor"] = Color3.fromRGB(22, 22, 28),
-		["SectionColor"] = Color3.fromRGB(28, 28, 36),
+		["BackgroundColor"] = Color3.fromRGB(16, 16, 20),
+		["SectionColor"] = Color3.fromRGB(24, 24, 30),
 		["HideKey"] = "LeftControl"
 	},
 }
@@ -92,7 +90,7 @@ function AevryxLib.Main(Name, X, Y)
 		});
 		Rotation = 90;
 	})
-	CreateModule.Instance("UIStroke", { Parent = LoadingScreen; Thickness = 1.5; Color = AevryxLib["Theme"]["AccentColor"]; Transparency = 0 })
+	CreateModule.Instance("UIStroke", { Parent = LoadingScreen; Thickness = 1.5; Color = Color3.fromRGB(60, 60, 70); Transparency = 0 })
 
 	local LoadingTitle = CreateModule.Instance("ImageLabel", {
 		Parent = LoadingScreen;
@@ -204,16 +202,6 @@ function AevryxLib.Main(Name, X, Y)
 	})
 	CreateModule.Instance("UICorner", { Parent = MainFrame; CornerRadius = UDim.new(0, 10) })
 
-	CreateModule.Instance("UIGradient", {
-		Parent = MainFrame;
-		Color = ColorSequence.new({
-			ColorSequenceKeypoint.new(0, Color3.fromRGB(18, 18, 24)),
-			ColorSequenceKeypoint.new(0.5, AevryxLib["Theme"]["BackgroundColor"]),
-			ColorSequenceKeypoint.new(1, Color3.fromRGB(10, 10, 14)),
-		});
-		Rotation = 35;
-	})
-
 	local Border = CreateModule.Instance("Frame", {
 		Name = "Border";
 		Parent = MainFrame;
@@ -227,32 +215,15 @@ function AevryxLib.Main(Name, X, Y)
 	CreateModule.Instance("UICorner", { Parent = Border; CornerRadius = UDim.new(0, 10) })
 	CreateModule.Instance("UIStroke", {
 		Parent = Border;
-		Thickness = 1.4;
-		Color = AevryxLib["Theme"]["AccentColor"];
-		Transparency = 0.35;
-	})
-
-	local AccentLine = CreateModule.Instance("Frame", {
-		Parent = MainFrame;
-		BackgroundColor3 = AevryxLib["Theme"]["AccentColor2"];
-		BorderSizePixel = 0;
-		Position = UDim2.new(0, 0, 0, 0);
-		Size = UDim2.new(1, 0, 0, 3);
-		ZIndex = 7;
-	})
-	CreateModule.Instance("UIGradient", {
-		Parent = AccentLine;
-		Color = ColorSequence.new({
-			ColorSequenceKeypoint.new(0, AevryxLib["Theme"]["AccentColor"]),
-			ColorSequenceKeypoint.new(0.5, AevryxLib["Theme"]["AccentColor2"]),
-			ColorSequenceKeypoint.new(1, AevryxLib["Theme"]["AccentColor"]),
-		});
+		Thickness = 1.2;
+		Color = Color3.fromRGB(45, 45, 55);
+		Transparency = 0.6;
 	})
 
 	local Sidebar = CreateModule.Instance("Frame", {
 		Name = "Sidebar";
 		Parent = MainFrame;
-		BackgroundColor3 = AevryxLib["Theme"]["PanelColor"];
+		BackgroundColor3 = AevryxLib["Theme"]["BackgroundColor"];
 		BorderSizePixel = 0;
 		Position = UDim2.new(0, 0, 0, 0);
 		Size = UDim2.new(0, SIDEBAR, 1, 0);
@@ -261,49 +232,20 @@ function AevryxLib.Main(Name, X, Y)
 	CreateModule.Instance("UICorner", { Parent = Sidebar; CornerRadius = UDim.new(0, 10) })
 	CreateModule.Instance("Frame", {
 		Parent = Sidebar;
-		BackgroundColor3 = AevryxLib["Theme"]["PanelColor"];
+		BackgroundColor3 = Color3.fromRGB(45, 45, 55);
+		BackgroundTransparency = 0.6;
 		BorderSizePixel = 0;
-		Position = UDim2.new(0.86, 0, 0, 0);
-		Size = UDim2.new(0.14, 0, 1, 0);
+		Position = UDim2.new(1, -1, 0.04, 0);
+		Size = UDim2.new(0, 1, 0.92, 0);
 		ZIndex = 3;
-	})
-
-	local Logo = CreateModule.Instance("ImageLabel", {
-		Parent = Sidebar;
-		BackgroundTransparency = 1;
-		Image = "rbxassetid://88607367141872";
-		ScaleType = Enum.ScaleType.Fit;
-		Position = UDim2.new(0.5, 0, 0.04, 0);
-		AnchorPoint = Vector2.new(0.5, 0);
-		Size = UDim2.new(0, 52, 0, 52);
-		ZIndex = 4;
-	})
-	local LogoText = CreateModule.Instance("TextLabel", {
-		Parent = Sidebar;
-		BackgroundTransparency = 1;
-		Font = Enum.Font[AevryxLib["Theme"]["Font"]];
-		Text = "AEVRYX";
-		TextSize = 18;
-		TextColor3 = AevryxLib["Theme"]["FontColor"];
-		Position = UDim2.new(0, 0, 0.17, 0);
-		Size = UDim2.new(1, 0, 0.06, 0);
-		ZIndex = 4;
-	})
-	CreateModule.Instance("Frame", {
-		Parent = Sidebar;
-		BackgroundColor3 = AevryxLib["Theme"]["AccentColor2"];
-		BorderSizePixel = 0;
-		Position = UDim2.new(0.15, 0, 0.245, 0);
-		Size = UDim2.new(0.7, 0, 0, 1);
-		ZIndex = 4;
 	})
 
 	local TabsList = CreateModule.Instance("Frame", {
 		Parent = Sidebar;
 		BackgroundTransparency = 1;
 		BorderSizePixel = 0;
-		Position = UDim2.new(0, 0, 0.28, 0);
-		Size = UDim2.new(1, 0, 0.72, -8);
+		Position = UDim2.new(0, 0, 0.04, 0);
+		Size = UDim2.new(1, 0, 0.92, 0);
 		ZIndex = 4;
 	})
 	CreateModule.Instance("UIListLayout", {
@@ -444,16 +386,14 @@ function AevryxLib.Main(Name, X, Y)
 				local active = (v == TabButton)
 				v.IsActive.Value = active
 				if active then
-					v.BackgroundColor3 = AevryxLib["Theme"]["AccentColor"]
-					v.BackgroundTransparency = 0.15
+					v.BackgroundColor3 = Color3.fromRGB(34, 34, 42)
+					v.BackgroundTransparency = 0
 					v.TextColor3 = AevryxLib["Theme"]["FontColor"]
 				else
-					v.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+					v.BackgroundColor3 = Color3.fromRGB(30, 30, 38)
 					v.BackgroundTransparency = 1
 					v.TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.8)
 				end
-				local ind = v:FindFirstChild("Indicator")
-				if ind then Tween(ind, { BackgroundTransparency = active and 0 or 1 }, 0.3):Play() end
 			end
 		end
 		for _, v in next, Pages:GetChildren() do
@@ -493,7 +433,7 @@ function AevryxLib.Main(Name, X, Y)
 			if not dragging then con:Disconnect() end
 		end)
 	end
-	AccentLine.InputBegan:Connect(function(input)
+	MainFrame.InputBegan:Connect(function(input)
 		if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
 			dragging = true
 			dragStart = input.Position
@@ -531,7 +471,7 @@ function AevryxLib.Main(Name, X, Y)
 		local Bar = CreateModule.Instance("Frame", {
 			Parent = ScreenGui;
 			Name = HeaderText;
-			BackgroundColor3 = AevryxLib["Theme"]["PanelColor"];
+			BackgroundColor3 = AevryxLib["Theme"]["BackgroundColor"];
 			BorderSizePixel = 0;
 			Position = UDim2.new(1, 20, yOffset, 0);
 			Size = UDim2.new(0.2, 0, 0.12, 0);
@@ -543,12 +483,12 @@ function AevryxLib.Main(Name, X, Y)
 		CreateModule.Instance("UIStroke", {
 			Parent = Bar;
 			Thickness = 1;
-			Color = AevryxLib["Theme"]["AccentColor2"];
+			Color = Color3.fromRGB(60, 60, 70);
 			Transparency = 0.4;
 		})
 		CreateModule.Instance("Frame", {
 			Parent = Bar;
-			BackgroundColor3 = AevryxLib["Theme"]["AccentColor2"];
+			BackgroundColor3 = Color3.fromRGB(60, 60, 70);
 			BorderSizePixel = 0;
 			Position = UDim2.new(0, 0, 0, 0);
 			Size = UDim2.new(0, 4, 1, 0);
@@ -602,34 +542,24 @@ function AevryxLib.Main(Name, X, Y)
 		local TabButton = CreateModule.Instance("TextButton", {
 			Parent = TabsList;
 			Name = "TabButton";
-			BackgroundColor3 = Color3.fromRGB(255, 255, 255);
+			BackgroundColor3 = Color3.fromRGB(30, 30, 38);
 			BackgroundTransparency = 1;
 			BorderSizePixel = 0;
 			Size = UDim2.new(1, 0, 0, 34);
 			Font = Enum.Font[AevryxLib["Theme"]["Font"]];
-			Text = Text;
+			Text = "   " .. Text;
 			TextSize = 15;
 			TextXAlignment = Enum.TextXAlignment.Left;
 			AutoButtonColor = false;
 			ZIndex = 4;
 		})
 		CreateModule.Instance("UICorner", { Parent = TabButton; CornerRadius = UDim.new(0, 6) })
-		local Indicator = CreateModule.Instance("Frame", {
-			Parent = TabButton;
-			Name = "Indicator";
-			BackgroundColor3 = AevryxLib["Theme"]["AccentColor2"];
-			BorderSizePixel = 0;
-			Position = UDim2.new(0, 0, 0.15, 0);
-			Size = UDim2.new(0, 3, 0, 0.7, 0);
-			BackgroundTransparency = 1;
-			ZIndex = 5;
-		})
 		local IsTabActive = CreateModule.Instance("BoolValue", { Parent = TabButton; Name = "IsActive"; Value = (TabCount == 1) })
 		TabButton.TextColor3 = IsTabActive.Value and AevryxLib["Theme"]["FontColor"] or Darker(AevryxLib["Theme"]["FontColor"], 1.8)
 
 		TabButton.MouseEnter:Connect(function()
 			if not IsTabActive.Value then
-				Tween(TabButton, { BackgroundTransparency = 0.85, TextColor3 = AevryxLib["Theme"]["FontColor"] }, 0.2):Play()
+				Tween(TabButton, { BackgroundTransparency = 0.6, TextColor3 = AevryxLib["Theme"]["FontColor"] }, 0.2):Play()
 			end
 		end)
 		TabButton.MouseLeave:Connect(function()
@@ -692,10 +622,9 @@ function AevryxLib.Main(Name, X, Y)
 		if TabCount == 1 then
 			PageLayout:JumpTo(Page)
 			Fader.BackgroundTransparency = 1
-			TabButton.BackgroundColor3 = AevryxLib["Theme"]["AccentColor"]
-			TabButton.BackgroundTransparency = 0.15
+			TabButton.BackgroundColor3 = Color3.fromRGB(34, 34, 42)
+			TabButton.BackgroundTransparency = 0
 			TabButton.TextColor3 = AevryxLib["Theme"]["FontColor"]
-			Indicator.BackgroundTransparency = 0
 		else
 			Fader.BackgroundTransparency = 0
 		end
@@ -742,7 +671,7 @@ function AevryxLib.Main(Name, X, Y)
 			})
 			CreateModule.Instance("Frame", {
 				Parent = Section;
-				BackgroundColor3 = AevryxLib["Theme"]["AccentColor2"];
+				BackgroundColor3 = Color3.fromRGB(60, 60, 70);
 				BorderSizePixel = 0;
 				Position = UDim2.new(0, 0, 0, 30);
 				Size = UDim2.new(1, 0, 0, 1);
@@ -778,7 +707,7 @@ function AevryxLib.Main(Name, X, Y)
 					BackgroundColor3 = Color3.fromRGB(36, 36, 44);
 					BorderSizePixel = 0;
 					Position = UDim2.new(0, 0, 0, 0);
-					Size = UDim2.new(0.97, 0, 0, 30);
+					Size = UDim2.new(1, 0, 0, 30);
 					Font = Enum.Font[AevryxLib["Theme"]["Font"]];
 					Text = Text;
 					TextSize = 14;
@@ -796,7 +725,7 @@ function AevryxLib.Main(Name, X, Y)
 					Transparency = 0.5;
 				})
 				Button.MouseEnter:Connect(function()
-					Tween(Button, { BackgroundColor3 = AevryxLib["Theme"]["AccentColor"], TextColor3 = AevryxLib["Theme"]["FontColor"] }, 0.2):Play()
+					Tween(Button, { BackgroundColor3 = Color3.fromRGB(60, 60, 70), TextColor3 = AevryxLib["Theme"]["FontColor"] }, 0.2):Play()
 				end)
 				Button.MouseLeave:Connect(function()
 					Tween(Button, { BackgroundColor3 = Color3.fromRGB(36, 36, 44), TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.4) }, 0.2):Play()
@@ -815,7 +744,7 @@ function AevryxLib.Main(Name, X, Y)
 					BackgroundColor3 = Color3.fromRGB(36, 36, 44);
 					BorderSizePixel = 0;
 					Position = UDim2.new(0, 0, 0, 0);
-					Size = UDim2.new(0.97, 0, 0, 30);
+					Size = UDim2.new(1, 0, 0, 30);
 					Font = Enum.Font[AevryxLib["Theme"]["Font"]];
 					Text = "";
 					TextSize = 14;
@@ -871,7 +800,7 @@ function AevryxLib.Main(Name, X, Y)
 
 				local Keybinder = CreateModule.Instance("TextButton", {
 					Parent = Keybind;
-					BackgroundColor3 = AevryxLib["Theme"]["AccentColor"];
+					BackgroundColor3 = Color3.fromRGB(60, 60, 70);
 					BorderSizePixel = 0;
 					AnchorPoint = Vector2.new(1, 0.5);
 					Position = UDim2.new(1, -8, 0.5, 0);
@@ -920,7 +849,7 @@ function AevryxLib.Main(Name, X, Y)
 					BackgroundColor3 = Color3.fromRGB(36, 36, 44);
 					BorderSizePixel = 0;
 					Position = UDim2.new(0, 0, 0, 0);
-					Size = UDim2.new(0.97, 0, 0, 30);
+					Size = UDim2.new(1, 0, 0, 30);
 					Font = Enum.Font[AevryxLib["Theme"]["Font"]];
 					Text = "";
 					TextSize = 14;
@@ -947,7 +876,7 @@ function AevryxLib.Main(Name, X, Y)
 				local Checked = CreateModule.Instance("Frame", {
 					Parent = Checkbox;
 					Name = "Cube";
-					BackgroundColor3 = AevryxLib["Theme"]["AccentColor2"];
+					BackgroundColor3 = Color3.fromRGB(60, 60, 70);
 					BorderSizePixel = 0;
 					AnchorPoint = Vector2.new(1, 0.5);
 					Position = UDim2.new(1, -12, 0.5, 0);
@@ -961,7 +890,7 @@ function AevryxLib.Main(Name, X, Y)
 				IsActive.Changed:Connect(function()
 					if IsActive.Value then
 						Tween(Label, { TextColor3 = AevryxLib["Theme"]["FontColor"] }, 0.25):Play()
-						Tween(Checked, { BackgroundTransparency = 0, BackgroundColor3 = AevryxLib["Theme"]["AccentColor2"] }, 0.25):Play()
+						Tween(Checked, { BackgroundTransparency = 0, BackgroundColor3 = Color3.fromRGB(60, 60, 70) }, 0.25):Play()
 						pcall(func, IsActive.Value)
 					else
 						Tween(Checked, { BackgroundTransparency = 1 }, 0.25):Play()
@@ -983,7 +912,7 @@ function AevryxLib.Main(Name, X, Y)
 					BackgroundColor3 = Color3.fromRGB(30, 30, 38);
 					BorderSizePixel = 0;
 					Position = UDim2.new(0, 0, 0, 0);
-					Size = UDim2.new(0.97, 0, 0, 26);
+					Size = UDim2.new(1, 0, 0, 26);
 					Font = Enum.Font[AevryxLib["Theme"]["Font"]];
 					Text = Text;
 					TextSize = 13;
@@ -1004,7 +933,7 @@ function AevryxLib.Main(Name, X, Y)
 					BackgroundTransparency = 1;
 					BorderSizePixel = 0;
 					Position = UDim2.new(0, 0, 0, 0);
-					Size = UDim2.new(0.97, 0, 0, 30);
+					Size = UDim2.new(1, 0, 0, 30);
 				})
 				local TextBox = CreateModule.Instance("TextBox", {
 					Parent = TextBoxFrame;
@@ -1032,7 +961,7 @@ function AevryxLib.Main(Name, X, Y)
 					Transparency = 0.5;
 				})
 				TextBox.Focused:Connect(function()
-					Tween(Stroke, { Color = AevryxLib["Theme"]["AccentColor2"] }, 0.25):Play()
+					Tween(Stroke, { Color = Color3.fromRGB(60, 60, 70) }, 0.25):Play()
 				end)
 				TextBox.FocusLost:Connect(function()
 					Tween(Stroke, { Color = Color3.fromRGB(50, 50, 60) }, 0.25):Play()
@@ -1049,7 +978,7 @@ function AevryxLib.Main(Name, X, Y)
 					BackgroundColor3 = Color3.fromRGB(36, 36, 44);
 					BorderSizePixel = 0;
 					Position = UDim2.new(0, 0, 0, 0);
-					Size = UDim2.new(0.97, 0, 0, 44);
+					Size = UDim2.new(1, 0, 0, 44);
 					Font = Enum.Font[AevryxLib["Theme"]["Font"]];
 					TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.4);
 					Text = Text;
@@ -1090,7 +1019,7 @@ function AevryxLib.Main(Name, X, Y)
 				local Progress = CreateModule.Instance("Frame", {
 					Parent = Bar;
 					Name = "Progress";
-					BackgroundColor3 = AevryxLib["Theme"]["AccentColor2"];
+					BackgroundColor3 = Color3.fromRGB(60, 60, 70);
 					BorderSizePixel = 0;
 					AnchorPoint = Vector2.new(0, 0.5);
 					Position = UDim2.new(0, 0, 0.5, 0);
@@ -1138,7 +1067,7 @@ function AevryxLib.Main(Name, X, Y)
 					BackgroundColor3 = Color3.fromRGB(36, 36, 44);
 					BorderSizePixel = 0;
 					Position = UDim2.new(0, 0, 0, 0);
-					Size = UDim2.new(0.97, 0, 0, 30);
+					Size = UDim2.new(1, 0, 0, 30);
 					ClipsDescendants = true;
 					ZIndex = 3;
 				})
@@ -1203,10 +1132,10 @@ function AevryxLib.Main(Name, X, Y)
 				local function ToggleDropdown()
 					IsOpened = not IsOpened
 					if IsOpened then
-						Dropdown:TweenSize(UDim2.new(0.97, 0, 0, 150), "Out", "Quart", 0.3, true)
+						Dropdown:TweenSize(UDim2.new(1, 0, 0, 150), "Out", "Quart", 0.3, true)
 						Tween(DropdownImage, { Rotation = 180 }, 0.3):Play()
 					else
-						Dropdown:TweenSize(UDim2.new(0.97, 0, 0, 30), "Out", "Quart", 0.3, true)
+						Dropdown:TweenSize(UDim2.new(1, 0, 0, 30), "Out", "Quart", 0.3, true)
 						Tween(DropdownImage, { Rotation = 0 }, 0.3):Play()
 					end
 				end
@@ -1219,7 +1148,7 @@ function AevryxLib.Main(Name, X, Y)
 						BackgroundColor3 = Color3.fromRGB(36, 36, 44);
 						BorderSizePixel = 0;
 						Position = UDim2.new(0, 0, 0, 0);
-						Size = UDim2.new(0.95, 0, 0, 24);
+						Size = UDim2.new(1, 0, 0, 24);
 						Font = Enum.Font[AevryxLib["Theme"]["Font"]];
 						Text = "  " .. string;
 						TextSize = 14;
@@ -1230,7 +1159,7 @@ function AevryxLib.Main(Name, X, Y)
 						ZIndex = 5;
 					})
 					Selectable.MouseEnter:Connect(function()
-						Tween(Selectable, { BackgroundColor3 = AevryxLib["Theme"]["AccentColor"], TextColor3 = AevryxLib["Theme"]["FontColor"] }, 0.2):Play()
+						Tween(Selectable, { BackgroundColor3 = Color3.fromRGB(60, 60, 70), TextColor3 = AevryxLib["Theme"]["FontColor"] }, 0.2):Play()
 					end)
 					Selectable.MouseLeave:Connect(function()
 						Tween(Selectable, { BackgroundColor3 = Color3.fromRGB(36, 36, 44), TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.4) }, 0.2):Play()
@@ -1238,7 +1167,7 @@ function AevryxLib.Main(Name, X, Y)
 					Selectable.MouseButton1Click:Connect(function()
 						pcall(func, string, value)
 						DropdownButton.Text = "  " .. string
-						Dropdown:TweenSize(UDim2.new(0.97, 0, 0, 30), "Out", "Quart", 0.3, true)
+						Dropdown:TweenSize(UDim2.new(1, 0, 0, 30), "Out", "Quart", 0.3, true)
 						Tween(DropdownImage, { Rotation = 0 }, 0.3):Play()
 						IsOpened = false
 					end)
@@ -1286,7 +1215,7 @@ function AevryxLib.Main(Name, X, Y)
 					BackgroundColor3 = Color3.fromRGB(36, 36, 44);
 					BorderSizePixel = 0;
 					Position = UDim2.new(0, 0, 0, 0);
-					Size = UDim2.new(0.97, 0, 0, 30);
+					Size = UDim2.new(1, 0, 0, 30);
 					ClipsDescendants = true;
 					ZIndex = 3;
 				})
@@ -1351,10 +1280,10 @@ function AevryxLib.Main(Name, X, Y)
 				local function ToggleDropdown()
 					IsOpened = not IsOpened
 					if IsOpened then
-						Dropdown:TweenSize(UDim2.new(0.97, 0, 0, 150), "Out", "Quart", 0.3, true)
+						Dropdown:TweenSize(UDim2.new(1, 0, 0, 150), "Out", "Quart", 0.3, true)
 						Tween(DropdownImage, { Rotation = 180 }, 0.3):Play()
 					else
-						Dropdown:TweenSize(UDim2.new(0.97, 0, 0, 30), "Out", "Quart", 0.3, true)
+						Dropdown:TweenSize(UDim2.new(1, 0, 0, 30), "Out", "Quart", 0.3, true)
 						Tween(DropdownImage, { Rotation = 0 }, 0.3):Play()
 					end
 				end
@@ -1368,7 +1297,7 @@ function AevryxLib.Main(Name, X, Y)
 						BackgroundColor3 = Color3.fromRGB(36, 36, 44);
 						BorderSizePixel = 0;
 						Position = UDim2.new(0, 0, 0, 0);
-						Size = UDim2.new(0.95, 0, 0, 24);
+						Size = UDim2.new(1, 0, 0, 24);
 						Font = Enum.Font[AevryxLib["Theme"]["Font"]];
 						Text = "  " .. string;
 						TextSize = 14;
@@ -1393,7 +1322,7 @@ function AevryxLib.Main(Name, X, Y)
 						ZIndex = 6;
 					})
 					Selectable.MouseEnter:Connect(function()
-						Tween(Selectable, { BackgroundColor3 = AevryxLib["Theme"]["AccentColor"], TextColor3 = AevryxLib["Theme"]["FontColor"] }, 0.2):Play()
+						Tween(Selectable, { BackgroundColor3 = Color3.fromRGB(60, 60, 70), TextColor3 = AevryxLib["Theme"]["FontColor"] }, 0.2):Play()
 					end)
 					Selectable.MouseLeave:Connect(function()
 						Tween(Selectable, { BackgroundColor3 = Color3.fromRGB(36, 36, 44), TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.4) }, 0.2):Play()
