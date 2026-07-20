@@ -436,7 +436,9 @@ function AevryxLib.Main(Name, X, Y)
 	local TabCount = 0
 	local IsGuiOpened = true
 
-	local function SelectTab(TabButton, Page)
+	local function SelectTab(TabButton, pageName)
+		local Page = Pages:FindFirstChild(pageName)
+		if not Page then return end
 		for _, v in next, TabsList:GetChildren() do
 			if v:IsA("TextButton") then
 				local active = (v == TabButton)
@@ -455,7 +457,7 @@ function AevryxLib.Main(Name, X, Y)
 			end
 		end
 		for _, v in next, Pages:GetChildren() do
-			if v.Name ~= Page.Name and v:FindFirstChild("Fader") then
+			if v.Name ~= pageName and v:FindFirstChild("Fader") then
 				Tween(v.Fader, { BackgroundTransparency = 0 }, 0.3):Play()
 				spawn(function()
 					wait(0.34)
@@ -636,7 +638,7 @@ function AevryxLib.Main(Name, X, Y)
 			end
 		end)
 		TabButton.MouseButton1Click:Connect(function()
-			SelectTab(TabButton, Page)
+			SelectTab(TabButton, Text)
 		end)
 
 		local Page = CreateModule.Instance("Frame", {
@@ -1127,6 +1129,305 @@ function AevryxLib.Main(Name, X, Y)
 					end
 				end)
 				AddToReg(Slider)
+			end
+
+			function InSection.Dropdown(Text, Selectables, ind, func)
+				local Dropdown = CreateModule.Instance("Frame", {
+					Parent = SectionElements;
+					Name = Text;
+					BackgroundColor3 = Color3.fromRGB(36, 36, 44);
+					BorderSizePixel = 0;
+					Position = UDim2.new(0, 0, 0, 0);
+					Size = UDim2.new(0.97, 0, 0, 30);
+					ClipsDescendants = true;
+					ZIndex = 3;
+				})
+				CreateModule.Instance("UICorner", { Parent = Dropdown; CornerRadius = UDim.new(0, 5) })
+				CreateModule.Instance("UIStroke", {
+					Parent = Dropdown;
+					Thickness = 1;
+					Color = Color3.fromRGB(50, 50, 60);
+					Transparency = 0.5;
+				})
+				local DropdownButton = CreateModule.Instance("TextButton", {
+					Parent = Dropdown;
+					Name = "DropdownButton";
+					BackgroundColor3 = Color3.fromRGB(36, 36, 44);
+					BorderSizePixel = 0;
+					Position = UDim2.new(0, 0, 0, 0);
+					Size = UDim2.new(1, 0, 0, 30);
+					Font = Enum.Font[AevryxLib["Theme"]["Font"]];
+					Text = "  " .. Text;
+					TextSize = 14;
+					TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.4);
+					TextXAlignment = Enum.TextXAlignment.Left;
+					TextYAlignment = Enum.TextYAlignment.Center;
+					AutoButtonColor = false;
+					ZIndex = 4;
+				})
+				local DropdownImage = CreateModule.Instance("ImageLabel", {
+					Parent = DropdownButton;
+					AnchorPoint = Vector2.new(1, 0.5);
+					BackgroundTransparency = 1;
+					Position = UDim2.new(1, -6, 0.5, 0);
+					Size = UDim2.new(0, 18, 0, 18);
+					Image = "rbxassetid://3926305904";
+					ImageColor3 = Color3.fromRGB(136, 136, 136);
+					ImageRectOffset = Vector2.new(44, 404);
+					ImageRectSize = Vector2.new(36, 36);
+					ZIndex = 5;
+				})
+				local List = CreateModule.Instance("ScrollingFrame", {
+					Parent = Dropdown;
+					Name = "List";
+					Active = true;
+					BackgroundColor3 = Color3.fromRGB(28, 28, 36);
+					BackgroundTransparency = 0.05;
+					BorderSizePixel = 0;
+					Position = UDim2.new(0, 0, 0, 30);
+					Size = UDim2.new(1, 0, 0, 0);
+					CanvasSize = UDim2.new(0, 0, 0, 0);
+					AutomaticCanvasSize = Enum.AutomaticSize.Y;
+					ScrollBarThickness = 4;
+					ScrollBarImageTransparency = 0.5;
+					ZIndex = 4;
+				})
+				CreateModule.Instance("UIListLayout", {
+					Parent = List;
+					Padding = UDim.new(0, 4);
+					HorizontalAlignment = Enum.HorizontalAlignment.Center;
+					SortOrder = Enum.SortOrder.LayoutOrder;
+				})
+				CreateModule.Instance("UICorner", { Parent = Dropdown; CornerRadius = UDim.new(0, 5) })
+				local IsOpened = false
+				local function ToggleDropdown()
+					IsOpened = not IsOpened
+					if IsOpened then
+						Dropdown:TweenSize(UDim2.new(0.97, 0, 0, 150), "Out", "Quart", 0.3, true)
+						Tween(DropdownImage, { Rotation = 180 }, 0.3):Play()
+					else
+						Dropdown:TweenSize(UDim2.new(0.97, 0, 0, 30), "Out", "Quart", 0.3, true)
+						Tween(DropdownImage, { Rotation = 0 }, 0.3):Play()
+					end
+				end
+				DropdownButton.MouseButton1Click:Connect(ToggleDropdown)
+				DropdownButton.TouchTap:Connect(ToggleDropdown)
+				local function NewSelectable(string, value)
+					local Selectable = CreateModule.Instance("TextButton", {
+						Parent = List;
+						Name = string;
+						BackgroundColor3 = Color3.fromRGB(36, 36, 44);
+						BorderSizePixel = 0;
+						Position = UDim2.new(0, 0, 0, 0);
+						Size = UDim2.new(0.95, 0, 0, 24);
+						Font = Enum.Font[AevryxLib["Theme"]["Font"]];
+						Text = "  " .. string;
+						TextSize = 14;
+						TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.4);
+						TextXAlignment = Enum.TextXAlignment.Left;
+						TextYAlignment = Enum.TextYAlignment.Center;
+						AutoButtonColor = false;
+						ZIndex = 5;
+					})
+					Selectable.MouseEnter:Connect(function()
+						Tween(Selectable, { BackgroundColor3 = AevryxLib["Theme"]["AccentColor"], TextColor3 = AevryxLib["Theme"]["FontColor"] }, 0.2):Play()
+					end)
+					Selectable.MouseLeave:Connect(function()
+						Tween(Selectable, { BackgroundColor3 = Color3.fromRGB(36, 36, 44), TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.4) }, 0.2):Play()
+					end)
+					Selectable.MouseButton1Click:Connect(function()
+						pcall(func, string, value)
+						DropdownButton.Text = "  " .. string
+						Dropdown:TweenSize(UDim2.new(0.97, 0, 0, 30), "Out", "Quart", 0.3, true)
+						Tween(DropdownImage, { Rotation = 0 }, 0.3):Play()
+						IsOpened = false
+					end)
+				end
+				local valueToDisplay = {}
+				for string, value in next, Selectables do
+					if ind == 1 then
+						NewSelectable(tostring(string), tostring(value))
+						valueToDisplay[tostring(value)] = tostring(string)
+					elseif ind == 2 then
+						NewSelectable(tostring(value), tostring(string))
+						valueToDisplay[tostring(string)] = tostring(value)
+					end
+				end
+				local InDropdown = {}
+				function InDropdown.Refresh(select)
+					for i, v in next, List:GetChildren() do
+						if v.ClassName == "TextButton" then v:Destroy() end
+					end
+					wait()
+					valueToDisplay = {}
+					for string, value in next, select do
+						if ind == 1 then
+							NewSelectable(tostring(string), tostring(value))
+							valueToDisplay[tostring(value)] = tostring(string)
+						elseif ind == 2 then
+							NewSelectable(tostring(value), tostring(string))
+							valueToDisplay[tostring(string)] = tostring(value)
+						end
+					end
+				end
+				function InDropdown.Set(selectionString)
+					if typeof(selectionString) ~= "string" then return end
+					local displayText = valueToDisplay[selectionString]
+					DropdownButton.Text = "  " .. (displayText or selectionString)
+				end
+				AddToReg(Dropdown)
+				return InDropdown
+			end
+
+			function InSection.MultiDropdown(Text, Selectables, ind, func)
+				local Dropdown = CreateModule.Instance("Frame", {
+					Parent = SectionElements;
+					Name = Text;
+					BackgroundColor3 = Color3.fromRGB(36, 36, 44);
+					BorderSizePixel = 0;
+					Position = UDim2.new(0, 0, 0, 0);
+					Size = UDim2.new(0.97, 0, 0, 30);
+					ClipsDescendants = true;
+					ZIndex = 3;
+				})
+				CreateModule.Instance("UICorner", { Parent = Dropdown; CornerRadius = UDim.new(0, 5) })
+				CreateModule.Instance("UIStroke", {
+					Parent = Dropdown;
+					Thickness = 1;
+					Color = Color3.fromRGB(50, 50, 60);
+					Transparency = 0.5;
+				})
+				local DropdownButton = CreateModule.Instance("TextButton", {
+					Parent = Dropdown;
+					Name = "DropdownButton";
+					BackgroundColor3 = Color3.fromRGB(36, 36, 44);
+					BorderSizePixel = 0;
+					Position = UDim2.new(0, 0, 0, 0);
+					Size = UDim2.new(1, 0, 0, 30);
+					Font = Enum.Font[AevryxLib["Theme"]["Font"]];
+					Text = "  " .. Text;
+					TextSize = 14;
+					TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.4);
+					TextXAlignment = Enum.TextXAlignment.Left;
+					TextYAlignment = Enum.TextYAlignment.Center;
+					AutoButtonColor = false;
+					ZIndex = 4;
+				})
+				local DropdownImage = CreateModule.Instance("ImageLabel", {
+					Parent = DropdownButton;
+					AnchorPoint = Vector2.new(1, 0.5);
+					BackgroundTransparency = 1;
+					Position = UDim2.new(1, -6, 0.5, 0);
+					Size = UDim2.new(0, 18, 0, 18);
+					Image = "rbxassetid://3926305904";
+					ImageColor3 = Color3.fromRGB(136, 136, 136);
+					ImageRectOffset = Vector2.new(44, 404);
+					ImageRectSize = Vector2.new(36, 36);
+					ZIndex = 5;
+				})
+				local List = CreateModule.Instance("ScrollingFrame", {
+					Parent = Dropdown;
+					Name = "List";
+					Active = true;
+					BackgroundColor3 = Color3.fromRGB(28, 28, 36);
+					BackgroundTransparency = 0.05;
+					BorderSizePixel = 0;
+					Position = UDim2.new(0, 0, 0, 30);
+					Size = UDim2.new(1, 0, 0, 0);
+					CanvasSize = UDim2.new(0, 0, 0, 0);
+					AutomaticCanvasSize = Enum.AutomaticSize.Y;
+					ScrollBarThickness = 4;
+					ScrollBarImageTransparency = 0.5;
+					ZIndex = 4;
+				})
+				CreateModule.Instance("UIListLayout", {
+					Parent = List;
+					Padding = UDim.new(0, 4);
+					HorizontalAlignment = Enum.HorizontalAlignment.Center;
+					SortOrder = Enum.SortOrder.LayoutOrder;
+				})
+				CreateModule.Instance("UICorner", { Parent = Dropdown; CornerRadius = UDim.new(0, 5) })
+				local IsOpened = false
+				local function ToggleDropdown()
+					IsOpened = not IsOpened
+					if IsOpened then
+						Dropdown:TweenSize(UDim2.new(0.97, 0, 0, 150), "Out", "Quart", 0.3, true)
+						Tween(DropdownImage, { Rotation = 180 }, 0.3):Play()
+					else
+						Dropdown:TweenSize(UDim2.new(0.97, 0, 0, 30), "Out", "Quart", 0.3, true)
+						Tween(DropdownImage, { Rotation = 0 }, 0.3):Play()
+					end
+				end
+				DropdownButton.MouseButton1Click:Connect(ToggleDropdown)
+				DropdownButton.TouchTap:Connect(ToggleDropdown)
+				local Selected = {}
+				local function NewSelectable(string, value)
+					local Selectable = CreateModule.Instance("TextButton", {
+						Parent = List;
+						Name = string;
+						BackgroundColor3 = Color3.fromRGB(36, 36, 44);
+						BorderSizePixel = 0;
+						Position = UDim2.new(0, 0, 0, 0);
+						Size = UDim2.new(0.95, 0, 0, 24);
+						Font = Enum.Font[AevryxLib["Theme"]["Font"]];
+						Text = "  " .. string;
+						TextSize = 14;
+						TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.4);
+						TextXAlignment = Enum.TextXAlignment.Left;
+						TextYAlignment = Enum.TextYAlignment.Center;
+						AutoButtonColor = false;
+						ZIndex = 5;
+					})
+					local Check = CreateModule.Instance("TextLabel", {
+						Parent = Selectable;
+						Name = "Check";
+						BackgroundTransparency = 1;
+						Position = UDim2.new(0.88, 0, 0, 0);
+						Size = UDim2.new(0.1, 0, 0, 24);
+						Font = Enum.Font[AevryxLib["Theme"]["Font"]];
+						Text = "";
+						TextSize = 14;
+						TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.4);
+						TextXAlignment = Enum.TextXAlignment.Center;
+						TextYAlignment = Enum.TextYAlignment.Center;
+						ZIndex = 6;
+					})
+					Selectable.MouseEnter:Connect(function()
+						Tween(Selectable, { BackgroundColor3 = AevryxLib["Theme"]["AccentColor"], TextColor3 = AevryxLib["Theme"]["FontColor"] }, 0.2):Play()
+					end)
+					Selectable.MouseLeave:Connect(function()
+						Tween(Selectable, { BackgroundColor3 = Color3.fromRGB(36, 36, 44), TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.4) }, 0.2):Play()
+					end)
+					Selectable.MouseButton1Click:Connect(function()
+						Selected[string] = not Selected[string]
+						Check.Text = Selected[string] and "●" or ""
+						pcall(func, string, value)
+					end)
+				end
+				for string, value in next, Selectables do
+					if ind == 1 then
+						NewSelectable(tostring(string), tostring(value))
+					elseif ind == 2 then
+						NewSelectable(tostring(value), tostring(string))
+					end
+				end
+				local InDropdown = {}
+				function InDropdown.Refresh(select)
+					for i, v in next, List:GetChildren() do
+						if v.ClassName == "TextButton" then v:Destroy() end
+					end
+					wait()
+					Selected = {}
+					for string, value in next, select do
+						if ind == 1 then
+							NewSelectable(tostring(string), tostring(value))
+						elseif ind == 2 then
+							NewSelectable(tostring(value), tostring(string))
+						end
+					end
+				end
+				AddToReg(Dropdown)
+				return InDropdown
 			end
 
 			return InSection
