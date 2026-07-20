@@ -664,13 +664,13 @@ function AevryxLib.Main(Name, X, Y)
 			Position = UDim2.new(0.51, 0, 0.02, 0);
 			Size = UDim2.new(0.49, 0, 0.96, 0);
 		})
-		CreateModule.Instance("UIListLayout", {
+		local PageListLayout = CreateModule.Instance("UIListLayout", {
 			Parent = PageList;
 			Padding = UDim.new(0, 12);
 			HorizontalAlignment = Enum.HorizontalAlignment.Left;
 			SortOrder = Enum.SortOrder.LayoutOrder;
 		})
-		CreateModule.Instance("UIListLayout", {
+		local PageList2Layout = CreateModule.Instance("UIListLayout", {
 			Parent = PageList2;
 			Padding = UDim.new(0, 12);
 			HorizontalAlignment = Enum.HorizontalAlignment.Left;
@@ -704,7 +704,7 @@ function AevryxLib.Main(Name, X, Y)
 		function InPage.Section(Text)
 			local InSection = {}
 			local Column = PageList
-			if PageList.AbsoluteContentSize.Y > PageList2.AbsoluteContentSize.Y then
+			if PageListLayout.AbsoluteContentSize.Y > PageList2Layout.AbsoluteContentSize.Y then
 				Column = PageList2
 			end
 
