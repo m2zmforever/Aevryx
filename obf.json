@@ -1,0 +1,18 @@
+{
+  "preset": "Custom",
+  "prettify": false,
+  "embedRuntime": false,
+  "mangleStatements": true,
+  "liftConstants": 25,
+  "manageNumbers": true,
+  "manageStrings": true,
+  "manageSelfCalls": true,
+  "manageIndexes": true,
+  "manageGlobals": true,
+  "flattenControlFlow": false,
+  "visualizeOptions": {
+    "visualizeScript": false,
+    "environmentCheck": false,
+    "debugVM": false
+  }
+}
