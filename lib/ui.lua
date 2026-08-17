@@ -789,7 +789,7 @@ InMain.Notification = InMain.Notification
                 BorderSizePixel = 0;
                 BorderColor3 = Color3.fromRGB(45,45,45);
                 Position = UDim2.new(0,0,0,0);
-                Size = UDim2.new(0.95,0,0,30);
+                Size = UDim2.new(1,0,0,30);
                 AutomaticSize = Enum.AutomaticSize.Y;
             })
 
@@ -1216,6 +1216,51 @@ InMain.Notification = InMain.Notification
                 })
                 AddToReg(Img)
                 return Img;
+            end
+
+            function InSection.Welcome(ImageId, Text)
+                SectionList.FillDirection = Enum.FillDirection.Horizontal
+                SectionList.HorizontalAlignment = Enum.HorizontalAlignment.Left
+                SectionList.VerticalAlignment = Enum.VerticalAlignment.Center
+                SectionList.Padding = UDim.new(0,10)
+
+                local Avatar = CreateModule.Instance("ImageLabel",{
+                    Parent = SectionElements;
+                    Name = "Avatar";
+                    BackgroundTransparency = 1;
+                    BorderSizePixel = 0;
+                    Position = UDim2.new(0,5,0.5,0);
+                    AnchorPoint = Vector2.new(0,0.5);
+                    Size = UDim2.new(0,64,0,64);
+                    Image = ImageId or "";
+                    ScaleType = Enum.ScaleType.Fit;
+                    LayoutOrder = 0;
+                })
+                local AvatarCorner = CreateModule.Instance("UICorner",{
+                    Parent = Avatar;
+                    Name = "Corner";
+                    CornerRadius = UDim.new(0,5);
+                })
+
+                local Label = CreateModule.Instance("TextLabel",{
+                    Parent = SectionElements;
+                    Name = "WelcomeText";
+                    BackgroundTransparency = 1;
+                    BorderSizePixel = 0;
+                    Position = UDim2.new(0,79,0.5,0);
+                    AnchorPoint = Vector2.new(0,0.5);
+                    Size = UDim2.new(1,-84,0,64);
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
+                    Text = Text;
+                    TextSize = 22;
+                    TextColor3 = AevryxLib["Theme"]["FontColor"];
+                    TextXAlignment = Enum.TextXAlignment.Left;
+                    TextYAlignment = Enum.TextYAlignment.Center;
+                    LayoutOrder = 1;
+                })
+                AddToReg(Avatar)
+                AddToReg(Label)
+                return Avatar, Label;
             end
 
             function InSection.TextBox(Text,func,defvalue)
