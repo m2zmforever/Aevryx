@@ -774,6 +774,100 @@ InMain.Notification = InMain.Notification
         UpdateTabPages()
         local InPage = {}
 
+        function InPage.WelcomeSection(ImageId, Text)
+            local InSection = {}
+
+            local Column = PageList
+            if ElementsList.AbsoluteContentSize.Y > ElementsList2.AbsoluteContentSize.Y then
+                Column = PageList2
+            end
+
+            local Section = CreateModule.Instance("Frame",{
+                Parent = Column;
+                Name = "Welcome";
+                BackgroundColor3 = Color3.fromRGB(0,0,0);
+                BorderSizePixel = 0;
+                BorderColor3 = Color3.fromRGB(45,45,45);
+                Position = UDim2.new(0,0,0,0);
+                Size = UDim2.new(1,0,0,80);
+                AutomaticSize = Enum.AutomaticSize.Y;
+            })
+
+            local Corner = CreateModule.Instance("UICorner",{
+                Parent = Section;
+                Name = "Corner";
+                CornerRadius = UDim.new(0,5);
+            })
+
+            local Stroke = CreateModule.Instance("UIStroke",{
+                Parent = Section;
+                Name = "Stroke";
+                Thickness = 1;
+                Color = Color3.fromRGB(20,20,20);
+                ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
+            })
+
+            local List = CreateModule.Instance("UIListLayout",{
+                Parent = Section;
+                FillDirection = Enum.FillDirection.Horizontal;
+                Padding = UDim.new(0,10);
+                HorizontalAlignment = Enum.HorizontalAlignment.Left;
+                VerticalAlignment = Enum.VerticalAlignment.Center;
+                SortOrder = Enum.SortOrder.LayoutOrder;
+            })
+
+            local Padding = CreateModule.Instance("UIPadding",{
+                Parent = Section;
+                PaddingLeft = UDim.new(0,8);
+                PaddingRight = UDim.new(0,8);
+                PaddingTop = UDim.new(0,8);
+                PaddingBottom = UDim.new(0,8);
+            })
+
+            local Avatar = CreateModule.Instance("ImageLabel",{
+                Parent = Section;
+                Name = "Avatar";
+                BackgroundTransparency = 1;
+                BorderSizePixel = 0;
+                Size = UDim2.new(0,64,0,64);
+                Image = ImageId or "";
+                ScaleType = Enum.ScaleType.Fit;
+                LayoutOrder = 0;
+            })
+            local AvatarCorner = CreateModule.Instance("UICorner",{
+                Parent = Avatar;
+                Name = "Corner";
+                CornerRadius = UDim.new(0,5);
+            })
+
+            local Label = CreateModule.Instance("TextLabel",{
+                Parent = Section;
+                Name = "WelcomeText";
+                BackgroundTransparency = 1;
+                BorderSizePixel = 0;
+                Size = UDim2.new(1,-82,0,64);
+                Font = Enum.Font[AevryxLib["Theme"]["Font"]];
+                Text = Text or "";
+                TextSize = 22;
+                TextColor3 = AevryxLib["Theme"]["FontColor"];
+                TextXAlignment = Enum.TextXAlignment.Left;
+                TextYAlignment = Enum.TextYAlignment.Center;
+                LayoutOrder = 1;
+                AutomaticSize = Enum.AutomaticSize.Y;
+            })
+            AddToReg(Avatar)
+            AddToReg(Label)
+
+            function InSection.SetText(NewText)
+                Label.Text = NewText
+            end
+            function InSection.SetAvatar(NewImageId)
+                Avatar.Image = NewImageId or ""
+            end
+
+            return InSection;
+        end
+
         function InPage.Section(Text)
             local InSection = {}
 
@@ -1216,51 +1310,6 @@ InMain.Notification = InMain.Notification
                 })
                 AddToReg(Img)
                 return Img;
-            end
-
-            function InSection.Welcome(ImageId, Text)
-                SectionList.FillDirection = Enum.FillDirection.Horizontal
-                SectionList.HorizontalAlignment = Enum.HorizontalAlignment.Left
-                SectionList.VerticalAlignment = Enum.VerticalAlignment.Center
-                SectionList.Padding = UDim.new(0,10)
-
-                local Avatar = CreateModule.Instance("ImageLabel",{
-                    Parent = SectionElements;
-                    Name = "Avatar";
-                    BackgroundTransparency = 1;
-                    BorderSizePixel = 0;
-                    Position = UDim2.new(0,5,0.5,0);
-                    AnchorPoint = Vector2.new(0,0.5);
-                    Size = UDim2.new(0,64,0,64);
-                    Image = ImageId or "";
-                    ScaleType = Enum.ScaleType.Fit;
-                    LayoutOrder = 0;
-                })
-                local AvatarCorner = CreateModule.Instance("UICorner",{
-                    Parent = Avatar;
-                    Name = "Corner";
-                    CornerRadius = UDim.new(0,5);
-                })
-
-                local Label = CreateModule.Instance("TextLabel",{
-                    Parent = SectionElements;
-                    Name = "WelcomeText";
-                    BackgroundTransparency = 1;
-                    BorderSizePixel = 0;
-                    Position = UDim2.new(0,79,0.5,0);
-                    AnchorPoint = Vector2.new(0,0.5);
-                    Size = UDim2.new(1,-84,0,64);
-                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
-                    Text = Text;
-                    TextSize = 22;
-                    TextColor3 = AevryxLib["Theme"]["FontColor"];
-                    TextXAlignment = Enum.TextXAlignment.Left;
-                    TextYAlignment = Enum.TextYAlignment.Center;
-                    LayoutOrder = 1;
-                })
-                AddToReg(Avatar)
-                AddToReg(Label)
-                return Avatar, Label;
             end
 
             function InSection.TextBox(Text,func,defvalue)
