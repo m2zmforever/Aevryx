@@ -803,32 +803,15 @@ InMain.Notification = InMain.Notification
                 ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
             })
 
-            local List = CreateModule.Instance("UIListLayout",{
-                Parent = Section;
-                FillDirection = Enum.FillDirection.Horizontal;
-                Padding = UDim.new(0,10);
-                HorizontalAlignment = Enum.HorizontalAlignment.Left;
-                VerticalAlignment = Enum.VerticalAlignment.Center;
-                SortOrder = Enum.SortOrder.LayoutOrder;
-            })
-
-            local Padding = CreateModule.Instance("UIPadding",{
-                Parent = Section;
-                PaddingLeft = UDim.new(0,8);
-                PaddingRight = UDim.new(0,8);
-                PaddingTop = UDim.new(0,8);
-                PaddingBottom = UDim.new(0,8);
-            })
-
             local Avatar = CreateModule.Instance("ImageLabel",{
                 Parent = Section;
                 Name = "Avatar";
                 BackgroundTransparency = 1;
                 BorderSizePixel = 0;
+                Position = UDim2.new(0,8,0,8);
                 Size = UDim2.new(0,64,0,64);
                 Image = ImageId or "";
                 ScaleType = Enum.ScaleType.Fit;
-                LayoutOrder = 0;
             })
             local AvatarCorner = CreateModule.Instance("UICorner",{
                 Parent = Avatar;
@@ -841,7 +824,8 @@ InMain.Notification = InMain.Notification
                 Name = "WelcomeText";
                 BackgroundTransparency = 1;
                 BorderSizePixel = 0;
-                Size = UDim2.new(1,-82,0,64);
+                Position = UDim2.new(0,82,0,0);
+                Size = UDim2.new(1,-90,1,0);
                 Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                 Text = Text or "";
                 TextSize = 22;
@@ -861,8 +845,10 @@ InMain.Notification = InMain.Notification
                 Avatar.Image = NewImageId or ""
             end
 
+            PageList.Size = UDim2.new(0.475,0,1,0)
             PageList.Position = UDim2.new(0.015,0,0.015,WelcomeHeight + 10)
-            PageList2.Position = UDim2.new(0.52,0,0.015,WelcomeHeight + 10)
+            PageList2.Size = UDim2.new(0.475,0,1,0)
+            PageList2.Position = UDim2.new(0.51,0,0.015,WelcomeHeight + 10)
 
             return InSection;
         end
