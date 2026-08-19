@@ -500,17 +500,18 @@ function AevryxLib.Main(Name,X,Y)
 
 
     local ActiveNotifications = {}
-    local NotificationOffset = 0.12
+    local NotificationOffset = 0.135
+    local NotificationBaseY = 0.76
     
     local function UpdateNotificationPositions()
         for i, notification in ipairs(ActiveNotifications) do
-            local newYOffset = 0.8 - (NotificationOffset * (i - 1))
+            local newYOffset = NotificationBaseY - (NotificationOffset * (i - 1))
             TweenService:Create(notification, TweenInfo.new(0.3), {Position = UDim2.new(0.78, 0, newYOffset, 0)}):Play()
         end
     end
     
     function InMain.Notification(HeaderText,Text)
-        local yOffset = 0.8 - (NotificationOffset * #ActiveNotifications)
+        local yOffset = NotificationBaseY - (NotificationOffset * #ActiveNotifications)
         
         local Bar = CreateModule.Instance("Frame",{
             Parent = AevryxLib.ScreenGui;
