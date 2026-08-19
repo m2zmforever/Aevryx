@@ -777,20 +777,16 @@ InMain.Notification = InMain.Notification
         function InPage.WelcomeSection(ImageId, Text)
             local InSection = {}
 
-            local Column = PageList
-            if ElementsList.AbsoluteContentSize.Y > ElementsList2.AbsoluteContentSize.Y then
-                Column = PageList2
-            end
+            local WelcomeHeight = 80
 
             local Section = CreateModule.Instance("Frame",{
-                Parent = Column;
+                Parent = Page;
                 Name = "Welcome";
                 BackgroundColor3 = Color3.fromRGB(0,0,0);
                 BorderSizePixel = 0;
                 BorderColor3 = Color3.fromRGB(45,45,45);
-                Position = UDim2.new(0,0,0,0);
-                Size = UDim2.new(1,0,0,80);
-                AutomaticSize = Enum.AutomaticSize.Y;
+                Position = UDim2.new(0.015,0,0.015,0);
+                Size = UDim2.new(0.97,0,0,WelcomeHeight);
             })
 
             local Corner = CreateModule.Instance("UICorner",{
@@ -864,6 +860,9 @@ InMain.Notification = InMain.Notification
             function InSection.SetAvatar(NewImageId)
                 Avatar.Image = NewImageId or ""
             end
+
+            PageList.Position = UDim2.new(0.015,0,0.015,WelcomeHeight + 10)
+            PageList2.Position = UDim2.new(0.52,0,0.015,WelcomeHeight + 10)
 
             return InSection;
         end
