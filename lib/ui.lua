@@ -668,7 +668,7 @@ InMain.Notification = InMain.Notification
             BackgroundTransparency = 1;
             BorderSizePixel = 0;
             Position = UDim2.new(0.015,0,0.015,0);
-            Size = UDim2.new(0.5,0,1,0);
+            Size = UDim2.new(0.475,0,1,0);
         })
 
         local PageList2 = CreateModule.Instance("Frame",{
@@ -676,8 +676,8 @@ InMain.Notification = InMain.Notification
             Name = "PageList2";
             BackgroundTransparency = 1;
             BorderSizePixel = 0;
-            Position = UDim2.new(0.52,0,0.015,0);
-            Size = UDim2.new(0.5,0,1,0);
+            Position = UDim2.new(0.51,0,0.015,0);
+            Size = UDim2.new(0.475,0,1,0);
         })
 
         local ElementsList = CreateModule.Instance("UIListLayout",{
@@ -778,6 +778,8 @@ InMain.Notification = InMain.Notification
             local InSection = {}
 
             local WelcomeHeight = 80
+            local WelcomeTop = 15
+            local WelcomeGap = 25
 
             local Section = CreateModule.Instance("Frame",{
                 Parent = Page;
@@ -785,7 +787,7 @@ InMain.Notification = InMain.Notification
                 BackgroundColor3 = Color3.fromRGB(0,0,0);
                 BorderSizePixel = 0;
                 BorderColor3 = Color3.fromRGB(45,45,45);
-                Position = UDim2.new(0.015,0,0.015,0);
+                Position = UDim2.new(0.015,0,0.015,WelcomeTop);
                 Size = UDim2.new(0.97,0,0,WelcomeHeight);
             })
 
@@ -845,10 +847,8 @@ InMain.Notification = InMain.Notification
                 Avatar.Image = NewImageId or ""
             end
 
-            PageList.Size = UDim2.new(0.475,0,1,0)
-            PageList.Position = UDim2.new(0.015,0,0.015,WelcomeHeight + 10)
-            PageList2.Size = UDim2.new(0.475,0,1,0)
-            PageList2.Position = UDim2.new(0.51,0,0.015,WelcomeHeight + 10)
+            PageList.Position = UDim2.new(0.015,0,0.015,WelcomeTop + WelcomeHeight + WelcomeGap)
+            PageList2.Position = UDim2.new(0.51,0,0.015,WelcomeTop + WelcomeHeight + WelcomeGap)
 
             return InSection;
         end
