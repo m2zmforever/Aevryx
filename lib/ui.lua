@@ -1366,6 +1366,9 @@ InMain.Notification = InMain.Notification
                 return TextBox;
             end
             function InSection.Slider(Text,min,max,func,precise,defvalue)
+                min = min or 0
+                max = max or 100
+                defvalue = defvalue or min
                 local Slider = CreateModule.Instance("TextLabel",{
                     Parent = SectionElements;
                     Name = Text;
@@ -1447,7 +1450,10 @@ InMain.Notification = InMain.Notification
                 local Mouse = game.Players.LocalPlayer:GetMouse()
 
 				local function UpdateSlider(val)
-					local percent = (val - min) / (max - min)
+					val = val or min or 0
+					local m = max or 100
+					local mn = min or 0
+					local percent = (val - mn) / (m - mn)
 
 					percent = math.clamp(percent, 0, 1)
 
@@ -1458,7 +1464,7 @@ InMain.Notification = InMain.Notification
                 ValueLabel.Text = tostring(defvalue and defvalue or min) .. "/" .. tostring(max)
 
 				local IsSliding,Dragging = false
-				local RealValue = defvalue
+				local RealValue = defvalue or min
 				local value
 				local function Move(Pressed)
 					IsSliding = true;
