@@ -149,6 +149,126 @@ function AevryxLib.Main(Name,X,Y)
         CornerRadius = UDim.new(0,5);
     })
 
+    local WAVE_RES = 64
+    local WAVE_ASSET = game:GetService("AssetService")
+    local WAVE_RUN = game:GetService("RunService")
+
+    local function fract(x) return x - math.floor(x) end
+    local function mix(a, b, t) return a + (b - a) * t end
+    local function smoothstep(e0, e1, x)
+        local t = math.clamp((x - e0) / (e1 - e0), 0, 1)
+        return t * t * (3 - 2 * t)
+    end
+    local function hash(x, y)
+        return fract(math.sin(x * 127.1 + y * 311.7) * 43758.5453)
+    end
+    local function noise(x, y)
+        local ix = math.floor(x)
+        local iy = math.floor(y)
+        local fx = x - ix
+        local fy = y - iy
+        local a = hash(ix, iy)
+        local b = hash(ix + 1, iy)
+        local c = hash(ix, iy + 1)
+        local d = hash(ix + 1, iy + 1)
+        local ux = fx * fx * (3 - 2 * fx)
+        local uy = fy * fy * (3 - 2 * fy)
+        return mix(mix(a, b, ux), mix(c, d, ux), uy)
+    end
+    local function fbm(x, y)
+        local v = 0
+        local amp = 0.5
+        local px, py = x, y
+        for i = 1, 5 do
+            v = v + amp * noise(px, py)
+            px = px * 2
+            py = py * 2
+            amp = amp * 0.5
+        end
+        return v
+    end
+
+    local waveImage = WAVE_ASSET:CreateEditableImage({ Size = Vector2.new(WAVE_RES, WAVE_RES) })
+    local waveBuffer = buffer.create(WAVE_RES * WAVE_RES * 4)
+
+    local WaveBG = CreateModule.Instance("ImageLabel",{
+        Name = "WaveBackground";
+        Parent = Load;
+        BackgroundTransparency = 1;
+        BorderSizePixel = 0;
+        Position = UDim2.new(0,0,0,0);
+        Size = UDim2.new(1,0,1,0);
+        ImageTransparency = 0;
+        Image = "";
+        ScaleType = Enum.ScaleType.Crop;
+        ZIndex = -1;
+    })
+    WaveBG.ImageContent = Content.fromObject(waveImage)
+
+    local waveStart = tick()
+    spawn(function()
+        while true do
+            local t = (tick() - waveStart) * 0.16
+            local aspect = 1
+            local idx = 0
+            for y = 0, WAVE_RES - 1 do
+                for x = 0, WAVE_RES - 1 do
+                    local uvx = x / WAVE_RES
+                    local uvy = y / WAVE_RES
+                    local px = uvx * aspect
+                    local py = uvy
+
+                    local qx = fbm(px * 3 + 0, py * 3 + t)
+                    local qy = fbm(px * 3 + 5.2, py * 3 - t * 1.1)
+                    local rx = fbm(px * 4 + 1.7 * qx + 1.7 + 0.15 * t, py * 4 + 1.7 * qy + 9.2)
+                    local ry = fbm(px * 4 + 1.7 * qx + 8.3, py * 4 + 1.7 * qy + 2.8 - 0.13 * t)
+                    local sx = fbm(px * 6 + 2.3 * rx + 4.1 + 0.22 * t, py * 6 + 2.3 * ry + 1.3)
+                    local sy = fbm(px * 6 + 2.3 * rx + 2.7, py * 6 + 2.3 * ry + 7.4 - 0.19 * t)
+                    local wave = fbm(px * 4 + 2 * rx + 1.2 * sx, py * 4 + 2 * ry + 1.2 * sy)
+
+                    local flow = fbm(px * 2.5 + math.sin(t * 0.3) * 0.6, py * 2.5 - t * 0.9)
+                    local flow2 = fbm(px * 5 + math.cos(t * 0.22) * 0.9, py * 5 + t * 0.7)
+                    wave = mix(wave, wave * 0.82 + flow * 0.18, 0.4)
+                    wave = mix(wave, wave * 0.9 + flow2 * 0.1, 0.3)
+
+                    local fine = fbm(px * 11 + t * 0.5, py * 11 - t * 1.3) * 0.12
+                    wave = wave + fine - 0.06
+
+                    local liquid = smoothstep(0.28, 0.96, wave)
+                    local crest = smoothstep(0.60, 0.82, wave) * (1 - smoothstep(0.84, 0.99, wave))
+
+                    local deep = 0.0
+                    local mid = 0.10
+                    local glow = 0.55
+                    local rim = 0.85
+                    local spark = 1.0
+
+                    local col = mix(deep, mid, smoothstep(0.0, 0.6, wave))
+                    col = mix(col, glow, liquid * 0.85)
+                    col = col + rim * crest * 0.95
+
+                    local ember = math.max(0, fbm(px * 9, py * 9 - t * 1.6) - 0.5)
+                    ember = ember * ember * 4
+                    col = col + spark * ember * 0.15
+
+                    local d = math.sqrt((uvx - 0.5) ^ 2 + (uvy - 0.5) ^ 2)
+                    col = col * (1 - 0.6 * smoothstep(0.15, 1.05, d))
+                    col = col * 0.9
+
+                    col = math.clamp(col, 0, 1)
+                    local v = math.floor(col * 255)
+                    buffer.writeu8(waveBuffer, idx, v)
+                    buffer.writeu8(waveBuffer, idx + 1, v)
+                    buffer.writeu8(waveBuffer, idx + 2, v)
+                    buffer.writeu8(waveBuffer, idx + 3, 255)
+                    idx = idx + 4
+                end
+            end
+            waveImage:WritePixelsBuffer(Vector2.zero, Vector2.new(WAVE_RES, WAVE_RES), waveBuffer)
+            WAVE_RUN.RenderStepped:Wait()
+        end
+    end)
+
     local Topbar = CreateModule.Instance("Frame",{
         Name = "Topbar";
         Parent = AevryxLib.ScreenGui;
@@ -185,67 +305,6 @@ function AevryxLib.Main(Name,X,Y)
         ClipsDescendants = true;
         ZIndex = 0;
 	})
-
-    local ParticleBG = CreateModule.Instance("Frame",{
-        Parent = Load;
-        Name = "ParticleBackground";
-        BackgroundTransparency = 1;
-        BorderSizePixel = 0;
-        Position = UDim2.new(0,0,0,0);
-        Size = UDim2.new(1,0,1,0);
-        ZIndex = 0;
-    })
-
-    local PARTICLE_COUNT = 35
-    local PARTICLE_COLOR = Color3.fromRGB(80, 80, 80)
-    local PARTICLE_MIN_SIZE = 5
-    local PARTICLE_MAX_SIZE = 15
-    local PARTICLE_MIN_SPEED = 10
-    local PARTICLE_MAX_SPEED = 20
-    local PARTICLE_MIN_ALPHA = 0.15
-    local PARTICLE_MAX_ALPHA = 0.35
-
-    local particles = {}
-
-    for i = 1, PARTICLE_COUNT do
-        local size = PARTICLE_MIN_SIZE + math.random() * (PARTICLE_MAX_SIZE - PARTICLE_MIN_SIZE)
-        local alpha = PARTICLE_MIN_ALPHA + math.random() * (PARTICLE_MAX_ALPHA - PARTICLE_MIN_ALPHA)
-
-        local dot = CreateModule.Instance("Frame",{
-            Parent = ParticleBG;
-            Name = "Particle" .. i;
-            BackgroundColor3 = PARTICLE_COLOR;
-            BackgroundTransparency = 1 - alpha;
-            BorderSizePixel = 0;
-            Position = UDim2.new(math.random(), 0, math.random(), 0);
-            Size = UDim2.new(0, size, 0, size);
-            ZIndex = 1;
-        })
-
-        local dotCorner = CreateModule.Instance("UICorner",{
-            Parent = dot;
-            CornerRadius = UDim.new(1, 0);
-        })
-
-        local pulseDir = (math.random() > 0.5 and 1) or -1
-        local pulseSpeed = 0.3 + math.random() * 0.7
-        local pulseRange = 0.1 + math.random() * 0.2
-        local baseAlpha = alpha
-
-        table.insert(particles, {
-            frame = dot,
-            posX = math.random(),
-            posY = math.random(),
-            velX = (math.random() - 0.5) * 2,
-            velY = -0.2 - math.random() * 0.8,
-            speed = PARTICLE_MIN_SPEED + math.random() * (PARTICLE_MAX_SPEED - PARTICLE_MIN_SPEED),
-            pulseDir = pulseDir,
-            pulseSpeed = pulseSpeed,
-            pulseRange = pulseRange,
-            baseAlpha = baseAlpha,
-            pulseTime = math.random() * math.pi * 2,
-        })
-    end
 
     local Border = CreateModule.Instance("Frame",{
 		Name = "Border";
@@ -312,36 +371,6 @@ function AevryxLib.Main(Name,X,Y)
 		Size = UDim2.new(1,0,1,0);
         ZIndex = 2;
 	})
-
-    spawn(function()
-        local runService = game:GetService("RunService")
-        while true do
-            local dt = runService.RenderStepped:Wait()
-            for _, p in ipairs(particles) do
-                p.posX = p.posX + p.velX * p.speed * dt * 0.01
-                p.posY = p.posY + p.velY * p.speed * dt * 0.01
-
-                if p.posY < -0.1 then
-                    p.posY = 1.1
-                    p.posX = math.random()
-                end
-                if p.posX < -0.1 then
-                    p.posX = 1.1
-                elseif p.posX > 1.1 then
-                    p.posX = -0.1
-                end
-
-                p.pulseTime = p.pulseTime + p.pulseSpeed * dt
-                local pulseAlpha = p.baseAlpha + math.sin(p.pulseTime) * p.pulseRange
-                pulseAlpha = math.clamp(pulseAlpha, 0.02, 0.25)
-
-                if p.frame and p.frame.Parent then
-                    p.frame.Position = UDim2.new(p.posX, 0, p.posY, 0)
-                    p.frame.BackgroundTransparency = 1 - pulseAlpha
-                end
-            end
-        end
-    end)
 
     local PageLayout = CreateModule.Instance("UIPageLayout",{
         Parent = Pages;
