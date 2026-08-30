@@ -210,35 +210,35 @@ function AevryxLib.Main(Name,X,Y)
         CornerRadius = UDim.new(0,5);
     })
 
-    local Line1 = CreateModule.Instance("Frame",{
-        Name = "Line1";
+    Load.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
+    Border.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
+    Topbar.Visible = true
+
+    local DecoLine1 = CreateModule.Instance("Frame",{
+        Name = "DecoLine1";
         Parent = Border;
         BackgroundColor3 = Color3.fromRGB(140,140,140);
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
         AnchorPoint = Vector2.new(1,1);
-        Position = UDim2.new(1,-14,1,-14);
-        Size = UDim2.new(0,90,0,3);
+        Position = UDim2.new(1,-10,1,-10);
+        Size = UDim2.new(0,260,0,4);
         Rotation = 45;
         ZIndex = 7;
     })
 
-    local Line2 = CreateModule.Instance("Frame",{
-        Name = "Line2";
+    local DecoLine2 = CreateModule.Instance("Frame",{
+        Name = "DecoLine2";
         Parent = Border;
         BackgroundColor3 = Color3.fromRGB(60,60,60);
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
         AnchorPoint = Vector2.new(1,1);
-        Position = UDim2.new(1,-6,1,-6);
-        Size = UDim2.new(0,90,0,3);
+        Position = UDim2.new(1,-2,1,-2);
+        Size = UDim2.new(0,260,0,4);
         Rotation = 45;
         ZIndex = 7;
     })
-
-    Load.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
-    Border.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
-    Topbar.Visible = true
 
     local BannerVisible = true
     local BANNER_SIZE = 200
