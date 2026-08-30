@@ -217,12 +217,12 @@ function AevryxLib.Main(Name,X,Y)
     local DecoLine1 = CreateModule.Instance("Frame",{
         Name = "DecoLine1";
         Parent = Border;
-        BackgroundColor3 = Color3.fromRGB(140,140,140);
+        BackgroundColor3 = Color3.fromRGB(255,40,40);
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
         AnchorPoint = Vector2.new(1,1);
-        Position = UDim2.new(1,-10,1,-10);
-        Size = UDim2.new(0,260,0,4);
+        Position = UDim2.new(1,-14,1,-12);
+        Size = UDim2.new(0,28,0,2);
         Rotation = 45;
         ZIndex = 7;
     })
@@ -230,12 +230,12 @@ function AevryxLib.Main(Name,X,Y)
     local DecoLine2 = CreateModule.Instance("Frame",{
         Name = "DecoLine2";
         Parent = Border;
-        BackgroundColor3 = Color3.fromRGB(60,60,60);
+        BackgroundColor3 = Color3.fromRGB(255,40,40);
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
         AnchorPoint = Vector2.new(1,1);
-        Position = UDim2.new(1,-2,1,-2);
-        Size = UDim2.new(0,260,0,4);
+        Position = UDim2.new(1,-14,1,-4);
+        Size = UDim2.new(0,28,0,2);
         Rotation = 45;
         ZIndex = 7;
     })
