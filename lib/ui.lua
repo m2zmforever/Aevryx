@@ -214,28 +214,39 @@ function AevryxLib.Main(Name,X,Y)
     Border.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
     Topbar.Visible = true
 
+    local DecoClip = CreateModule.Instance("Frame",{
+        Name = "DecoClip";
+        Parent = Border;
+        BackgroundTransparency = 1;
+        BorderSizePixel = 0;
+        Position = UDim2.new(0,0,0,0);
+        Size = UDim2.new(1,0,1,0);
+        ClipsDescendants = true;
+        ZIndex = 7;
+    })
+
     local DecoLine1 = CreateModule.Instance("Frame",{
         Name = "DecoLine1";
-        Parent = Border;
+        Parent = DecoClip;
         BackgroundColor3 = Color3.fromRGB(255,40,40);
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
         AnchorPoint = Vector2.new(0.5,0.5);
-        Position = UDim2.new(1,-14,1,-14);
-        Size = UDim2.new(0,160,0,2);
+        Position = UDim2.new(1,-20,1,-20);
+        Size = UDim2.new(0,140,0,2);
         Rotation = 45;
         ZIndex = 7;
     })
 
     local DecoLine2 = CreateModule.Instance("Frame",{
         Name = "DecoLine2";
-        Parent = Border;
+        Parent = DecoClip;
         BackgroundColor3 = Color3.fromRGB(255,40,40);
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
         AnchorPoint = Vector2.new(0.5,0.5);
-        Position = UDim2.new(1,-4,1,-4);
-        Size = UDim2.new(0,160,0,2);
+        Position = UDim2.new(1,-10,1,-10);
+        Size = UDim2.new(0,140,0,2);
         Rotation = 45;
         ZIndex = 7;
     })
