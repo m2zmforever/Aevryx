@@ -149,130 +149,6 @@ function AevryxLib.Main(Name,X,Y)
         CornerRadius = UDim.new(0,5);
     })
 
-    local WAVE_RES = 48
-    local WAVE_ASSET = game:GetService("AssetService")
-    local WAVE_RUN = game:GetService("RunService")
-    local sin = math.sin
-    local cos = math.cos
-    local floor = math.floor
-    local clamp = math.clamp
-
-    local function fract(x) return x - floor(x) end
-    local function mix(a, b, t) return a + (b - a) * t end
-    local function smoothstep(e0, e1, x)
-        local t = clamp((x - e0) / (e1 - e0), 0, 1)
-        return t * t * (3 - 2 * t)
-    end
-    local function hash(x, y)
-        return fract(sin(x * 127.1 + y * 311.7) * 43758.5453)
-    end
-    local function noise(x, y)
-        local ix = floor(x)
-        local iy = floor(y)
-        local fx = x - ix
-        local fy = y - iy
-        local a = hash(ix, iy)
-        local b = hash(ix + 1, iy)
-        local c = hash(ix, iy + 1)
-        local d = hash(ix + 1, iy + 1)
-        local ux = fx * fx * (3 - 2 * fx)
-        local uy = fy * fy * (3 - 2 * fy)
-        return mix(mix(a, b, ux), mix(c, d, ux), uy)
-    end
-    local function fbm(x, y)
-        local v = 0
-        local amp = 0.5
-        local px, py = x, y
-        for i = 1, 4 do
-            v = v + amp * noise(px, py)
-            px = px * 2
-            py = py * 2
-            amp = amp * 0.5
-        end
-        return v
-    end
-
-    local waveImage = WAVE_ASSET:CreateEditableImage({ Size = Vector2.new(WAVE_RES, WAVE_RES) })
-    local waveBuffer = buffer.create(WAVE_RES * WAVE_RES * 4)
-
-    local WaveBG = CreateModule.Instance("ImageLabel",{
-        Name = "WaveBackground";
-        Parent = Load;
-        BackgroundTransparency = 1;
-        BorderSizePixel = 0;
-        Position = UDim2.new(0,0,0,0);
-        Size = UDim2.new(1,0,1,0);
-        ImageTransparency = 0;
-        ScaleType = Enum.ScaleType.Crop;
-        ZIndex = -1;
-    })
-    WaveBG.ImageContent = Content.fromObject(waveImage)
-
-    local waveStart = tick()
-    local FRAME_TIME = 1 / 20
-    local lastFrame = 0
-    spawn(function()
-        while true do
-            local now = tick()
-            if now - lastFrame >= FRAME_TIME then
-                lastFrame = now
-                local t = (now - waveStart) * 0.16
-                local s03 = sin(t * 0.3) * 0.6
-                local c022 = cos(t * 0.22) * 0.9
-                local idx = 0
-                for y = 0, WAVE_RES - 1 do
-                    local uvy = y / WAVE_RES
-                    for x = 0, WAVE_RES - 1 do
-                        local uvx = x / WAVE_RES
-                        local px = uvx
-                        local py = uvy
-
-                        local qx = fbm(px * 3, py * 3 + t)
-                        local qy = fbm(px * 3 + 5.2, py * 3 - t * 1.1)
-                        local rx = fbm(px * 4 + 1.7 * qx + 1.7 + 0.15 * t, py * 4 + 1.7 * qy + 9.2)
-                        local ry = fbm(px * 4 + 1.7 * qx + 8.3, py * 4 + 1.7 * qy + 2.8 - 0.13 * t)
-                        local sx = fbm(px * 6 + 2.3 * rx + 4.1 + 0.22 * t, py * 6 + 2.3 * ry + 1.3)
-                        local sy = fbm(px * 6 + 2.3 * rx + 2.7, py * 6 + 2.3 * ry + 7.4 - 0.19 * t)
-                        local wave = fbm(px * 4 + 2 * rx + 1.2 * sx, py * 4 + 2 * ry + 1.2 * sy)
-
-                        local flow = fbm(px * 2.5 + s03, py * 2.5 - t * 0.9)
-                        local flow2 = fbm(px * 5 + c022, py * 5 + t * 0.7)
-                        wave = mix(wave, wave * 0.82 + flow * 0.18, 0.4)
-                        wave = mix(wave, wave * 0.9 + flow2 * 0.1, 0.3)
-
-                        local fine = fbm(px * 11 + t * 0.5, py * 11 - t * 1.3) * 0.12
-                        wave = wave + fine - 0.06
-
-                        local liquid = smoothstep(0.28, 0.96, wave)
-                        local crest = smoothstep(0.60, 0.82, wave) * (1 - smoothstep(0.84, 0.99, wave))
-
-                        local col = mix(0.0, 0.10, smoothstep(0.0, 0.6, wave))
-                        col = mix(col, 0.55, liquid * 0.85)
-                        col = col + 0.85 * crest * 0.95
-
-                        local ember = math.max(0, fbm(px * 9, py * 9 - t * 1.6) - 0.5)
-                        ember = ember * ember * 4
-                        col = col + ember * 0.15
-
-                        local d = (uvx - 0.5) ^ 2 + (uvy - 0.5) ^ 2
-                        col = col * (1 - 0.6 * smoothstep(0.15, 1.05, math.sqrt(d)))
-                        col = col * 0.9
-
-                        col = clamp(col, 0, 1)
-                        local v = floor(col * 255)
-                        buffer.writeu8(waveBuffer, idx, v)
-                        buffer.writeu8(waveBuffer, idx + 1, v)
-                        buffer.writeu8(waveBuffer, idx + 2, v)
-                        buffer.writeu8(waveBuffer, idx + 3, 255)
-                        idx = idx + 4
-                    end
-                end
-                waveImage:WritePixelsBuffer(Vector2.zero, Vector2.new(WAVE_RES, WAVE_RES), waveBuffer)
-            end
-            WAVE_RUN.RenderStepped:Wait()
-        end
-    end)
-
     local Topbar = CreateModule.Instance("Frame",{
         Name = "Topbar";
         Parent = AevryxLib.ScreenGui;
@@ -332,6 +208,28 @@ function AevryxLib.Main(Name,X,Y)
         Parent = Border;
         Name = "Corner";
         CornerRadius = UDim.new(0,5);
+    })
+
+    local Line1 = CreateModule.Instance("Frame",{
+        Name = "Line1";
+        Parent = Border;
+        BackgroundColor3 = Color3.fromRGB(140,140,140);
+        BackgroundTransparency = 0;
+        BorderSizePixel = 0;
+        Position = UDim2.new(1,-26,1,-12);
+        Size = UDim2.new(0,18,0,2);
+        ZIndex = 7;
+    })
+
+    local Line2 = CreateModule.Instance("Frame",{
+        Name = "Line2";
+        Parent = Border;
+        BackgroundColor3 = Color3.fromRGB(60,60,60);
+        BackgroundTransparency = 0;
+        BorderSizePixel = 0;
+        Position = UDim2.new(1,-26,1,-8);
+        Size = UDim2.new(0,18,0,2);
+        ZIndex = 7;
     })
 
     Load.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
