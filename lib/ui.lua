@@ -220,9 +220,9 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundColor3 = Color3.fromRGB(255,40,40);
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
-        AnchorPoint = Vector2.new(1,1);
-        Position = UDim2.new(1,-14,1,-12);
-        Size = UDim2.new(0,28,0,2);
+        AnchorPoint = Vector2.new(0.5,0.5);
+        Position = UDim2.new(1,-14,1,-14);
+        Size = UDim2.new(0,160,0,2);
         Rotation = 45;
         ZIndex = 7;
     })
@@ -233,9 +233,9 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundColor3 = Color3.fromRGB(255,40,40);
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
-        AnchorPoint = Vector2.new(1,1);
-        Position = UDim2.new(1,-14,1,-4);
-        Size = UDim2.new(0,28,0,2);
+        AnchorPoint = Vector2.new(0.5,0.5);
+        Position = UDim2.new(1,-4,1,-4);
+        Size = UDim2.new(0,160,0,2);
         Rotation = 45;
         ZIndex = 7;
     })
