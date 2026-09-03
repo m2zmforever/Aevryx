@@ -283,7 +283,7 @@ function AevryxLib.Main(Name,X,Y)
 
     local TabsPadding = CreateModule.Instance("UIPadding",{
         Parent = TabsButtons;
-        PaddingLeft = UDim.new(0,22);
+        PaddingLeft = UDim.new(0,8);
         PaddingRight = UDim.new(0,8);
     })
 
