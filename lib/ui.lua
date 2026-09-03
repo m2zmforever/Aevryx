@@ -281,63 +281,10 @@ function AevryxLib.Main(Name,X,Y)
         ElasticBehavior = Enum.ElasticBehavior.Always;
     })
 
-    local ScrollIndicator = CreateModule.Instance("Frame",{
-        Parent = Topbar;
-        Name = "ScrollIndicator";
-        BackgroundTransparency = 1;
-        BorderSizePixel = 0;
-        Position = UDim2.new(1,-20,0,0);
-        AnchorPoint = Vector2.new(1,0);
-        Size = UDim2.new(0,40,1,0);
-        ZIndex = 4;
-    })
-
-    local ScrollHint = CreateModule.Instance("TextLabel",{
-        Parent = ScrollIndicator;
-        Name = "Hint";
-        BackgroundTransparency = 1;
-        Position = UDim2.new(1,-4,0.5,0);
-        AnchorPoint = Vector2.new(1,0.5);
-        Size = UDim2.new(0,16,0,16);
-        Font = Enum.Font.GothamBold;
-        Text = "›";
-        TextSize = 14;
-        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
-        TextXAlignment = Enum.TextXAlignment.Right;
-        ZIndex = 4;
-    })
-
-    spawn(function()
-        wait(0.2)
-        local maxX = math.max(0, TabsButtons.AbsoluteCanvasSize.X - TabsButtons.AbsoluteWindowSize.X)
-        local function updateHint()
-            if maxX <= 1 then
-                ScrollIndicator.Visible = false
-                return
-            end
-            local pos = TabsButtons.CanvasPosition.X
-            if pos >= maxX - 1 then
-                ScrollIndicator.Visible = false
-            else
-                ScrollIndicator.Visible = true
-            end
-        end
-        TabsButtons:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
-            maxX = math.max(0, TabsButtons.AbsoluteCanvasSize.X - TabsButtons.AbsoluteWindowSize.X)
-            updateHint()
-        end)
-        TabsButtons:GetPropertyChangedSignal("CanvasPosition"):Connect(updateHint)
-        TabsButtons:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
-            maxX = math.max(0, TabsButtons.AbsoluteCanvasSize.X - TabsButtons.AbsoluteWindowSize.X)
-            updateHint()
-        end)
-        updateHint()
-    end)
-
     local TabsPadding = CreateModule.Instance("UIPadding",{
         Parent = TabsButtons;
         PaddingLeft = UDim.new(0,22);
-        PaddingRight = UDim.new(0,30);
+        PaddingRight = UDim.new(0,8);
     })
 
 
