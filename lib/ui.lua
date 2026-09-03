@@ -279,7 +279,6 @@ function AevryxLib.Main(Name,X,Y)
         ScrollBarThickness = 0;
         ScrollingDirection = Enum.ScrollingDirection.X;
         ElasticBehavior = Enum.ElasticBehavior.Always;
-        BounceIntensity = 0;
     })
 
     local ScrollIndicator = CreateModule.Instance("Frame",{
