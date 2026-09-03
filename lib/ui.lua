@@ -265,15 +265,75 @@ function AevryxLib.Main(Name,X,Y)
     })
 
 
-    local TabsButtons = CreateModule.Instance("Frame",{
+    local TabsButtons = CreateModule.Instance("ScrollingFrame",{
         Parent = Topbar;
         Name = "TabsButtons";
+        Active = true;
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
         Position = UDim2.new(0,6,0,0);
         Size = UDim2.new(1,-12,1,0);
         ZIndex = 3;
+        CanvasSize = UDim2.new(0,0,0,0);
+        AutomaticCanvasSize = Enum.AutomaticSize.X;
+        ScrollBarThickness = 0;
+        ScrollingDirection = Enum.ScrollingDirection.X;
+        ElasticBehavior = Enum.ElasticBehavior.Always;
+        BounceIntensity = 0;
     })
+
+    local ScrollIndicator = CreateModule.Instance("Frame",{
+        Parent = Topbar;
+        Name = "ScrollIndicator";
+        BackgroundTransparency = 1;
+        BorderSizePixel = 0;
+        Position = UDim2.new(1,-20,0,0);
+        AnchorPoint = Vector2.new(1,0);
+        Size = UDim2.new(0,40,1,0);
+        ZIndex = 4;
+    })
+
+    local ScrollHint = CreateModule.Instance("TextLabel",{
+        Parent = ScrollIndicator;
+        Name = "Hint";
+        BackgroundTransparency = 1;
+        Position = UDim2.new(1,-4,0.5,0);
+        AnchorPoint = Vector2.new(1,0.5);
+        Size = UDim2.new(0,16,0,16);
+        Font = Enum.Font.GothamBold;
+        Text = "›";
+        TextSize = 14;
+        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
+        TextXAlignment = Enum.TextXAlignment.Right;
+        ZIndex = 4;
+    })
+
+    spawn(function()
+        wait(0.2)
+        local maxX = math.max(0, TabsButtons.AbsoluteCanvasSize.X - TabsButtons.AbsoluteWindowSize.X)
+        local function updateHint()
+            if maxX <= 1 then
+                ScrollIndicator.Visible = false
+                return
+            end
+            local pos = TabsButtons.CanvasPosition.X
+            if pos >= maxX - 1 then
+                ScrollIndicator.Visible = false
+            else
+                ScrollIndicator.Visible = true
+            end
+        end
+        TabsButtons:GetPropertyChangedSignal("AbsoluteCanvasSize"):Connect(function()
+            maxX = math.max(0, TabsButtons.AbsoluteCanvasSize.X - TabsButtons.AbsoluteWindowSize.X)
+            updateHint()
+        end)
+        TabsButtons:GetPropertyChangedSignal("CanvasPosition"):Connect(updateHint)
+        TabsButtons:GetPropertyChangedSignal("AbsoluteWindowSize"):Connect(function()
+            maxX = math.max(0, TabsButtons.AbsoluteCanvasSize.X - TabsButtons.AbsoluteWindowSize.X)
+            updateHint()
+        end)
+        updateHint()
+    end)
 
     local TabsPadding = CreateModule.Instance("UIPadding",{
         Parent = TabsButtons;
@@ -290,79 +350,11 @@ function AevryxLib.Main(Name,X,Y)
     })
 
     local TabButtonsList = {}
-    local CurrentTabPage = 1
-    local TabsPerPage = 6
-
-    local PrevArrow = CreateModule.Instance("TextButton",{
-        Parent = Topbar;
-        Name = "PrevArrow";
-        BackgroundTransparency = 1;
-        BorderSizePixel = 0;
-        Position = UDim2.new(0, 6, 0.5, 0);
-        AnchorPoint = Vector2.new(0, 0.5);
-        Size = UDim2.new(0, 20, 0, 20);
-        Font = Enum.Font.GothamBold;
-        Text = "‹";
-        TextSize = 22;
-        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.8);
-        AutoButtonColor = false;
-        ZIndex = 4;
-    })
-
-    local NextArrow = CreateModule.Instance("TextButton",{
-        Parent = Topbar;
-        Name = "NextArrow";
-        BackgroundTransparency = 1;
-        BorderSizePixel = 0;
-        Position = UDim2.new(1, -16, 0.5, 0);
-        AnchorPoint = Vector2.new(0.5, 0.5);
-        Size = UDim2.new(0, 20, 0, 20);
-        Font = Enum.Font.GothamBold;
-        Text = "›";
-        TextSize = 22;
-        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"], 1.8);
-        AutoButtonColor = false;
-        ZIndex = 4;
-    })
-
-    local function UpdateTabPages()
-        local totalPages = math.max(1, math.ceil(#TabButtonsList / TabsPerPage))
-        if CurrentTabPage > totalPages then CurrentTabPage = totalPages end
-        for i, btn in ipairs(TabButtonsList) do
-            local pageIndex = math.ceil(i / TabsPerPage)
-            btn.Visible = (pageIndex == CurrentTabPage)
-        end
-        PrevArrow.Visible = (CurrentTabPage > 1)
-        NextArrow.Visible = (CurrentTabPage < totalPages)
-    end
-
-    PrevArrow.MouseButton1Click:Connect(function()
-        if CurrentTabPage > 1 then
-            CurrentTabPage = CurrentTabPage - 1
-            UpdateTabPages()
-        end
-    end)
-
-    NextArrow.MouseButton1Click:Connect(function()
-        local totalPages = math.max(1, math.ceil(#TabButtonsList / TabsPerPage))
-        if CurrentTabPage < totalPages then
-            CurrentTabPage = CurrentTabPage + 1
-            UpdateTabPages()
-        end
-    end)
 
     local IsGuiOpened = true
 
-    TabsButtons.ChildAdded:Connect(function()
-        task.spawn(UpdateTabPages)
-    end)
-    TabsButtons.ChildRemoved:Connect(function()
-        task.spawn(UpdateTabPages)
-    end)
-
     spawn(function()
         wait(0.1)
-        pcall(UpdateTabPages)
         local activeIndex = nil
         for i, btn in ipairs(TabButtonsList) do
             local ok, val = pcall(function()
@@ -681,7 +673,6 @@ InMain.Notification = InMain.Notification
             TweenService:Create(Fader,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
         end
         table.insert(TabButtonsList, TabButton)
-        UpdateTabPages()
         local InPage = {}
 
         function InPage.WelcomeSection(ImageId, Text)
