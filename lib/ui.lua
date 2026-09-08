@@ -1,3 +1,14 @@
+--    db                                      8    8 888 
+--   dPYb   .d88b Yb  dP 8d8b Yb  dP Yb dP    8    8  8  
+--  dPwwYb  8.dP'  YbdP  8P    YbdP   `8.     8b..d8  8  
+-- dP    Yb `Y88P   YP   8      dP   dP Yb    `Y88P' 888 
+--                             dP
+--
+-- Code Lines: 1.8k
+-- Build Date: 08/09/2026 + 18:22
+-- Ocerium Project UI by @slf0Dev
+-- Edited for Aevryx by @m2zm.
+
 local TweenService = game:GetService("TweenService")
 local InputService = game:GetService("UserInputService")
 
