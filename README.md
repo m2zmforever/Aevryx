@@ -32,7 +32,7 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
   <summary align="center">Combat</summary>
   <p align="center">
     KillAura<br>
-    Kill All)<br>
+    Kill All<br>
     Shoot Murderer<br>
     Teleport behind and Shoot Murderer<br>
   </p>
@@ -61,11 +61,11 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
 <details>
   <summary align="center">Autofarm</summary>
   <p align="center">
-    Autofarm (Coins)<br>
+    Autofarm<br>
     No Render<br>
-    Kill All If Murderer (AutoPlay)<br>
-    Fling Murderer If Innocent (Autoplay)<br>
-    Shoot Murderer If Sheriff (Autoplay)<br>
+    Kill All If Murderer<br>
+    Fling Murderer If Innocent<br>
+    Shoot Murderer If Sheriff<br>
   </p>
 </details>
 <details>
