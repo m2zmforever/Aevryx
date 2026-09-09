@@ -9,9 +9,9 @@
   <img src="https://img.shields.io/badge/ALWAYS_UPDATED-000000?style=for-the-badge&labelColor=000000&color=000000">
 </p>
 
-<h2 align="center">What is this?</h2>
+<h2 align="center">What is this sh*t?</h2>
 <p align="center">
-Aevryx is one of the best free, no-key script for Murder Mystery 2, offering smooth performance and stable gameplay for your potato computer.
+Aevryx is one of the best free, no-key script for Murder Mystery 2, offering good performance and stable gameplay for your potato computer.
 </p>
 
 <h2 align="center">Features?</h2>
@@ -21,28 +21,31 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering smo
 <details>
   <summary align="center">ESP</summary>
   <p align="center">
-    PlayerESP (Chams)<br>
-    RoleESP (Chams)<br>
-    NameESP (Nameplate)
+    Player ESP<br>
+    Role ESP<br>
+    Name ESP<br>
+    Gun ESP<br>
+    Gun ESP Text
   </p>
 </details>
 <details>
   <summary align="center">Combat</summary>
   <p align="center">
-    KillAura (AutoMode)<br>
-    Kill All (Keybind)<br>
-    Shoot Murderer (Keybind)<br>
+    KillAura<br>
+    Kill All)<br>
+    Shoot Murderer<br>
+    Teleport behind and Shoot Murderer<br>
   </p>
 </details>
 <details>
   <summary align="center">Character</summary>
   <p align="center">
-    Walkspeed (Slider)<br>
+    Walkspeed Changer<br>
     Headless<br>
     Void Protection<br>
     Noclip<br>
     Anti AFK<br>
-    Emotes (Dropdown)<br>
+    Emotes<br>
     Invisibility
   </p>
 </details>
@@ -51,23 +54,26 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering smo
   <p align="center">
     Teleport to Map<br>
     Teleport to Lobby<br>
-    Teleport to Player (Dropdown)<br>
-    Teleport Loop (Checkbox)<br>
-    Teleport Loop Delay (Slider)
+    Teleport to Player<br>
+    Teleport Loop<br>
   </p>
 </details>
 <details>
   <summary align="center">Autofarm</summary>
   <p align="center">
     Autofarm (Coins)<br>
-    Alternative Autofarm (Bad)<br>
-    Speed (Slider)<br>
     No Render<br>
     Kill All If Murderer (AutoPlay)<br>
     Fling Murderer If Innocent (Autoplay)<br>
     Shoot Murderer If Sheriff (Autoplay)<br>
-    Automatic Mystery Box<br>
-    Select Mystery Box (Dropdown)
+  </p>
+</details>
+<details>
+  <summary align="center">Autofarm 2</summary>
+  <p align="center">
+    Auto-Salvage<br>
+    Auto-Craft<br>
+    Auto Mystery Box<br>
   </p>
 </details>
 <details>
@@ -78,7 +84,6 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering smo
     Round Timer<br>
     Send Roles to Chat<br>
     Map Vote Spam<br>
-    Select Vote Pad (Dropdown)
   </p>
 </details>
 
@@ -87,10 +92,9 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering smo
 
   <p align="center">
     Touch Fling<br>
-    Fling Power (Slider)<br>
     Fling Murderer<br>
     Fling Sheriff<br>
-    Fling Target (Dropdown)<br>
+    Fling Target<br>
     Fling Loop<br>
     Anti Fling
   </p>
