@@ -31,6 +31,8 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
 <details>
   <summary align="center">Combat</summary>
   <p align="center">
+    Grap Dropped Gun<br>
+    Auto Grap Dropped Gun<br>
     KillAura<br>
     Kill All<br>
     Shoot Murderer<br>
