@@ -5,7 +5,7 @@
 --                             dP
 --
 -- Code Lines: 1.8k
--- Build Date: 08/09/2026 + 18:22
+-- Build Date: 12/09/2026 + 04:24
 -- Ocerium Project UI by @slf0Dev
 -- Edited for Aevryx by @m2zm.
 
@@ -1155,7 +1155,7 @@ InMain.Notification = InMain.Notification
                 return Img;
             end
 
-            function InSection.TextBox(Text,func,defvalue)
+            function InSection.TextBox(Text,func,defvalue,placeholder)
                 local TextBoxFrame = CreateModule.Instance("Frame",{
                     Parent = SectionElements;
                     Name = Text;
@@ -1177,7 +1177,8 @@ InMain.Notification = InMain.Notification
                     TextSize = 14;
                     TextColor3 = AevryxLib["Theme"]["FontColor"];
                     TextXAlignment = Enum.TextXAlignment.Left;
-                    PlaceholderText = Text;
+                    TextYAlignment = Enum.TextYAlignment.Center;
+                    PlaceholderText = placeholder or Text;
                     PlaceholderColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
                     ClearTextOnFocus = false;
                     ClipsDescendants = true;
@@ -1304,6 +1305,7 @@ InMain.Notification = InMain.Notification
 
                 
 
+                local InputService = game:GetService("UserInputService")
                 local Mouse = game.Players.LocalPlayer:GetMouse()
 
 				local function UpdateSlider(val)
@@ -1323,13 +1325,14 @@ InMain.Notification = InMain.Notification
 				local IsSliding,Dragging = false
 				local RealValue = defvalue or min
 				local value
-				local function Move(Pressed)
-					IsSliding = true;
-					local pos = UDim2.new(math.clamp((Pressed.Position.X - Bar.AbsolutePosition.X) / Bar.AbsoluteSize.X, 0, 1), 0, 1, 0)
-					local size = UDim2.new(math.clamp((Pressed.Position.X - Bar.AbsolutePosition.X) / Bar.AbsoluteSize.X, 0, 1), 0, 1, 0)
-					Progress:TweenSize(size, "Out", "Quart", 0.2,true);
-					RealValue = (((pos.X.Scale * max) / max) * (max - min) + min)
+				local function Move(PositionX)
+					local barPosition = Bar.AbsolutePosition.X
+					local barSize = Bar.AbsoluteSize.X
+					if barSize <= 0 then return end
+					local scale = math.clamp((PositionX - barPosition) / barSize, 0, 1)
+					RealValue = min + scale * (max - min)
                     value = (precise and tonumber(string.format("%.1f", RealValue))) or math.floor(RealValue)
+					Progress.Size = UDim2.new(scale, 0, 1, 0)
                     ValueLabel.Text = tostring(value) .. "/".. max 
                     if type(func) == "function" then
                         local okc, errc = pcall(func, value)
@@ -1339,27 +1342,26 @@ InMain.Notification = InMain.Notification
                     end
 				end
 
-				Bar.InputBegan:Connect(function(Pressed)
-					if Pressed.UserInputType == Enum.UserInputType.MouseButton1 or Pressed.UserInputType == Enum.UserInputType.Touch then
+				Bar.InputBegan:Connect(function(Input)
+					if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 						Dragging = true
 						IsSliding = false
-                        Move(Pressed)
+                        Move(Mouse.X)
                         TweenService:Create(Progress,TweenInfo.new(0.3),{BackgroundColor3 = Darker(AevryxLib["Theme"]["AccentColor"],1.2)}):Play()
 					end
 				end)
 
-				Bar.InputEnded:Connect(function(Pressed)
-					if Pressed.UserInputType == Enum.UserInputType.MouseButton1 or Pressed.UserInputType == Enum.UserInputType.Touch then
+				Bar.InputEnded:Connect(function(Input)
+					if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 						Dragging = false
 						IsSliding = false
-                        TweenService:Create(Progress,TweenInfo.new(0.3),{BackgroundColor3 = Darker(AevryxLib["Theme"]["AccentColor"],1.7)}):Play()
-                        Move(Pressed)
+                        TweenService:Create(Progress,TweenInfo.new(0.3),{BackgroundColor3 = AevryxLib["Theme"]["AccentColor"]}):Play()
 					end
 				end)
 
-				game:GetService("UserInputService").InputChanged:Connect(function(Pressed)
-					if Dragging and (Pressed.UserInputType == Enum.UserInputType.MouseMovement or Pressed.UserInputType == Enum.UserInputType.Touch) then
-                        Move(Pressed)
+				InputService.InputChanged:Connect(function(Input)
+					if Dragging and (Input.UserInputType == Enum.UserInputType.MouseMovement or Input.UserInputType == Enum.UserInputType.Touch) then
+                        Move(Input.Position.X)
 					end
 				end)
 
