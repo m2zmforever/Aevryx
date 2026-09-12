@@ -63,9 +63,10 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
   <p align="center">
     Autofarm<br>
     No Render<br>
-    Kill All If Murderer<br>
-    Fling Murderer If Innocent<br>
-    Shoot Murderer If Sheriff<br>
+    Kill All If Bag Full<br>
+    Fling Murderer If Bag Full<br>
+    Shoot Murderer If Bag Full<br>
+    Reset Character If Bag Full<br>
   </p>
 </details>
 <details>
@@ -74,6 +75,7 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
     Auto-Salvage<br>
     Auto-Craft<br>
     Auto Mystery Box<br>
+    Discord Status Sender<br>
   </p>
 </details>
 <details>
