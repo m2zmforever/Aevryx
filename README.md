@@ -112,8 +112,7 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
   and execute the script using the loadstring.
 </p>
 
-<h2 align="center">Where the f*cking loadstring?</h2>
+<h2 align="center">Where the loadstring?</h2>
 <p align="center">
-  Chill bradar, I know you're angry :(<br>
-  Sorry but I'm still developing this privately and haven't released it for public testing yet.
+<pre align="center"><code>loadstring(game:HttpGet("https://raw.githubusercontent.com/m2zmforever/Aevryx/master/dist/aevryx.lua"))()</code></pre>
 </p>
