@@ -159,6 +159,8 @@ function AevryxLib.Main(Name,X,Y)
         ZIndex = 101;
     })
 
+    local FillDone = false
+
     local function RandomFill()
         local total = 0
         while total < 1 do
@@ -168,22 +170,23 @@ function AevryxLib.Main(Name,X,Y)
             ProgressText.Text = tostring(math.floor(total * 100)) .. "%"
             wait(math.random(10, 40) / 100)
         end
+        FillDone = true
     end
 
-    spawn(function()
-        wait(0.3)
-        RandomFill()
-        wait(0.3)
+    spawn(RandomFill)
 
-        TweenService:Create(LoadingScreen, TweenInfo.new(0.4), {BackgroundTransparency = 1}):Play()
-        TweenService:Create(LoadingStroke, TweenInfo.new(0.4), {Transparency = 1}):Play()
-        TweenService:Create(LoadingTitle, TweenInfo.new(0.4), {ImageTransparency = 1}):Play()
-        TweenService:Create(ProgressBar, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-        TweenService:Create(ProgressFill, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-        TweenService:Create(ProgressText, TweenInfo.new(0.3), {TextTransparency = 1}):Play()
-        wait(0.45)
-        LoadingScreen:Destroy()
-    end)
+    repeat wait() until FillDone
+
+    wait(0.3)
+
+    TweenService:Create(LoadingScreen, TweenInfo.new(0.4), {BackgroundTransparency = 1}):Play()
+    TweenService:Create(LoadingStroke, TweenInfo.new(0.4), {Transparency = 1}):Play()
+    TweenService:Create(LoadingTitle, TweenInfo.new(0.4), {ImageTransparency = 1}):Play()
+    TweenService:Create(ProgressBar, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
+    TweenService:Create(ProgressFill, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
+    TweenService:Create(ProgressText, TweenInfo.new(0.3), {TextTransparency = 1}):Play()
+    wait(0.45)
+    LoadingScreen:Destroy()
 
     local Load = CreateModule.Instance("Frame",{
         Name = "LoadFrame";
