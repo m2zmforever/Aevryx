@@ -145,18 +145,45 @@ function AevryxLib.Main(Name,X,Y)
         CornerRadius = UDim.new(0,3);
     })
 
-    wait(0.3)
+    local ProgressText = CreateModule.Instance("TextLabel",{
+        Parent = LoadingScreen;
+        Name = "ProgressText";
+        BackgroundTransparency = 1;
+        Font = Enum.Font[AevryxLib["Theme"]["Font"]];
+        Text = "";
+        TextSize = 10;
+        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
+        Position = UDim2.new(0.5, 0, 0.92, 0);
+        AnchorPoint = Vector2.new(0.5, 0);
+        Size = UDim2.new(1, 0, 0, 14);
+        ZIndex = 101;
+    })
 
-    TweenService:Create(ProgressFill, TweenInfo.new(0.8), {Size = UDim2.new(1, 0, 1, 0)}):Play()
-    wait(0.8)
+    local function RandomFill()
+        local total = 0
+        while total < 1 do
+            local step = math.random(3, 12) / 100
+            total = math.min(total + step, 1)
+            ProgressFill.Size = UDim2.new(total, 0, 1, 0)
+            ProgressText.Text = tostring(math.floor(total * 100)) .. "%"
+            wait(math.random(10, 40) / 100)
+        end
+    end
 
-    TweenService:Create(LoadingScreen, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-    TweenService:Create(LoadingStroke, TweenInfo.new(0.3), {Transparency = 1}):Play()
-    TweenService:Create(LoadingTitle, TweenInfo.new(0.3), {ImageTransparency = 1}):Play()
-    TweenService:Create(ProgressBar, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-    TweenService:Create(ProgressFill, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-    wait(0.35)
-    LoadingScreen:Destroy()
+    spawn(function()
+        wait(0.3)
+        RandomFill()
+        wait(0.3)
+
+        TweenService:Create(LoadingScreen, TweenInfo.new(0.4), {BackgroundTransparency = 1}):Play()
+        TweenService:Create(LoadingStroke, TweenInfo.new(0.4), {Transparency = 1}):Play()
+        TweenService:Create(LoadingTitle, TweenInfo.new(0.4), {ImageTransparency = 1}):Play()
+        TweenService:Create(ProgressBar, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
+        TweenService:Create(ProgressFill, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
+        TweenService:Create(ProgressText, TweenInfo.new(0.3), {TextTransparency = 1}):Play()
+        wait(0.45)
+        LoadingScreen:Destroy()
+    end)
 
     local Load = CreateModule.Instance("Frame",{
         Name = "LoadFrame";
