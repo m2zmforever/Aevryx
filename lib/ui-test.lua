@@ -5,7 +5,7 @@
 --                             dP
 --
 -- Code Lines: 1.8k
--- Build Date: 14/09/2026 + 15:34
+-- Build Date: 14/09/2026 + 15:48
 -- Ocerium Project UI by @slf0Dev
 -- Edited for Aevryx by @m2zm.
 
@@ -145,20 +145,6 @@ function AevryxLib.Main(Name,X,Y)
         CornerRadius = UDim.new(0,3);
     })
 
-    local ProgressText = CreateModule.Instance("TextLabel",{
-        Parent = LoadingScreen;
-        Name = "ProgressText";
-        BackgroundTransparency = 1;
-        Font = Enum.Font[AevryxLib["Theme"]["Font"]];
-        Text = "";
-        TextSize = 10;
-        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
-        Position = UDim2.new(0.5, 0, 0.92, 0);
-        AnchorPoint = Vector2.new(0.5, 0);
-        Size = UDim2.new(1, 0, 0, 14);
-        ZIndex = 101;
-    })
-
     local FillDone = false
 
     local function RandomFill()
@@ -167,7 +153,6 @@ function AevryxLib.Main(Name,X,Y)
             local step = math.random(3, 12) / 100
             total = math.min(total + step, 1)
             ProgressFill.Size = UDim2.new(total, 0, 1, 0)
-            ProgressText.Text = tostring(math.floor(total * 100)) .. "%"
             wait(math.random(10, 40) / 100)
         end
         FillDone = true
@@ -175,7 +160,7 @@ function AevryxLib.Main(Name,X,Y)
 
     spawn(RandomFill)
 
-    repeat wait() until FillDone
+    while not FillDone do wait() end
 
     wait(0.3)
 
@@ -184,7 +169,6 @@ function AevryxLib.Main(Name,X,Y)
     TweenService:Create(LoadingTitle, TweenInfo.new(0.4), {ImageTransparency = 1}):Play()
     TweenService:Create(ProgressBar, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
     TweenService:Create(ProgressFill, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-    TweenService:Create(ProgressText, TweenInfo.new(0.3), {TextTransparency = 1}):Play()
     wait(0.45)
     LoadingScreen:Destroy()
 
