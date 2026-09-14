@@ -108,7 +108,7 @@ function AevryxLib.Main(Name,X,Y)
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0.5, 0);
         Position = UDim2.new(0.5, 0, 0.08, 0);
-        Size = UDim2.new(0,100,0,100);
+        Size = UDim2.new(0,130,0,130);
         ZIndex = 101;
         Visible = true;
     })
