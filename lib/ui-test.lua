@@ -145,9 +145,10 @@ function AevryxLib.Main(Name,X,Y)
         CornerRadius = UDim.new(0,3);
     })
 
-    wait(0.2)
+    wait(0.3)
 
-    TweenService:Create(ProgressFill, TweenInfo.new(0.2), {Size = UDim2.new(1, 0, 1, 0)}):Play()
+    TweenService:Create(ProgressFill, TweenInfo.new(0.8), {Size = UDim2.new(1, 0, 1, 0)}):Play()
+    wait(0.8)
 
     TweenService:Create(LoadingScreen, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
     TweenService:Create(LoadingStroke, TweenInfo.new(0.3), {Transparency = 1}):Play()
