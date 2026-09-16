@@ -5,7 +5,7 @@
 --                             dP
 --
 -- Code Lines: 1.8k
--- Build Date: 14/09/2026 + 16:05
+-- Build Date: 16/09/2026 + 20:51
 -- Ocerium Project UI by @slf0Dev
 -- Edited for Aevryx by @m2zm.
 
@@ -323,8 +323,8 @@ function AevryxLib.Main(Name,X,Y)
 
     local TabsPadding = CreateModule.Instance("UIPadding",{
         Parent = TabsButtons;
-        PaddingLeft = UDim.new(0,8);
-        PaddingRight = UDim.new(0,8);
+        PaddingLeft = UDim.new(0,4);
+        PaddingRight = UDim.new(0,4);
     })
 
 
@@ -332,7 +332,7 @@ function AevryxLib.Main(Name,X,Y)
         Parent = TabsButtons;
         FillDirection = Enum.FillDirection.Horizontal;
         SortOrder = Enum.SortOrder.LayoutOrder;
-		Padding = UDim.new(0,2)
+		Padding = UDim.new(0,0)
     })
 
     local TabButtonsList = {}
