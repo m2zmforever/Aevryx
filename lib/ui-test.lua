@@ -5,7 +5,7 @@
 --                             dP
 --
 -- Code Lines: 1.8k
--- Build Date: 16/09/2026 + 20:51
+-- Build Date: 18/09/2026 + 18:23
 -- Ocerium Project UI by @slf0Dev
 -- Edited for Aevryx by @m2zm.
 
@@ -103,73 +103,44 @@ function AevryxLib.Main(Name,X,Y)
         Parent = LoadingScreen;
         Name = "Title";
         BackgroundTransparency = 1;
-        Image = "rbxassetid://138902649769382";
+        Image = "rbxassetid://88607367141872";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
-        AnchorPoint = Vector2.new(0.5, 0.5);
-        Position = UDim2.new(0.5, 0, 0.5, 0);
-        Size = UDim2.new(0,130,0,130);
+        AnchorPoint = Vector2.new(0.5, 0);
+        Position = UDim2.new(0.5, 0, 0.08, 0);
+        Size = UDim2.new(0,64,0,64);
         ZIndex = 101;
         Visible = true;
     })
 
-    local ProgressBar = CreateModule.Instance("Frame",{
+    local LoadingStatus = CreateModule.Instance("TextLabel",{
         Parent = LoadingScreen;
-        Name = "ProgressBar";
-        BackgroundColor3 = Color3.fromRGB(30,30,30);
-        BorderSizePixel = 0;
-        AnchorPoint = Vector2.new(0.5, 1);
-        Position = UDim2.new(0.5, 0, 1, -10);
-        Size = UDim2.new(0.8, 0, 0, 6);
+        Name = "Status";
+        BackgroundTransparency = 1;
+        Font = Enum.Font[AevryxLib["Theme"]["Font"]];
+        Text = "Loading...";
+        TextSize = 12;
+        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
+        Position = UDim2.new(0,0,0.75,0);
+        Size = UDim2.new(1,0,0.2,0);
         ZIndex = 101;
     })
 
-    local ProgressBarCorner = CreateModule.Instance("UICorner",{
-        Parent = ProgressBar;
-        Name = "Corner";
-        CornerRadius = UDim.new(0,3);
-    })
-
-    local ProgressFill = CreateModule.Instance("Frame",{
-        Parent = ProgressBar;
-        Name = "Fill";
-        BackgroundColor3 = AevryxLib["Theme"]["AccentColor"];
-        BorderSizePixel = 0;
-        Size = UDim2.new(0, 0, 1, 0);
-        ZIndex = 102;
-    })
-
-    local ProgressFillCorner = CreateModule.Instance("UICorner",{
-        Parent = ProgressFill;
-        Name = "Corner";
-        CornerRadius = UDim.new(0,3);
-    })
-
-    local FillDone = false
-
-    local function RandomFill()
-        local total = 0
-        while total < 1 do
-            local step = math.random(3, 12) / 100
-            total = math.min(total + step, 1)
-            ProgressFill.Size = UDim2.new(total, 0, 1, 0)
-            wait(math.random(10, 40) / 100)
-        end
-        FillDone = true
-    end
-
-    spawn(RandomFill)
-
-    while not FillDone do wait() end
-
+    wait(0.2)
+    LoadingStatus.Text = "Loading Modules..."
+    wait(0.5)
+    LoadingStatus.Text = "Loading UI..."
+    wait(0.5)
+    LoadingStatus.Text = "Loading Config..."
+    wait(1)
+    LoadingStatus.Text = "Welcome To Aevryx..."
     wait(0.3)
 
-    TweenService:Create(LoadingScreen, TweenInfo.new(0.4), {BackgroundTransparency = 1}):Play()
-    TweenService:Create(LoadingStroke, TweenInfo.new(0.4), {Transparency = 1}):Play()
-    TweenService:Create(LoadingTitle, TweenInfo.new(0.4), {ImageTransparency = 1}):Play()
-    TweenService:Create(ProgressBar, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-    TweenService:Create(ProgressFill, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
-    wait(0.45)
+    TweenService:Create(LoadingScreen, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
+    TweenService:Create(LoadingStroke, TweenInfo.new(0.3), {Transparency = 1}):Play()
+    TweenService:Create(LoadingTitle, TweenInfo.new(0.3), {ImageTransparency = 1}):Play()
+    TweenService:Create(LoadingStatus, TweenInfo.new(0.3), {TextTransparency = 1}):Play()
+    wait(0.35)
     LoadingScreen:Destroy()
 
     local Load = CreateModule.Instance("Frame",{
@@ -323,8 +294,8 @@ function AevryxLib.Main(Name,X,Y)
 
     local TabsPadding = CreateModule.Instance("UIPadding",{
         Parent = TabsButtons;
-        PaddingLeft = UDim.new(0,4);
-        PaddingRight = UDim.new(0,4);
+        PaddingLeft = UDim.new(0,8);
+        PaddingRight = UDim.new(0,8);
     })
 
 
@@ -332,7 +303,7 @@ function AevryxLib.Main(Name,X,Y)
         Parent = TabsButtons;
         FillDirection = Enum.FillDirection.Horizontal;
         SortOrder = Enum.SortOrder.LayoutOrder;
-		Padding = UDim.new(0,0)
+		Padding = UDim.new(0,2)
     })
 
     local TabButtonsList = {}
@@ -548,6 +519,7 @@ InMain.Notification = InMain.Notification
             BorderSizePixel = 0;
             Position = UDim2.new(0,0,0,0);
             Size = UDim2.new(0.95,0,1,0);
+            ZIndex = 2;
         })
 
         local PageList = CreateModule.Instance("Frame",{
@@ -586,10 +558,11 @@ InMain.Notification = InMain.Notification
             Parent = Page;
             Name = 'Fader';
             BackgroundColor3 = Color3.fromRGB(0,0,0);
+            BackgroundTransparency = 1;
             BorderSizePixel = 0;
             Position = UDim2.new(0,0,0,0);
             Size = UDim2.new(1,0,1,0);
-            ZIndex = 2;
+            ZIndex = -1;
         })
 
         local ign = CreateModule.Instance("Frame",{
