@@ -1212,6 +1212,4 @@ function AevryxLib:Window(title, width, height)
 
 		return main
 	end
-
-	return AevryxLib
-end
+return AevryxLib;
