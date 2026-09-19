@@ -92,7 +92,7 @@ function AevryxLib.Main(Name,X,Y)
         Parent = LoadingScreen;
         Name = "Title";
         BackgroundTransparency = 1;
-        Image = "rbxassetid://88607367141872";
+        Image = "rbxassetid://74407923469942";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0.5, 0);
@@ -222,7 +222,7 @@ function AevryxLib.Main(Name,X,Y)
         Parent = Border;
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Image = "rbxassetid://138902649769382";
+        Image = "rbxassetid://81604598657551";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0,1);
