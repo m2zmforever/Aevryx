@@ -92,7 +92,7 @@ function AevryxLib.Main(Name,X,Y)
         Parent = LoadingScreen;
         Name = "Title";
         BackgroundTransparency = 1;
-        Image = "rbxassetid://88607367141872";
+        Image = "rbxassetid://74407923469942";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0.5, 0);
@@ -215,18 +215,18 @@ function AevryxLib.Main(Name,X,Y)
     Topbar.Visible = true
 
     local BannerVisible = true
-    local BANNER_SIZE = 200
+    local BANNER_SIZE = 160
 
     local BannerImage = CreateModule.Instance("ImageLabel",{
         Name = "BannerImage";
         Parent = Border;
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Image = "rbxassetid://138902649769382";
+        Image = "rbxassetid://81604598657551";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0,1);
-        Position = UDim2.new(0,8,1,35);
+        Position = UDim2.new(0,18,1,35);
         Size = UDim2.new(0,BANNER_SIZE,0,BANNER_SIZE);
         ZIndex = 6;
     })
