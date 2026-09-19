@@ -455,7 +455,7 @@ function AevryxLib.Main(Name,X,Y)
 
 InMain.Notification = InMain.Notification
 
-	function InMain.Tab(self, Text)
+	function InMain.Tab(Text)
         TabCount += 1
 
 		local TabButton = CreateModule.Instance("TextButton",{
