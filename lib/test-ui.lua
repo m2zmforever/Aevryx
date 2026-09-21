@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 21.09.2026 + 22:49:22
-  Total Code: 1813 (1813 Line of Code)
+  Build Date: 21.09.2026 + 23:05:13
+  Total Code: 1809 (1809 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -665,9 +665,9 @@ InMain.Notification = InMain.Notification
                 ImageTransparency = 0;
                 ScaleType = Enum.ScaleType.Fit;
                 AnchorPoint = Vector2.new(1,0);
-                Position = UDim2.new(1,-8,0,8);
-                Size = UDim2.new(0,72,0,72);
-                ZIndex = 6;
+                Position = UDim2.new(1,-10,0,10);
+                Size = UDim2.new(0,96,0,96);
+                ZIndex = 1;
             })
 
             local Label = CreateModule.Instance("TextLabel",{
