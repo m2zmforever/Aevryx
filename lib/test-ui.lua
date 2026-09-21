@@ -5,7 +5,7 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 21.09.2026 + 23:13:23
+  Build Date: 21.09.2026 + 23:17:45
   Total Code: 1809 (1809 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
@@ -108,8 +108,8 @@ function AevryxLib.Main(Name,X,Y)
         Image = "rbxassetid://97173479716906";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
-        AnchorPoint = Vector2.new(0.5, 0);
-        Position = UDim2.new(0.5, 0, 0.08, 0);
+        AnchorPoint = Vector2.new(0.5, 0.5);
+        Position = UDim2.new(0.5, 0, 0.5, 0);
         Size = UDim2.new(0,32,0,32);
         ZIndex = 101;
         Visible = true;
@@ -664,8 +664,8 @@ InMain.Notification = InMain.Notification
                 Image = "rbxassetid://86577151715930";
                 ImageTransparency = 0;
                 ScaleType = Enum.ScaleType.Fit;
-                AnchorPoint = Vector2.new(0.5,0.5);
-                Position = UDim2.new(0.5,0,0.5,0);
+                AnchorPoint = Vector2.new(1,0.5);
+                Position = UDim2.new(1,-10,0.5,0);
                 Size = UDim2.new(0,96,0,96);
                 ZIndex = 1;
             })
