@@ -5,7 +5,7 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 21.09.2026 + 22:40:09
+  Build Date: 21.09.2026 + 22:49:22
   Total Code: 1813 (1813 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
@@ -110,7 +110,7 @@ function AevryxLib.Main(Name,X,Y)
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0.5, 0);
         Position = UDim2.new(0.5, 0, 0.08, 0);
-        Size = UDim2.new(0,64,0,64);
+        Size = UDim2.new(0,48,0,48);
         ZIndex = 101;
         Visible = true;
     })
@@ -237,7 +237,7 @@ function AevryxLib.Main(Name,X,Y)
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0,1);
-        Position = UDim2.new(0,18,1,35);
+        Position = UDim2.new(0,28,1,35);
         Size = UDim2.new(0,BANNER_SIZE,0,BANNER_SIZE);
         ZIndex = 6;
     })
@@ -1170,8 +1170,8 @@ InMain.Notification = InMain.Notification
                     Name = "TextBox";
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
                     BorderSizePixel = 0;
-                    Position = UDim2.new(0,0,0,0);
-                    Size = UDim2.new(1,0,1,0);
+                    Position = UDim2.new(0,5,0,0);
+                    Size = UDim2.new(1,-5,1,0);
                     Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                     Text = defvalue or "";
                     TextSize = 14;
