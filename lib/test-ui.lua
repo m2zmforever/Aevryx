@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 21.09.2026 + 22:24:12
-  Total Code: 1815 (1815 Line of Code)
+  Build Date: 21.09.2026 + 22:40:09
+  Total Code: 1813 (1813 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -90,7 +90,7 @@ function AevryxLib.Main(Name,X,Y)
     local LoadingCorner = CreateModule.Instance("UICorner",{
         Parent = LoadingScreen;
         Name = "Corner";
-        CornerRadius = UDim.new(0,8);
+        CornerRadius = UDim.new(0,0);
     })
 
     local LoadingStroke = CreateModule.Instance("UIStroke",{
@@ -133,8 +133,6 @@ function AevryxLib.Main(Name,X,Y)
     wait(0.5)
     LoadingStatus.Text = "Loading UI..."
     wait(0.5)
-    LoadingStatus.Text = "Loading Config..."
-    wait(1)
     LoadingStatus.Text = "Welcome To Aevryx..."
     wait(0.3)
 
@@ -159,7 +157,7 @@ function AevryxLib.Main(Name,X,Y)
     local LoadCorner = CreateModule.Instance("UICorner",{
         Parent = Load;
         Name = "Corner";
-        CornerRadius = UDim.new(0,5);
+        CornerRadius = UDim.new(0,0);
     })
 
     local Topbar = CreateModule.Instance("Frame",{
@@ -178,7 +176,7 @@ function AevryxLib.Main(Name,X,Y)
     local Corner = CreateModule.Instance("UICorner",{
         Parent = Topbar;
         Name = "Corner";
-        CornerRadius = UDim.new(0,5);
+        CornerRadius = UDim.new(0,0);
     })
 
     Topbar.Changed:Connect(function(Property)
@@ -220,7 +218,7 @@ function AevryxLib.Main(Name,X,Y)
     local CornerBorder = CreateModule.Instance("UICorner",{
         Parent = Border;
         Name = "Corner";
-        CornerRadius = UDim.new(0,5);
+        CornerRadius = UDim.new(0,0);
     })
 
     Load.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
@@ -252,7 +250,7 @@ function AevryxLib.Main(Name,X,Y)
     local Corner = CreateModule.Instance("UICorner",{
         Parent = Container;
         Name = "Corner";
-        CornerRadius = UDim.new(0,5);
+        CornerRadius = UDim.new(0,0);
     })
 
     local Pages = CreateModule.Instance("Frame",{
@@ -388,7 +386,7 @@ function AevryxLib.Main(Name,X,Y)
         local Corner = CreateModule.Instance("UICorner",{
             Parent = Bar;
             Name = "Corner";
-            CornerRadius = UDim.new(0,8);
+            CornerRadius = UDim.new(0,0);
         })
 
         local Stroke = CreateModule.Instance("UIStroke",{
@@ -654,7 +652,7 @@ InMain.Notification = InMain.Notification
             local Corner = CreateModule.Instance("UICorner",{
                 Parent = Section;
                 Name = "Corner";
-                CornerRadius = UDim.new(0,5);
+                CornerRadius = UDim.new(0,0);
             })
 
             local Stroke = CreateModule.Instance("UIStroke",{
@@ -678,7 +676,7 @@ InMain.Notification = InMain.Notification
             local AvatarCorner = CreateModule.Instance("UICorner",{
                 Parent = Avatar;
                 Name = "Corner";
-                CornerRadius = UDim.new(0,5);
+                CornerRadius = UDim.new(0,0);
             })
 
             local Label = CreateModule.Instance("TextLabel",{
@@ -735,7 +733,7 @@ InMain.Notification = InMain.Notification
             local Corner = CreateModule.Instance("UICorner",{
                 Parent = Section;
                 Name = "Corner";
-                CornerRadius = UDim.new(0,5);
+                CornerRadius = UDim.new(0,0);
             })
 
             local Stroke = CreateModule.Instance("UIStroke",{
@@ -818,7 +816,7 @@ InMain.Notification = InMain.Notification
                 local Corner = CreateModule.Instance("UICorner",{
                     Parent = Button;
                     Name = "Corner";
-                    CornerRadius = UDim.new(0,5);
+                    CornerRadius = UDim.new(0,0);
                 })
 
                 local Stroke = CreateModule.Instance("UIStroke",{
@@ -982,7 +980,7 @@ InMain.Notification = InMain.Notification
                 local Corner = CreateModule.Instance("UICorner",{
                     Parent = Keybinder;
                     Name = "Corner";
-                    CornerRadius = UDim.new(0,5);
+                    CornerRadius = UDim.new(0,0);
                 })
 
                 local Stroke = CreateModule.Instance("UIStroke",{
@@ -1043,7 +1041,7 @@ InMain.Notification = InMain.Notification
                 local Corner1 = CreateModule.Instance("UICorner",{
                     Parent = Checkbox;
                     Name = "Corner";
-                    CornerRadius = UDim.new(0,5);
+                    CornerRadius = UDim.new(0,0);
                 })
 
                 local Stroke1 = CreateModule.Instance("UIStroke",{
@@ -1091,7 +1089,7 @@ InMain.Notification = InMain.Notification
                 local Corner = CreateModule.Instance("UICorner",{
                     Parent = Checked;
                     Name = "Corner";
-                    CornerRadius = UDim.new(0,5);
+                    CornerRadius = UDim.new(0,0);
                 })
 
                 local Stroke = CreateModule.Instance("UIStroke",{
@@ -1151,7 +1149,7 @@ InMain.Notification = InMain.Notification
                 local Corner = CreateModule.Instance("UICorner",{
                     Parent = Img;
                     Name = "Corner";
-                    CornerRadius = UDim.new(0,5);
+                    CornerRadius = UDim.new(0,0);
                 })
                 AddToReg(Img)
                 return Img;
@@ -1189,7 +1187,7 @@ InMain.Notification = InMain.Notification
                 local Corner = CreateModule.Instance("UICorner",{
                     Parent = TextBox;
                     Name = "Corner";
-                    CornerRadius = UDim.new(0,5);
+                    CornerRadius = UDim.new(0,0);
                 })
 
                 local Stroke = CreateModule.Instance("UIStroke",{
@@ -1289,7 +1287,7 @@ InMain.Notification = InMain.Notification
                 local Corner = CreateModule.Instance("UICorner",{
                     Parent = Bar;
                     Name = "Corner";
-                    CornerRadius = UDim.new(0,5);
+                    CornerRadius = UDim.new(0,0);
                 })
 
                 local Stroke = CreateModule.Instance("UIStroke",{
@@ -1302,7 +1300,7 @@ InMain.Notification = InMain.Notification
                 local Corner2 = CreateModule.Instance("UICorner",{
                     Parent = Progress;
                     Name = "Corner";
-                    CornerRadius = UDim.new(0,5);
+                    CornerRadius = UDim.new(0,0);
                 })
 
                 
@@ -1464,7 +1462,7 @@ InMain.Notification = InMain.Notification
                 local Corner = CreateModule.Instance("UICorner",{
                     Parent = Dropdown;
                     Name = "Corner";
-                    CornerRadius = UDim.new(0,5);
+                    CornerRadius = UDim.new(0,0);
                 })
 
                 local Stroke = CreateModule.Instance("UIStroke",{
@@ -1514,7 +1512,7 @@ InMain.Notification = InMain.Notification
                     local Corner = CreateModule.Instance("UICorner",{
                         Parent = Selectable;
                         Name = "Corner";
-                        CornerRadius = UDim.new(0,5);
+                        CornerRadius = UDim.new(0,0);
                     })
     
                     local Stroke = CreateModule.Instance("UIStroke",{
@@ -1676,7 +1674,7 @@ InMain.Notification = InMain.Notification
                 local Corner = CreateModule.Instance("UICorner",{
                     Parent = Dropdown;
                     Name = "Corner";
-                    CornerRadius = UDim.new(0,5);
+                    CornerRadius = UDim.new(0,0);
                 })
 
                 local Stroke = CreateModule.Instance("UIStroke",{
@@ -1743,7 +1741,7 @@ InMain.Notification = InMain.Notification
                     local Corner = CreateModule.Instance("UICorner",{
                         Parent = Selectable;
                         Name = "Corner";
-                        CornerRadius = UDim.new(0,5);
+                        CornerRadius = UDim.new(0,0);
                     })
     
                     local Stroke = CreateModule.Instance("UIStroke",{
