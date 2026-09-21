@@ -79,7 +79,8 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
       Kill All If Bag Full<br>
       Fling Murderer If Bag Full<br>
       Shoot Murderer If Bag Full<br>
-      Reset Character If Bag Full
+      Reset Character If Bag Full<br>
+      Teleport Lobby If Bag Full
     </td>
     <td valign="top">
       Auto-Salvage<br>
