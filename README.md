@@ -15,7 +15,7 @@
 
 <h2 align="center">What is this sh*t?</h2>
 <p align="center">
-Aevryx is one of the best free, no-key script for Murder Mystery 2, offering good performance and stable gameplay for your potato computer.
+Aevryx is one of the best free, no-key script for Murder Mystery 2, offering good performance and stable gameplay for everyone.
 </p>
 
 <h2 align="center">Features?</h2>
