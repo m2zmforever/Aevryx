@@ -1,3 +1,16 @@
+--[[
+
+     db    888888 Yb    dP 88""Yb Yb  dP Yb  dP     88   88 88 
+    dPYb   88__    Yb  dP  88__dP  YbdP   YbdP      88   88 88 
+   dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
+  dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
+
+  Build Date: 21.09.2026 + 22:24:12
+  Total Code: 1815 (1815 Line of Code)
+  Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
+
+--]]
+
 local TweenService = game:GetService("TweenService")
 local InputService = game:GetService("UserInputService")
 
@@ -92,7 +105,7 @@ function AevryxLib.Main(Name,X,Y)
         Parent = LoadingScreen;
         Name = "Title";
         BackgroundTransparency = 1;
-        Image = "rbxassetid://74407923469942";
+        Image = "rbxassetid://97173479716906";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0.5, 0);
@@ -222,7 +235,7 @@ function AevryxLib.Main(Name,X,Y)
         Parent = Border;
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Image = "rbxassetid://81604598657551";
+        Image = "rbxassetid://86577151715930";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0,1);
