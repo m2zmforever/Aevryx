@@ -225,28 +225,6 @@ function AevryxLib.Main(Name,X,Y)
     Border.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
     Topbar.Visible = true
 
-    local BannerVisible = true
-    local BANNER_SIZE = 160
-
-    local BannerImage = CreateModule.Instance("ImageLabel",{
-        Name = "BannerImage";
-        Parent = Border;
-        BackgroundTransparency = 1;
-        BorderSizePixel = 0;
-        Image = "rbxassetid://86577151715930";
-        ImageTransparency = 0;
-        ScaleType = Enum.ScaleType.Fit;
-        AnchorPoint = Vector2.new(0,1);
-        Position = UDim2.new(0,28,1,35);
-        Size = UDim2.new(0,BANNER_SIZE,0,BANNER_SIZE);
-        ZIndex = 6;
-    })
-
-    Topbar.Changed:Connect(function(Property)
-        if Property == "Position" then
-            BannerImage.Position = UDim2.new(0,8,1,35)
-        end
-    end)
     local Corner = CreateModule.Instance("UICorner",{
         Parent = Container;
         Name = "Corner";
@@ -677,6 +655,19 @@ InMain.Notification = InMain.Notification
                 Parent = Avatar;
                 Name = "Corner";
                 CornerRadius = UDim.new(0,0);
+            })
+            local WelcomeBanner = CreateModule.Instance("ImageLabel",{
+                Parent = Section;
+                Name = "WelcomeBanner";
+                BackgroundTransparency = 1;
+                BorderSizePixel = 0;
+                Image = "rbxassetid://86577151715930";
+                ImageTransparency = 0;
+                ScaleType = Enum.ScaleType.Fit;
+                AnchorPoint = Vector2.new(1,0);
+                Position = UDim2.new(1,-8,0,8);
+                Size = UDim2.new(0,72,0,72);
+                ZIndex = 6;
             })
 
             local Label = CreateModule.Instance("TextLabel",{
@@ -1170,8 +1161,8 @@ InMain.Notification = InMain.Notification
                     Name = "TextBox";
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
                     BorderSizePixel = 0;
-                    Position = UDim2.new(0,5,0,0);
-                    Size = UDim2.new(1,-5,1,0);
+                    Position = UDim2.new(0,0,0,0);
+                    Size = UDim2.new(1,0,1,0);
                     Font = Enum.Font[AevryxLib["Theme"]["Font"]];
                     Text = defvalue or "";
                     TextSize = 14;
@@ -1184,6 +1175,11 @@ InMain.Notification = InMain.Notification
                     ClipsDescendants = true;
                 })
 
+                local TextPadding = CreateModule.Instance("UIPadding",{
+                    Parent = TextBox;
+                    Name = "Padding";
+                    PaddingLeft = UDim.new(0,5);
+                })
                 local Corner = CreateModule.Instance("UICorner",{
                     Parent = TextBox;
                     Name = "Corner";
