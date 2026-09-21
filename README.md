@@ -111,7 +111,6 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
   Currently, the executors with which the script works best are
   <a href="https://www.xeno.now">Xeno</a>,
   <a href="https://getsolara.gg">Solara</a>,
-  <a href="https://deltaexploits.gg">Delta</a>
   and <a href="https://projectreal.gg">Real</a> Executor.
   Download them from their offical websites, inject into your game,
   and execute the script using the loadstring.
