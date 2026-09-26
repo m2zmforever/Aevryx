@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 26.09.2026 + 22:57:13
-  Total Code: 1898 (1898 Line of Code)
+  Build Date: 26.09.2026 + 23:02:19
+  Total Code: 1892 (1892 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -155,7 +155,7 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = 1;
 		BorderSizePixel = 0;
 		Position = UDim2.new(0.3,0,0.25,0);
-        ZIndex = 5;
+        ZIndex = 20;
         ClipsDescendants = true;
 	})
 
@@ -169,7 +169,7 @@ function AevryxLib.Main(Name,X,Y)
         Image = AevryxLib["Theme"]["BackgroundImage"];
         ImageTransparency = 1;
         ScaleType = Enum.ScaleType.Crop;
-        ZIndex = 5;
+        ZIndex = 20;
     })
 
     local LoadCorner = CreateModule.Instance("UICorner",{
@@ -644,22 +644,16 @@ InMain.Notification = InMain.Notification
         })
 
         TabButton.MouseButton1Click:Connect(function()
-            for i,v in next,Pages:GetChildren() do
-                if v.Name ~= Text and v:FindFirstChild("Fader") then
-                    local img = v.Fader:FindFirstChild("FaderImage")
-                    if img then
-                        TweenService:Create(img,TweenInfo.new(0.3),{ImageTransparency = AevryxLib["Theme"]["BackgroundTransparency"]}):Play()
-                    else
-                        TweenService:Create(v.Fader,TweenInfo.new(0.3),{BackgroundTransparency = 0}):Play()
-                    end
-                    spawn(function()
-                        wait(0.32)
-                        PageLayout:JumpTo(Page)
-                        TweenService:Create(Fader,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
-                        TweenService:Create(FaderImage,TweenInfo.new(0.3),{ImageTransparency = 1}):Play()
-                    end)
-                end
-            end
+            spawn(function()
+                if not Topbar.Visible then return end
+                TweenService:Create(Load,TweenInfo.new(0.25),{BackgroundTransparency = 0}):Play()
+                TweenService:Create(LoadImage,TweenInfo.new(0.25),{ImageTransparency = AevryxLib["Theme"]["BackgroundTransparency"]}):Play()
+                wait(0.27)
+                PageLayout:JumpTo(Page)
+                wait(0.05)
+                TweenService:Create(Load,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
+                TweenService:Create(LoadImage,TweenInfo.new(0.3),{ImageTransparency = 1}):Play()
+            end)
 
             for i,v in next,TabsButtons:GetChildren() do
                 if v.ClassName == "TextButton" and v.Name ~= Text then
