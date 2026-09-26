@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 26.09.2026 + 23:11:03
-  Total Code: 1859 (1859 Line of Code)
+  Build Date: 26.09.2026 + 23:17:15
+  Total Code: 1883 (1883 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -651,15 +651,26 @@ InMain.Notification = InMain.Notification
                 Parent = Page;
                 Name = "Welcome";
                 BackgroundColor3 = Color3.fromRGB(0,0,0);
-                BackgroundTransparency = AevryxLib["Theme"]["SectionTransparency"];
+                BackgroundTransparency = 1;
                 BorderSizePixel = 0;
                 BorderColor3 = Color3.fromRGB(45,45,45);
                 Position = UDim2.new(0.015,0,0.015,WelcomeTop);
                 Size = UDim2.new(0.97,0,0,WelcomeHeight);
             })
 
-            local SectionBlur = CreateModule.Instance("BlurEffect",{
+            local SectionBg = CreateModule.Instance("Frame",{
                 Parent = Section;
+                Name = "SectionBg";
+                BackgroundColor3 = Color3.fromRGB(0,0,0);
+                BackgroundTransparency = AevryxLib["Theme"]["SectionTransparency"];
+                BorderSizePixel = 0;
+                Position = UDim2.new(0,0,0,0);
+                Size = UDim2.new(1,0,1,0);
+                ZIndex = 0;
+            })
+
+            local SectionBgBlur = CreateModule.Instance("BlurEffect",{
+                Parent = SectionBg;
                 Name = "Blur";
                 Size = AevryxLib["Theme"]["SectionBlur"];
             })
@@ -751,7 +762,7 @@ InMain.Notification = InMain.Notification
                 Parent = Column;
                 Name = Text;
                 BackgroundColor3 = Color3.fromRGB(0,0,0);
-                BackgroundTransparency = AevryxLib["Theme"]["SectionTransparency"];
+                BackgroundTransparency = 1;
                 BorderSizePixel = 0;
                 BorderColor3 = Color3.fromRGB(45,45,45);
                 Position = UDim2.new(0,0,0,0);
@@ -759,8 +770,19 @@ InMain.Notification = InMain.Notification
                 AutomaticSize = Enum.AutomaticSize.Y;
             })
 
-            local SectionBlur = CreateModule.Instance("BlurEffect",{
+            local SectionBg = CreateModule.Instance("Frame",{
                 Parent = Section;
+                Name = "SectionBg";
+                BackgroundColor3 = Color3.fromRGB(0,0,0);
+                BackgroundTransparency = AevryxLib["Theme"]["SectionTransparency"];
+                BorderSizePixel = 0;
+                Position = UDim2.new(0,0,0,0);
+                Size = UDim2.new(1,0,1,0);
+                ZIndex = 0;
+            })
+
+            local SectionBgBlur = CreateModule.Instance("BlurEffect",{
+                Parent = SectionBg;
                 Name = "Blur";
                 Size = AevryxLib["Theme"]["SectionBlur"];
             })
@@ -1443,6 +1465,7 @@ InMain.Notification = InMain.Notification
                     Parent = Dropdown;
                     Name = "DropdownButton";
                     BackgroundTransparency = 1;
+                    ZIndex = 1;
                     BorderSizePixel = 0;
                     BorderColor3 = Color3.fromRGB(20,20,20);
                     Position = UDim2.new(0,0,0,0);
@@ -1540,7 +1563,7 @@ InMain.Notification = InMain.Notification
                     local Selectable = CreateModule.Instance("TextButton",{
                         Parent = List;
                         Name = string;
-                        BackgroundTransparency = 1;
+                        BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                         BorderSizePixel = 0;
                         BorderColor3 = Color3.fromRGB(20,20,20);
                         Position = UDim2.new(0,0,0,0);
@@ -1656,6 +1679,7 @@ InMain.Notification = InMain.Notification
                     Parent = Dropdown;
                     Name = "DropdownButton";
                     BackgroundTransparency = 1;
+                    ZIndex = 1;
                     BorderSizePixel = 0;
                     BorderColor3 = Color3.fromRGB(20,20,20);
                     Position = UDim2.new(0,0,0,0);
@@ -1755,7 +1779,7 @@ InMain.Notification = InMain.Notification
                     local Selectable = CreateModule.Instance("TextButton",{
                         Parent = List;
                         Name = string;
-                        BackgroundTransparency = 1;
+                        BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                         BorderSizePixel = 0;
                         BorderColor3 = Color3.fromRGB(20,20,20);
                         Position = UDim2.new(0,0,0,0);
