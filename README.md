@@ -54,8 +54,7 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
       Headless<br>
       Void Protection<br>
       Noclip<br>
-      Anti AFK<br>
-      Emotes<br>
+      Game Emotes<br>
       Invisibility
     </td>
     <td valign="top">
@@ -76,7 +75,8 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
     <td valign="top">
       Autofarm<br>
       Skip Coins Near Murderer<br>
-      No Render<br>
+      No Render (3D)<br>
+      Anti AFK<br>
       Kill All If Bag Full<br>
       Fling Murderer If Bag Full<br>
       Shoot Murderer If Bag Full<br>
