@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 26.09.2026 + 22:31:12
-  Total Code: 1841 (1841 Line of Code)
+  Build Date: 26.09.2026 + 22:49:33
+  Total Code: 1869 (1869 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -20,7 +20,7 @@ local AevryxLib = {
 		["AccentColor"] = Color3.fromRGB(60, 60, 60),
 		["FontColor"] = Color3.fromRGB(255,255,255),
 		["HideKey"] = "LeftControl",
-		["BackgroundImage"] = "rbxassetid://111031894340503",
+		["BackgroundImage"] = "rbxassetid://117083332437563",
 		["BackgroundTransparency"] = 0,
 		["SectionTransparency"] = 0.35,
 		["SectionBlur"] = 8,
@@ -158,6 +158,19 @@ function AevryxLib.Main(Name,X,Y)
         ClipsDescendants = true;
 	})
 
+    local LoadImage = CreateModule.Instance("ImageLabel",{
+        Name = "LoadImage";
+        Parent = Load;
+        BackgroundTransparency = 1;
+        BorderSizePixel = 0;
+        Position = UDim2.new(0,0,0,0);
+        Size = UDim2.new(1,0,1,0);
+        Image = AevryxLib["Theme"]["BackgroundImage"];
+        ImageTransparency = 1;
+        ScaleType = Enum.ScaleType.Crop;
+        ZIndex = 5;
+    })
+
     local LoadCorner = CreateModule.Instance("UICorner",{
         Parent = Load;
         Name = "Corner";
@@ -168,6 +181,7 @@ function AevryxLib.Main(Name,X,Y)
         Name = "Topbar";
         Parent = AevryxLib.ScreenGui;
 		BackgroundColor3 = Color3.fromRGB(0,0,0);
+		BackgroundTransparency = 1;
 		BorderSizePixel = 0;
 		Position = UDim2.new(0.3,0,0.25,0);
 		Size = UDim2.new(0,X,0,30);
@@ -199,12 +213,12 @@ function AevryxLib.Main(Name,X,Y)
 		Position = UDim2.new(0,0,1,-5);
 		Size = UDim2.new(1,0,0,Y);
         ClipsDescendants = true;
-        ZIndex = 0;
+        ZIndex = 1;
 	})
 
     local BgImage = CreateModule.Instance("ImageLabel",{
         Name = "Background";
-        Parent = Container;
+        Parent = Topbar;
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
         Position = UDim2.new(0,0,0,0);
@@ -241,7 +255,19 @@ function AevryxLib.Main(Name,X,Y)
 
     Load.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
     Border.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
+    BgImage.Size = Border.Size
     Topbar.Visible = true
+
+    Topbar:GetPropertyChangedSignal("Position"):Connect(function()
+        Load.Position = Topbar.Position
+        Border.Position = Topbar.Position
+    end)
+
+    Topbar:GetPropertyChangedSignal("Size"):Connect(function()
+        Load.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5)
+        Border.Size = Load.Size
+        BgImage.Size = Load.Size
+    end)
 
     local Corner = CreateModule.Instance("UICorner",{
         Parent = Container;
@@ -341,8 +367,10 @@ function AevryxLib.Main(Name,X,Y)
         if (keyEnum and input.KeyCode == keyEnum) or (uitEnum and input.UserInputType == uitEnum) then
             spawn(function()
                 TweenService:Create(Load,TweenInfo.new(0.15),{BackgroundTransparency = 0}):Play()
+                TweenService:Create(LoadImage,TweenInfo.new(0.15),{ImageTransparency = AevryxLib["Theme"]["BackgroundTransparency"]}):Play()
                 wait(0.2)
                 TweenService:Create(Load,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
+                TweenService:Create(LoadImage,TweenInfo.new(0.3),{ImageTransparency = 1}):Play()
                 Topbar.Visible = not Topbar.Visible
                 Load.Visible = not Load.Visible
             end)
