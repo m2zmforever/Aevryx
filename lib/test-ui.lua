@@ -5,7 +5,7 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 26.09.2026 + 22:27:55
+  Build Date: 26.09.2026 + 22:31:12
   Total Code: 1841 (1841 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
@@ -21,7 +21,7 @@ local AevryxLib = {
 		["FontColor"] = Color3.fromRGB(255,255,255),
 		["HideKey"] = "LeftControl",
 		["BackgroundImage"] = "rbxassetid://111031894340503",
-		["BackgroundTransparency"] = 0.85,
+		["BackgroundTransparency"] = 0,
 		["SectionTransparency"] = 0.35,
 		["SectionBlur"] = 8,
 	},
@@ -638,7 +638,7 @@ InMain.Notification = InMain.Notification
             local Section = CreateModule.Instance("Frame",{
                 Parent = Page;
                 Name = "Welcome";
-                BackgroundColor3 = Color3.fromRGB(12,12,12);
+                BackgroundColor3 = Color3.fromRGB(0,0,0);
                 BackgroundTransparency = AevryxLib["Theme"]["SectionTransparency"];
                 BorderSizePixel = 0;
                 BorderColor3 = Color3.fromRGB(45,45,45);
@@ -738,7 +738,7 @@ InMain.Notification = InMain.Notification
             local Section = CreateModule.Instance("Frame",{
                 Parent = Column;
                 Name = Text;
-                BackgroundColor3 = Color3.fromRGB(12,12,12);
+                BackgroundColor3 = Color3.fromRGB(0,0,0);
                 BackgroundTransparency = AevryxLib["Theme"]["SectionTransparency"];
                 BorderSizePixel = 0;
                 BorderColor3 = Color3.fromRGB(45,45,45);
