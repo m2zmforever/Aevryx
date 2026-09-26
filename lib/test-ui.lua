@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 26.09.2026 + 23:02:19
-  Total Code: 1892 (1892 Line of Code)
+  Build Date: 26.09.2026 + 23:11:03
+  Total Code: 1859 (1859 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -158,19 +158,6 @@ function AevryxLib.Main(Name,X,Y)
         ZIndex = 20;
         ClipsDescendants = true;
 	})
-
-    local LoadImage = CreateModule.Instance("ImageLabel",{
-        Name = "LoadImage";
-        Parent = Load;
-        BackgroundTransparency = 1;
-        BorderSizePixel = 0;
-        Position = UDim2.new(0,0,0,0);
-        Size = UDim2.new(1,0,1,0);
-        Image = AevryxLib["Theme"]["BackgroundImage"];
-        ImageTransparency = 1;
-        ScaleType = Enum.ScaleType.Crop;
-        ZIndex = 20;
-    })
 
     local LoadCorner = CreateModule.Instance("UICorner",{
         Parent = Load;
@@ -352,8 +339,6 @@ function AevryxLib.Main(Name,X,Y)
                     pcall(function() PageLayout:JumpTo(page) end)
                     if page:FindFirstChild("Fader") then
                         page.Fader.BackgroundTransparency = 1
-                        local fimg = page.Fader:FindFirstChild("FaderImage")
-                        if fimg then fimg.ImageTransparency = 1 end
                     end
                     break
                 end
@@ -369,10 +354,8 @@ function AevryxLib.Main(Name,X,Y)
         if (keyEnum and input.KeyCode == keyEnum) or (uitEnum and input.UserInputType == uitEnum) then
             spawn(function()
                 TweenService:Create(Load,TweenInfo.new(0.15),{BackgroundTransparency = 0}):Play()
-                TweenService:Create(LoadImage,TweenInfo.new(0.15),{ImageTransparency = AevryxLib["Theme"]["BackgroundTransparency"]}):Play()
                 wait(0.2)
                 TweenService:Create(Load,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
-                TweenService:Create(LoadImage,TweenInfo.new(0.3),{ImageTransparency = 1}):Play()
                 Topbar.Visible = not Topbar.Visible
                 Load.Visible = not Load.Visible
             end)
@@ -590,19 +573,6 @@ InMain.Notification = InMain.Notification
             ZIndex = 8;
         })
 
-        local FaderImage = CreateModule.Instance("ImageLabel",{
-            Parent = Fader;
-            Name = "FaderImage";
-            BackgroundTransparency = 1;
-            BorderSizePixel = 0;
-            Position = UDim2.new(0,0,0,0);
-            Size = UDim2.new(1,0,1,0);
-            Image = AevryxLib["Theme"]["BackgroundImage"];
-            ImageTransparency = 1;
-            ScaleType = Enum.ScaleType.Crop;
-            ZIndex = 8;
-        })
-
         local ign = CreateModule.Instance("Frame",{
             Parent = PageList;
             Name = 'ign';
@@ -647,12 +617,10 @@ InMain.Notification = InMain.Notification
             spawn(function()
                 if not Topbar.Visible then return end
                 TweenService:Create(Load,TweenInfo.new(0.25),{BackgroundTransparency = 0}):Play()
-                TweenService:Create(LoadImage,TweenInfo.new(0.25),{ImageTransparency = AevryxLib["Theme"]["BackgroundTransparency"]}):Play()
                 wait(0.27)
                 PageLayout:JumpTo(Page)
                 wait(0.05)
                 TweenService:Create(Load,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
-                TweenService:Create(LoadImage,TweenInfo.new(0.3),{ImageTransparency = 1}):Play()
             end)
 
             for i,v in next,TabsButtons:GetChildren() do
@@ -668,7 +636,6 @@ InMain.Notification = InMain.Notification
         if TabCount == 1 then
             PageLayout:JumpTo(Page)
             TweenService:Create(Fader,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
-            TweenService:Create(FaderImage,TweenInfo.new(0.3),{ImageTransparency = 1}):Play()
         end
         table.insert(TabButtonsList, TabButton)
         local InPage = {}
@@ -1353,7 +1320,7 @@ InMain.Notification = InMain.Notification
                 local Progress = CreateModule.Instance("Frame",{
                     Parent = Bar;
                     Name = 'Progress';
-                    BackgroundTransparency = 0;
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
                     BorderSizePixel = 0;
                     AnchorPoint = Vector2.new(0,0.5);
