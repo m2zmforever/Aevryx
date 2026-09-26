@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 26.09.2026 + 22:49:33
-  Total Code: 1869 (1869 Line of Code)
+  Build Date: 26.09.2026 + 22:57:13
+  Total Code: 1898 (1898 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -23,6 +23,7 @@ local AevryxLib = {
 		["BackgroundImage"] = "rbxassetid://117083332437563",
 		["BackgroundTransparency"] = 0,
 		["SectionTransparency"] = 0.35,
+		["ElementTransparency"] = 0.5,
 		["SectionBlur"] = 8,
 	},
 }
@@ -260,7 +261,6 @@ function AevryxLib.Main(Name,X,Y)
 
     Topbar:GetPropertyChangedSignal("Position"):Connect(function()
         Load.Position = Topbar.Position
-        Border.Position = Topbar.Position
     end)
 
     Topbar:GetPropertyChangedSignal("Size"):Connect(function()
@@ -352,6 +352,8 @@ function AevryxLib.Main(Name,X,Y)
                     pcall(function() PageLayout:JumpTo(page) end)
                     if page:FindFirstChild("Fader") then
                         page.Fader.BackgroundTransparency = 1
+                        local fimg = page.Fader:FindFirstChild("FaderImage")
+                        if fimg then fimg.ImageTransparency = 1 end
                     end
                     break
                 end
@@ -581,10 +583,24 @@ InMain.Notification = InMain.Notification
             Parent = Page;
             Name = 'Fader';
             BackgroundColor3 = Color3.fromRGB(0,0,0);
+            BackgroundTransparency = 1;
             BorderSizePixel = 0;
             Position = UDim2.new(0,0,0,0);
             Size = UDim2.new(1,0,1,0);
-            ZIndex = 2;
+            ZIndex = 8;
+        })
+
+        local FaderImage = CreateModule.Instance("ImageLabel",{
+            Parent = Fader;
+            Name = "FaderImage";
+            BackgroundTransparency = 1;
+            BorderSizePixel = 0;
+            Position = UDim2.new(0,0,0,0);
+            Size = UDim2.new(1,0,1,0);
+            Image = AevryxLib["Theme"]["BackgroundImage"];
+            ImageTransparency = 1;
+            ScaleType = Enum.ScaleType.Crop;
+            ZIndex = 8;
         })
 
         local ign = CreateModule.Instance("Frame",{
@@ -630,11 +646,17 @@ InMain.Notification = InMain.Notification
         TabButton.MouseButton1Click:Connect(function()
             for i,v in next,Pages:GetChildren() do
                 if v.Name ~= Text and v:FindFirstChild("Fader") then
-                    TweenService:Create(v.Fader,TweenInfo.new(0.3),{BackgroundTransparency = 0}):Play()
+                    local img = v.Fader:FindFirstChild("FaderImage")
+                    if img then
+                        TweenService:Create(img,TweenInfo.new(0.3),{ImageTransparency = AevryxLib["Theme"]["BackgroundTransparency"]}):Play()
+                    else
+                        TweenService:Create(v.Fader,TweenInfo.new(0.3),{BackgroundTransparency = 0}):Play()
+                    end
                     spawn(function()
                         wait(0.32)
                         PageLayout:JumpTo(Page)
                         TweenService:Create(Fader,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
+                        TweenService:Create(FaderImage,TweenInfo.new(0.3),{ImageTransparency = 1}):Play()
                     end)
                 end
             end
@@ -652,6 +674,7 @@ InMain.Notification = InMain.Notification
         if TabCount == 1 then
             PageLayout:JumpTo(Page)
             TweenService:Create(Fader,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
+            TweenService:Create(FaderImage,TweenInfo.new(0.3),{ImageTransparency = 1}):Play()
         end
         table.insert(TabButtonsList, TabButton)
         local InPage = {}
@@ -850,6 +873,7 @@ InMain.Notification = InMain.Notification
                     Parent = SectionElements;
                     Name = Text;
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 1;
                     BorderColor3 = Color3.fromRGB(20,20,20);
                     Position = UDim2.new(0,0,0,0);
@@ -1016,6 +1040,7 @@ InMain.Notification = InMain.Notification
                 local Keybinder = CreateModule.Instance("TextButton",{
                     Parent = Keybind;
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     AnchorPoint = Vector2.new(0,0.5);
                     Position = UDim2.new(0,0,0.5,0);
@@ -1130,6 +1155,7 @@ InMain.Notification = InMain.Notification
                     Parent = Checkbox;
                     Name = 'Cube';
                     BackgroundTransparency = (IsActive.Value and 0 or 1);
+                    ClipsDescendants = false;
                     BackgroundColor3 = AevryxLib["Theme"]["AccentColor"];
                     BorderSizePixel = 0;
                     AnchorPoint = Vector2.new(0,0.5);
@@ -1220,6 +1246,7 @@ InMain.Notification = InMain.Notification
                     Parent = TextBoxFrame;
                     Name = "TextBox";
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(1,0,1,0);
@@ -1302,7 +1329,7 @@ InMain.Notification = InMain.Notification
                 local Bar = CreateModule.Instance("Frame",{
                     Parent = Slider;
                     Name = 'Bar';
-                    BackgroundTransparency = 0;
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
                     BorderSizePixel = 0;
                     AnchorPoint = Vector2.new(0,0.5);
@@ -1444,6 +1471,7 @@ InMain.Notification = InMain.Notification
                     Parent = SectionElements;
                     Name = Text;
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     BorderColor3 = Color3.fromRGB(20,20,20);
                     Position = UDim2.new(0,0,0,0);
@@ -1656,6 +1684,7 @@ InMain.Notification = InMain.Notification
                     Parent = SectionElements;
                     Name = Text;
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     BorderColor3 = Color3.fromRGB(20,20,20);
                     Position = UDim2.new(0,0,0,0);
