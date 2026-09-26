@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 21.09.2026 + 23:17:45
-  Total Code: 1809 (1809 Line of Code)
+  Build Date: 26.09.2026 + 22:27:55
+  Total Code: 1841 (1841 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -19,7 +19,11 @@ local AevryxLib = {
 	    ["Font"] = "RobotoMono",
 		["AccentColor"] = Color3.fromRGB(60, 60, 60),
 		["FontColor"] = Color3.fromRGB(255,255,255),
-		["HideKey"] = "LeftControl"
+		["HideKey"] = "LeftControl",
+		["BackgroundImage"] = "rbxassetid://111031894340503",
+		["BackgroundTransparency"] = 0.85,
+		["SectionTransparency"] = 0.35,
+		["SectionBlur"] = 8,
 	},
 }
 
@@ -190,12 +194,26 @@ function AevryxLib.Main(Name,X,Y)
 		Parent = Topbar;
 		Name = "Container";
 		BackgroundColor3 = Color3.fromRGB(0,0,0);
+		BackgroundTransparency = 1;
 		BorderSizePixel = 0;
 		Position = UDim2.new(0,0,1,-5);
 		Size = UDim2.new(1,0,0,Y);
         ClipsDescendants = true;
         ZIndex = 0;
 	})
+
+    local BgImage = CreateModule.Instance("ImageLabel",{
+        Name = "Background";
+        Parent = Container;
+        BackgroundTransparency = 1;
+        BorderSizePixel = 0;
+        Position = UDim2.new(0,0,0,0);
+        Size = UDim2.new(1,0,1,0);
+        Image = AevryxLib["Theme"]["BackgroundImage"];
+        ImageTransparency = AevryxLib["Theme"]["BackgroundTransparency"];
+        ScaleType = Enum.ScaleType.Crop;
+        ZIndex = 0;
+    })
 
     local Border = CreateModule.Instance("Frame",{
 		Name = "Border";
@@ -620,11 +638,18 @@ InMain.Notification = InMain.Notification
             local Section = CreateModule.Instance("Frame",{
                 Parent = Page;
                 Name = "Welcome";
-                BackgroundColor3 = Color3.fromRGB(0,0,0);
+                BackgroundColor3 = Color3.fromRGB(12,12,12);
+                BackgroundTransparency = AevryxLib["Theme"]["SectionTransparency"];
                 BorderSizePixel = 0;
                 BorderColor3 = Color3.fromRGB(45,45,45);
                 Position = UDim2.new(0.015,0,0.015,WelcomeTop);
                 Size = UDim2.new(0.97,0,0,WelcomeHeight);
+            })
+
+            local SectionBlur = CreateModule.Instance("BlurEffect",{
+                Parent = Section;
+                Name = "Blur";
+                Size = AevryxLib["Theme"]["SectionBlur"];
             })
 
             local Corner = CreateModule.Instance("UICorner",{
@@ -713,12 +738,19 @@ InMain.Notification = InMain.Notification
             local Section = CreateModule.Instance("Frame",{
                 Parent = Column;
                 Name = Text;
-                BackgroundColor3 = Color3.fromRGB(0,0,0);
+                BackgroundColor3 = Color3.fromRGB(12,12,12);
+                BackgroundTransparency = AevryxLib["Theme"]["SectionTransparency"];
                 BorderSizePixel = 0;
                 BorderColor3 = Color3.fromRGB(45,45,45);
                 Position = UDim2.new(0,0,0,0);
                 Size = UDim2.new(1,0,0,30);
                 AutomaticSize = Enum.AutomaticSize.Y;
+            })
+
+            local SectionBlur = CreateModule.Instance("BlurEffect",{
+                Parent = Section;
+                Name = "Blur";
+                Size = AevryxLib["Theme"]["SectionBlur"];
             })
 
             local Corner = CreateModule.Instance("UICorner",{
