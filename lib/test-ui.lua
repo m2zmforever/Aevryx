@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 26.09.2026 + 23:27:33
-  Total Code: 1920 (1920 Line of Code)
+  Build Date: 26.09.2026 + 23:51:02
+  Total Code: 1902 (1902 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -119,23 +119,6 @@ function AevryxLib.Main(Name,X,Y)
         ZIndex = 100;
     })
 
-    local BannerShadow = CreateModule.Instance("Frame",{
-        Parent = LoadingScreen;
-        Name = "BannerShadow";
-        BackgroundColor3 = Color3.fromRGB(0,0,0);
-        BackgroundTransparency = 0.35;
-        BorderSizePixel = 0;
-        AnchorPoint = Vector2.new(0.5,0.5);
-        Position = UDim2.new(0.5,0,0.5,-16);
-        Size = UDim2.new(0,124,0,124);
-        ZIndex = 101;
-    })
-
-    local BannerShadowBlur = CreateModule.Instance("BlurEffect",{
-        Parent = BannerShadow;
-        Name = "ShadowBlur";
-        Size = 24;
-    })
 
     local LoadingBanner = CreateModule.Instance("ImageLabel",{
         Parent = LoadingScreen;
@@ -146,9 +129,9 @@ function AevryxLib.Main(Name,X,Y)
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0.5,0.5);
-        Position = UDim2.new(0.5,0,0.5,-16);
-        Size = UDim2.new(0,128,0,128);
-        ZIndex = 102;
+        Position = UDim2.new(0.5,0,0.5,-20);
+        Size = UDim2.new(0,180,0,180);
+        ZIndex = 101;
     })
 
     local LoadingBarBack = CreateModule.Instance("Frame",{
@@ -192,7 +175,6 @@ function AevryxLib.Main(Name,X,Y)
     TweenService:Create(LoadingStroke, TweenInfo.new(0.3), {Transparency = 1}):Play()
     TweenService:Create(LoadingImage, TweenInfo.new(0.3), {ImageTransparency = 1}):Play()
     TweenService:Create(LoadingBanner, TweenInfo.new(0.3), {ImageTransparency = 1}):Play()
-    TweenService:Create(BannerShadow, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
     TweenService:Create(LoadingBarBack, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
     TweenService:Create(LoadingBar, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
     wait(0.35)
