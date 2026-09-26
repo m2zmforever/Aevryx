@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 26.09.2026 + 23:17:15
-  Total Code: 1883 (1883 Line of Code)
+  Build Date: 26.09.2026 + 23:22:37
+  Total Code: 1901 (1901 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -87,8 +87,9 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
         Position = UDim2.new(0.5,0,0.5,0);
-        Size = UDim2.new(0,250,0,100);
+        Size = UDim2.new(0,X,0,150);
         AnchorPoint = Vector2.new(0.5,0.5);
+        ClipsDescendants = true;
         ZIndex = 100;
     })
 
@@ -106,45 +107,75 @@ function AevryxLib.Main(Name,X,Y)
         Transparency = 0;
     })
 
-    local LoadingTitle = CreateModule.Instance("ImageLabel",{
+    local LoadingImage = CreateModule.Instance("ImageLabel",{
         Parent = LoadingScreen;
-        Name = "Title";
+        Name = "Image";
         BackgroundTransparency = 1;
-        Image = "rbxassetid://97173479716906";
+        BorderSizePixel = 0;
+        Image = AevryxLib["Theme"]["BackgroundImage"];
+        ImageTransparency = 0;
+        ScaleType = Enum.ScaleType.Crop;
+        Size = UDim2.new(1,0,1,0);
+        ZIndex = 100;
+    })
+
+    local LoadingBanner = CreateModule.Instance("ImageLabel",{
+        Parent = LoadingScreen;
+        Name = "Banner";
+        BackgroundTransparency = 1;
+        BorderSizePixel = 0;
+        Image = "rbxassetid://86577151715930";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
-        AnchorPoint = Vector2.new(0.5, 0.5);
-        Position = UDim2.new(0.5, 0, 0.5, 0);
-        Size = UDim2.new(0,32,0,32);
+        AnchorPoint = Vector2.new(0.5,0.5);
+        Position = UDim2.new(0.5,0,0.5,-16);
+        Size = UDim2.new(0,96,0,96);
         ZIndex = 101;
-        Visible = true;
     })
 
-    local LoadingStatus = CreateModule.Instance("TextLabel",{
+    local LoadingBarBack = CreateModule.Instance("Frame",{
         Parent = LoadingScreen;
-        Name = "Status";
-        BackgroundTransparency = 1;
-        Font = Enum.Font[AevryxLib["Theme"]["Font"]];
-        Text = "Loading...";
-        TextSize = 12;
-        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
-        Position = UDim2.new(0,0,0.75,0);
-        Size = UDim2.new(1,0,0.2,0);
+        Name = "BarBack";
+        BackgroundColor3 = Color3.fromRGB(20,20,20);
+        BackgroundTransparency = 0.3;
+        BorderSizePixel = 0;
+        AnchorPoint = Vector2.new(0.5,0.5);
+        Position = UDim2.new(0.5,0,0.5,50);
+        Size = UDim2.new(0.7,0,0,6);
         ZIndex = 101;
     })
 
-    wait(0.2)
-    LoadingStatus.Text = "Loading Modules..."
-    wait(0.5)
-    LoadingStatus.Text = "Loading UI..."
-    wait(0.5)
-    LoadingStatus.Text = "Welcome To Aevryx..."
+    local LoadingBar = CreateModule.Instance("Frame",{
+        Parent = LoadingBarBack;
+        Name = "Bar";
+        BackgroundColor3 = AevryxLib["Theme"]["AccentColor"];
+        BackgroundTransparency = 0;
+        BorderSizePixel = 0;
+        Size = UDim2.new(0,0,1,0);
+        ZIndex = 102;
+    })
+
+    local function setProgress(v)
+        TweenService:Create(LoadingBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(v,0,1,0)}):Play()
+    end
+
+    setProgress(0.1)
     wait(0.3)
+    setProgress(0.35)
+    wait(0.4)
+    setProgress(0.6)
+    wait(0.4)
+    setProgress(0.85)
+    wait(0.3)
+    setProgress(1)
+    wait(0.2)
 
     TweenService:Create(LoadingScreen, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
     TweenService:Create(LoadingStroke, TweenInfo.new(0.3), {Transparency = 1}):Play()
-    TweenService:Create(LoadingTitle, TweenInfo.new(0.3), {ImageTransparency = 1}):Play()
-    TweenService:Create(LoadingStatus, TweenInfo.new(0.3), {TextTransparency = 1}):Play()
+    TweenService:Create(LoadingImage, TweenInfo.new(0.3), {ImageTransparency = 1}):Play()
+    TweenService:Create(LoadingBanner, TweenInfo.new(0.3), {ImageTransparency = 1}):Play()
+    TweenService:Create(LoadingBarBack, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
+    TweenService:Create(LoadingBar, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
     wait(0.35)
     LoadingScreen:Destroy()
 
@@ -703,19 +734,6 @@ InMain.Notification = InMain.Notification
                 Parent = Avatar;
                 Name = "Corner";
                 CornerRadius = UDim.new(0,0);
-            })
-            local WelcomeBanner = CreateModule.Instance("ImageLabel",{
-                Parent = Section;
-                Name = "WelcomeBanner";
-                BackgroundTransparency = 1;
-                BorderSizePixel = 0;
-                Image = "rbxassetid://86577151715930";
-                ImageTransparency = 0;
-                ScaleType = Enum.ScaleType.Fit;
-                AnchorPoint = Vector2.new(1,0.5);
-                Position = UDim2.new(1,-10,0.5,0);
-                Size = UDim2.new(0,96,0,96);
-                ZIndex = 1;
             })
 
             local Label = CreateModule.Instance("TextLabel",{
