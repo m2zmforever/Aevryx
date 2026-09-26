@@ -37,7 +37,8 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
       Role ESP<br>
       Name ESP<br>
       Gun ESP<br>
-      Gun ESP Text
+      Gun ESP Text<br>
+      Trap ESP (Need Test)<br>
     </td>
     <td valign="top">
       Grap Dropped Gun<br>
