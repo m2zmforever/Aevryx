@@ -2,26 +2,17 @@
   <img src="assets/banner.png" alt="Banner">
 </p>
 
+---
+
+<h2 align="center">What is this?</h2>
 <p align="center">
-  <img src="https://img.shields.io/badge/Everyone_should_have_access_to_good_script_without_needing_a_key_or_pay-FFFFFF?style=flat-square">
+Aevryx is one of the good free, no-key script for Murder Mystery 2, offering good performance and stable gameplay for PC players.
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Always_Premium-FFFFFF?style=flat-square">
-  <img src="https://img.shields.io/badge/Always_Safe-FFFFFF?style=flat-square">
-  <img src="https://img.shields.io/badge/Always_No_Key-FFFFFF?style=flat-square">
-  <img src="https://img.shields.io/badge/Always_Updated-FFFFFF?style=flat-square">
-</p>
-
-<h2 align="center">What is this sh*t?</h2>
-<p align="center">
-Aevryx is one of the best free, no-key script for Murder Mystery 2, offering good performance and stable gameplay for PC players.
-</p>
-
-<h2 align="center">Features?</h2>
+<h2 align="center">How many features Aevryx have?</h2>
 
 <p align="center">
-  Yeah, Aevryx has so many features and I am still adding new ones.
+  So many and I am still adding new ones. Here, current features list:
 </p>
 
 <table align="center">
@@ -38,7 +29,7 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
       Name ESP<br>
       Gun ESP<br>
       Gun ESP Text<br>
-      Trap ESP (Need Test)<br>
+      Trap ESP (Need Full Test)<br>
     </td>
     <td valign="top">
       Grap Dropped Gun<br>
@@ -55,7 +46,7 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
       Void Protection<br>
       Noclip<br>
       Game Emotes<br>
-      Invisibility
+      Invisibility (Raknet/Fallback)
     </td>
     <td valign="top">
       Teleport to Map<br>
@@ -115,10 +106,10 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
   <a href="https://getsolara.gg">Solara</a>,
   and <a href="https://projectreal.gg">Real</a> Executor.
   Download them from their offical websites, inject into your game,
-  and execute the script using the loadstring. (yeah, dont have raknet support but no need that. We have fallback for Invisibility.)
+  and execute the script using the loadstring.
 </p>
 
-<h2 align="center">Where the loadstring?</h2>
+<h2 align="center">Where is the loadstring?</h2>
 <p align="center">
 <pre align="center"><code>loadstring(game:HttpGet("https://raw.githubusercontent.com/m2zmforever/Aevryx/master/dist/aevryx.lua"))()</code></pre>
 </p>
