@@ -115,7 +115,7 @@ Aevryx is one of the best free, no-key script for Murder Mystery 2, offering goo
   <a href="https://getsolara.gg">Solara</a>,
   and <a href="https://projectreal.gg">Real</a> Executor.
   Download them from their offical websites, inject into your game,
-  and execute the script using the loadstring.
+  and execute the script using the loadstring. (yeah, dont have raknet support but no need that. We have fallback for Invisibility.)
 </p>
 
 <h2 align="center">Where the loadstring?</h2>
