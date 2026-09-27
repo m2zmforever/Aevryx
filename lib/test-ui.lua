@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 27.09.2026 + 12:32:44
-  Total Code: 1905 (1905 Line of Code)
+  Build Date: 27.09.2026 + 12:43:32
+  Total Code: 1982 (1982 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -206,7 +206,7 @@ function AevryxLib.Main(Name,X,Y)
 		Position = UDim2.new(0.3,0,0.25,0);
 		Size = UDim2.new(0,X,0,30);
         Active = true;
-        Draggable = true;
+        Draggable = false;
         Visible = false;
         ZIndex = 3;
 	})
@@ -317,14 +317,91 @@ function AevryxLib.Main(Name,X,Y)
     })
 
 
+    local DragButton = CreateModule.Instance("TextButton",{
+        Name = "DragButton";
+        Parent = Topbar;
+        BackgroundColor3 = Color3.fromRGB(0,0,0);
+        BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
+        BorderSizePixel = 0;
+        Position = UDim2.new(0,6,0,4);
+        Size = UDim2.new(0,22,0,22);
+        Font = Enum.Font.Arial;
+        Text = "\u2261";
+        TextSize = 16;
+        TextColor3 = AevryxLib["Theme"]["AccentColor"];
+        TextXAlignment = Enum.TextXAlignment.Center;
+        TextYAlignment = Enum.TextYAlignment.Center;
+        AutoButtonColor = false;
+        Active = true;
+        ZIndex = 4;
+    })
+
+    local DragCorner = CreateModule.Instance("UICorner",{
+        Parent = DragButton;
+        Name = "Corner";
+        CornerRadius = UDim.new(0,0);
+    })
+
+    local DragStroke = CreateModule.Instance("UIStroke",{
+        Parent = DragButton;
+        Name = "Stroke";
+        Thickness = 1;
+        Color = Color3.fromRGB(20,20,20);
+        ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
+    })
+
+    DragButton.MouseEnter:Connect(function()
+        TweenService:Create(DragButton, TweenInfo.new(0.3), {TextColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
+    end)
+
+    DragButton.MouseLeave:Connect(function()
+        TweenService:Create(DragButton, TweenInfo.new(0.3), {TextColor3 = AevryxLib["Theme"]["AccentColor"]}):Play()
+    end)
+
+    do
+        local dragging = false
+        local dragStart = nil
+        local startPos = nil
+        local mouse = game:GetService("UserInputService"):GetMouse()
+
+        DragButton.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                dragging = true
+                dragStart = Vector2.new(input.Position.X, input.Position.Y)
+                startPos = Topbar.Position
+            end
+        end)
+
+        InputService.InputChanged:Connect(function(input)
+            if not dragging then return end
+            if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+                local delta = Vector2.new(input.Position.X, input.Position.Y) - dragStart
+                Topbar.Position = UDim2.new(
+                    startPos.X.Scale,
+                    startPos.X.Offset + delta.X,
+                    startPos.Y.Scale,
+                    startPos.Y.Offset + delta.Y
+                )
+            end
+        end)
+
+        InputService.InputEnded:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                dragging = false
+                dragStart = nil
+                startPos = nil
+            end
+        end)
+    end
+
     local TabsButtons = CreateModule.Instance("ScrollingFrame",{
         Parent = Topbar;
         Name = "TabsButtons";
         Active = true;
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Position = UDim2.new(0,6,0,0);
-        Size = UDim2.new(1,-12,1,0);
+        Position = UDim2.new(0,32,0,0);
+        Size = UDim2.new(1,-38,1,0);
         ZIndex = 3;
         CanvasSize = UDim2.new(0,0,0,0);
         AutomaticCanvasSize = Enum.AutomaticSize.X;
@@ -335,7 +412,7 @@ function AevryxLib.Main(Name,X,Y)
 
     local TabsPadding = CreateModule.Instance("UIPadding",{
         Parent = TabsButtons;
-        PaddingLeft = UDim.new(0,8);
+        PaddingLeft = UDim.new(0,4);
         PaddingRight = UDim.new(0,8);
     })
 
