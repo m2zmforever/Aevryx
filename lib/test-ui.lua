@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 27.09.2026 + 13:03:24
-  Total Code: 1999 (1999 Line of Code)
+  Build Date: 27.09.2026 + 13:08:14
+  Total Code: 2002 (2002 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -324,9 +324,10 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundColor3 = Color3.fromRGB(0,0,0);
         BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
         BorderSizePixel = 0;
-        Position = Topbar.Position;
+        AnchorPoint = Vector2.new(0,0);
+        Position = UDim2.new(Topbar.Position.X.Scale, Topbar.Position.X.Offset + 6, Topbar.Position.Y.Scale, Topbar.Position.Y.Offset + 4);
         Size = UDim2.new(0,22,0,22);
-        Text = "+";
+        Text = "";
         AutoButtonColor = false;
         Active = true;
         ZIndex = 21;
@@ -393,12 +394,14 @@ function AevryxLib.Main(Name,X,Y)
             if not dragging then return end
             if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
                 local delta = Vector2.new(input.Position.X, input.Position.Y) - dragStart
-                Topbar.Position = UDim2.new(
+                local newPos = UDim2.new(
                     startPos.X.Scale,
                     startPos.X.Offset + delta.X,
                     startPos.Y.Scale,
                     startPos.Y.Offset + delta.Y
                 )
+                Topbar.Position = newPos
+                DragButton.Position = UDim2.new(newPos.X.Scale, newPos.X.Offset + 6, newPos.Y.Scale, newPos.Y.Offset + 4)
             end
         end)
 
