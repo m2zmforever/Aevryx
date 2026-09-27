@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 26.09.2026 + 23:51:02
-  Total Code: 1902 (1902 Line of Code)
+  Build Date: 27.09.2026 + 12:32:44
+  Total Code: 1905 (1905 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -22,7 +22,7 @@ local AevryxLib = {
 		["HideKey"] = "LeftControl",
 		["BackgroundImage"] = "rbxassetid://117083332437563",
 		["BackgroundTransparency"] = 0,
-		["SectionTransparency"] = 0.35,
+		["SectionTransparency"] = 0.25,
 		["ElementTransparency"] = 0.5,
 		["SectionBlur"] = 8,
 	},
@@ -923,7 +923,8 @@ InMain.Notification = InMain.Notification
                 local Keybind = CreateModule.Instance("TextLabel",{
                     Parent = SectionElements;
                     Name = Text or "Keybind";
-                    BackgroundTransparency = 1;
+                    BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(0.95,0,0,25);
@@ -1104,7 +1105,8 @@ InMain.Notification = InMain.Notification
                 local Checkbox = CreateModule.Instance("TextButton",{
                     Parent = SectionElements;
                     Name = Text;
-                    BackgroundTransparency = 1;
+                    BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     BorderColor3 = Color3.fromRGB(30,30,30);
                     Position = UDim2.new(0,0,0,0);
@@ -1238,7 +1240,8 @@ InMain.Notification = InMain.Notification
                 local TextBoxFrame = CreateModule.Instance("Frame",{
                     Parent = SectionElements;
                     Name = Text;
-                    BackgroundTransparency = 1;
+                    BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(0.95,0,0,25);
