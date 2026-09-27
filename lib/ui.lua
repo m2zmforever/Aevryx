@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 21.09.2026 + 23:25:55
-  Total Code: 1809 (1809 Line of Code)
+  Build Date: 27.09.2026 + 13:22:18
+  Total Code: 2002 (2002 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -19,7 +19,12 @@ local AevryxLib = {
 	    ["Font"] = "RobotoMono",
 		["AccentColor"] = Color3.fromRGB(60, 60, 60),
 		["FontColor"] = Color3.fromRGB(255,255,255),
-		["HideKey"] = "LeftControl"
+		["HideKey"] = "LeftControl",
+		["BackgroundImage"] = "rbxassetid://117083332437563",
+		["BackgroundTransparency"] = 0,
+		["SectionTransparency"] = 0.25,
+		["ElementTransparency"] = 0.5,
+		["SectionBlur"] = 8,
 	},
 }
 
@@ -82,8 +87,9 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
         Position = UDim2.new(0.5,0,0.5,0);
-        Size = UDim2.new(0,250,0,100);
+        Size = UDim2.new(0,X,0,150);
         AnchorPoint = Vector2.new(0.5,0.5);
+        ClipsDescendants = true;
         ZIndex = 100;
     })
 
@@ -101,45 +107,76 @@ function AevryxLib.Main(Name,X,Y)
         Transparency = 0;
     })
 
-    local LoadingTitle = CreateModule.Instance("ImageLabel",{
+    local LoadingImage = CreateModule.Instance("ImageLabel",{
         Parent = LoadingScreen;
-        Name = "Title";
+        Name = "Image";
         BackgroundTransparency = 1;
-        Image = "rbxassetid://97173479716906";
+        BorderSizePixel = 0;
+        Image = AevryxLib["Theme"]["BackgroundImage"];
+        ImageTransparency = 0;
+        ScaleType = Enum.ScaleType.Crop;
+        Size = UDim2.new(1,0,1,0);
+        ZIndex = 100;
+    })
+
+
+    local LoadingBanner = CreateModule.Instance("ImageLabel",{
+        Parent = LoadingScreen;
+        Name = "Banner";
+        BackgroundTransparency = 1;
+        BorderSizePixel = 0;
+        Image = "rbxassetid://86577151715930";
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
-        AnchorPoint = Vector2.new(0.5, 0.5);
-        Position = UDim2.new(0.5, 0, 0.5, 0);
-        Size = UDim2.new(0,32,0,32);
+        AnchorPoint = Vector2.new(0.5,0.5);
+        Position = UDim2.new(0.5,0,0.5,-20);
+        Size = UDim2.new(0,180,0,180);
         ZIndex = 101;
-        Visible = true;
     })
 
-    local LoadingStatus = CreateModule.Instance("TextLabel",{
+    local LoadingBarBack = CreateModule.Instance("Frame",{
         Parent = LoadingScreen;
-        Name = "Status";
-        BackgroundTransparency = 1;
-        Font = Enum.Font[AevryxLib["Theme"]["Font"]];
-        Text = "Loading...";
-        TextSize = 12;
-        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
-        Position = UDim2.new(0,0,0.75,0);
-        Size = UDim2.new(1,0,0.2,0);
+        Name = "BarBack";
+        BackgroundColor3 = Color3.fromRGB(20,20,20);
+        BackgroundTransparency = 0.3;
+        BorderSizePixel = 0;
+        AnchorPoint = Vector2.new(0.5,0.5);
+        Position = UDim2.new(0.5,0,0.5,50);
+        Size = UDim2.new(0.7,0,0,6);
         ZIndex = 101;
     })
 
-    wait(0.2)
-    LoadingStatus.Text = "Loading Modules..."
-    wait(0.5)
-    LoadingStatus.Text = "Loading UI..."
-    wait(0.5)
-    LoadingStatus.Text = "Welcome To Aevryx..."
+    local LoadingBar = CreateModule.Instance("Frame",{
+        Parent = LoadingBarBack;
+        Name = "Bar";
+        BackgroundColor3 = AevryxLib["Theme"]["AccentColor"];
+        BackgroundTransparency = 0;
+        BorderSizePixel = 0;
+        Size = UDim2.new(0,0,1,0);
+        ZIndex = 102;
+    })
+
+    local function setProgress(v)
+        TweenService:Create(LoadingBar, TweenInfo.new(0.4, Enum.EasingStyle.Quad, Enum.EasingDirection.Out), {Size = UDim2.new(v,0,1,0)}):Play()
+    end
+
+    setProgress(0.1)
     wait(0.3)
+    setProgress(0.35)
+    wait(0.4)
+    setProgress(0.6)
+    wait(0.4)
+    setProgress(0.85)
+    wait(0.3)
+    setProgress(1)
+    wait(0.2)
 
     TweenService:Create(LoadingScreen, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
     TweenService:Create(LoadingStroke, TweenInfo.new(0.3), {Transparency = 1}):Play()
-    TweenService:Create(LoadingTitle, TweenInfo.new(0.3), {ImageTransparency = 1}):Play()
-    TweenService:Create(LoadingStatus, TweenInfo.new(0.3), {TextTransparency = 1}):Play()
+    TweenService:Create(LoadingImage, TweenInfo.new(0.3), {ImageTransparency = 1}):Play()
+    TweenService:Create(LoadingBanner, TweenInfo.new(0.3), {ImageTransparency = 1}):Play()
+    TweenService:Create(LoadingBarBack, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
+    TweenService:Create(LoadingBar, TweenInfo.new(0.3), {BackgroundTransparency = 1}):Play()
     wait(0.35)
     LoadingScreen:Destroy()
 
@@ -150,7 +187,7 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = 1;
 		BorderSizePixel = 0;
 		Position = UDim2.new(0.3,0,0.25,0);
-        ZIndex = 5;
+        ZIndex = 20;
         ClipsDescendants = true;
 	})
 
@@ -164,11 +201,12 @@ function AevryxLib.Main(Name,X,Y)
         Name = "Topbar";
         Parent = AevryxLib.ScreenGui;
 		BackgroundColor3 = Color3.fromRGB(0,0,0);
+		BackgroundTransparency = 1;
 		BorderSizePixel = 0;
 		Position = UDim2.new(0.3,0,0.25,0);
 		Size = UDim2.new(0,X,0,30);
         Active = true;
-        Draggable = true;
+        Draggable = false;
         Visible = false;
         ZIndex = 3;
 	})
@@ -190,12 +228,26 @@ function AevryxLib.Main(Name,X,Y)
 		Parent = Topbar;
 		Name = "Container";
 		BackgroundColor3 = Color3.fromRGB(0,0,0);
+		BackgroundTransparency = 1;
 		BorderSizePixel = 0;
 		Position = UDim2.new(0,0,1,-5);
 		Size = UDim2.new(1,0,0,Y);
         ClipsDescendants = true;
-        ZIndex = 0;
+        ZIndex = 1;
 	})
+
+    local BgImage = CreateModule.Instance("ImageLabel",{
+        Name = "Background";
+        Parent = Topbar;
+        BackgroundTransparency = 1;
+        BorderSizePixel = 0;
+        Position = UDim2.new(0,0,0,0);
+        Size = UDim2.new(1,0,1,0);
+        Image = AevryxLib["Theme"]["BackgroundImage"];
+        ImageTransparency = AevryxLib["Theme"]["BackgroundTransparency"];
+        ScaleType = Enum.ScaleType.Crop;
+        ZIndex = 0;
+    })
 
     local Border = CreateModule.Instance("Frame",{
 		Name = "Border";
@@ -223,7 +275,115 @@ function AevryxLib.Main(Name,X,Y)
 
     Load.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
     Border.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
+    BgImage.Size = Border.Size
     Topbar.Visible = true
+
+    local DragButton = CreateModule.Instance("TextButton",{
+        Name = "DragButton";
+        Parent = AevryxLib.ScreenGui;
+        BackgroundColor3 = Color3.fromRGB(0,0,0);
+        BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
+        BorderSizePixel = 0;
+        AnchorPoint = Vector2.new(0,0);
+        Position = UDim2.new(Topbar.Position.X.Scale, Topbar.Position.X.Offset - 28, Topbar.Position.Y.Scale, Topbar.Position.Y.Offset + 4);
+        Size = UDim2.new(0,22,0,22);
+        Text = "";
+        AutoButtonColor = false;
+        Active = true;
+        ZIndex = 21;
+    })
+
+    local DragCorner = CreateModule.Instance("UICorner",{
+        Parent = DragButton;
+        Name = "Corner";
+        CornerRadius = UDim.new(0,0);
+    })
+
+    local DragStroke = CreateModule.Instance("UIStroke",{
+        Parent = DragButton;
+        Name = "Stroke";
+        Thickness = 1;
+        Color = Color3.fromRGB(20,20,20);
+        ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
+    })
+
+    for i = 1, 3 do
+        CreateModule.Instance("Frame",{
+            Parent = DragButton;
+            Name = "Grip";
+            BackgroundColor3 = AevryxLib["Theme"]["AccentColor"];
+            BackgroundTransparency = 0;
+            BorderSizePixel = 0;
+            AnchorPoint = Vector2.new(0.5,0.5);
+            Position = UDim2.new(0.5,0,0.5,(i - 2) * 5);
+            Size = UDim2.new(0,12,0,2);
+            ZIndex = 22;
+        })
+    end
+
+    DragButton.MouseEnter:Connect(function()
+        for _, grip in pairs(DragButton:GetChildren()) do
+            if grip.Name == "Grip" then
+                TweenService:Create(grip, TweenInfo.new(0.3), {BackgroundColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
+            end
+        end
+    end)
+
+    DragButton.MouseLeave:Connect(function()
+        for _, grip in pairs(DragButton:GetChildren()) do
+            if grip.Name == "Grip" then
+                TweenService:Create(grip, TweenInfo.new(0.3), {BackgroundColor3 = AevryxLib["Theme"]["AccentColor"]}):Play()
+            end
+        end
+    end)
+
+    do
+        local dragging = false
+        local dragStart = nil
+        local startPos = nil
+
+        DragButton.InputBegan:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                dragging = true
+                dragStart = Vector2.new(input.Position.X, input.Position.Y)
+                startPos = Topbar.Position
+            end
+        end)
+
+        InputService.InputChanged:Connect(function(input)
+            if not dragging then return end
+            if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+                local delta = Vector2.new(input.Position.X, input.Position.Y) - dragStart
+                local newPos = UDim2.new(
+                    startPos.X.Scale,
+                    startPos.X.Offset + delta.X,
+                    startPos.Y.Scale,
+                    startPos.Y.Offset + delta.Y
+                )
+                Topbar.Position = newPos
+                DragButton.Position = UDim2.new(newPos.X.Scale, newPos.X.Offset - 28, newPos.Y.Scale, newPos.Y.Offset + 4)
+            end
+        end)
+
+        InputService.InputEnded:Connect(function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                dragging = false
+                dragStart = nil
+                startPos = nil
+            end
+        end)
+    end
+
+    Topbar:GetPropertyChangedSignal("Position"):Connect(function()
+        Load.Position = Topbar.Position
+        DragButton.Position = UDim2.new(Topbar.Position.X.Scale, Topbar.Position.X.Offset - 28, Topbar.Position.Y.Scale, Topbar.Position.Y.Offset + 4)
+    end)
+
+    Topbar:GetPropertyChangedSignal("Size"):Connect(function()
+        Load.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5)
+        Border.Size = Load.Size
+        BgImage.Size = Load.Size
+    end)
 
     local Corner = CreateModule.Instance("UICorner",{
         Parent = Container;
@@ -327,6 +487,7 @@ function AevryxLib.Main(Name,X,Y)
                 TweenService:Create(Load,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
                 Topbar.Visible = not Topbar.Visible
                 Load.Visible = not Load.Visible
+                DragButton.Visible = not DragButton.Visible
             end)
         end
     end)
@@ -535,10 +696,11 @@ InMain.Notification = InMain.Notification
             Parent = Page;
             Name = 'Fader';
             BackgroundColor3 = Color3.fromRGB(0,0,0);
+            BackgroundTransparency = 1;
             BorderSizePixel = 0;
             Position = UDim2.new(0,0,0,0);
             Size = UDim2.new(1,0,1,0);
-            ZIndex = 2;
+            ZIndex = 8;
         })
 
         local ign = CreateModule.Instance("Frame",{
@@ -582,16 +744,14 @@ InMain.Notification = InMain.Notification
         })
 
         TabButton.MouseButton1Click:Connect(function()
-            for i,v in next,Pages:GetChildren() do
-                if v.Name ~= Text and v:FindFirstChild("Fader") then
-                    TweenService:Create(v.Fader,TweenInfo.new(0.3),{BackgroundTransparency = 0}):Play()
-                    spawn(function()
-                        wait(0.32)
-                        PageLayout:JumpTo(Page)
-                        TweenService:Create(Fader,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
-                    end)
-                end
-            end
+            spawn(function()
+                if not Topbar.Visible then return end
+                TweenService:Create(Load,TweenInfo.new(0.25),{BackgroundTransparency = 0}):Play()
+                wait(0.27)
+                PageLayout:JumpTo(Page)
+                wait(0.05)
+                TweenService:Create(Load,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
+            end)
 
             for i,v in next,TabsButtons:GetChildren() do
                 if v.ClassName == "TextButton" and v.Name ~= Text then
@@ -621,10 +781,28 @@ InMain.Notification = InMain.Notification
                 Parent = Page;
                 Name = "Welcome";
                 BackgroundColor3 = Color3.fromRGB(0,0,0);
+                BackgroundTransparency = 1;
                 BorderSizePixel = 0;
                 BorderColor3 = Color3.fromRGB(45,45,45);
                 Position = UDim2.new(0.015,0,0.015,WelcomeTop);
                 Size = UDim2.new(0.97,0,0,WelcomeHeight);
+            })
+
+            local SectionBg = CreateModule.Instance("Frame",{
+                Parent = Section;
+                Name = "SectionBg";
+                BackgroundColor3 = Color3.fromRGB(0,0,0);
+                BackgroundTransparency = AevryxLib["Theme"]["SectionTransparency"];
+                BorderSizePixel = 0;
+                Position = UDim2.new(0,0,0,0);
+                Size = UDim2.new(1,0,1,0);
+                ZIndex = 1;
+            })
+
+            local SectionBgBlur = CreateModule.Instance("BlurEffect",{
+                Parent = SectionBg;
+                Name = "Blur";
+                Size = AevryxLib["Theme"]["SectionBlur"];
             })
 
             local Corner = CreateModule.Instance("UICorner",{
@@ -655,19 +833,6 @@ InMain.Notification = InMain.Notification
                 Parent = Avatar;
                 Name = "Corner";
                 CornerRadius = UDim.new(0,0);
-            })
-            local WelcomeBanner = CreateModule.Instance("ImageLabel",{
-                Parent = Section;
-                Name = "WelcomeBanner";
-                BackgroundTransparency = 1;
-                BorderSizePixel = 0;
-                Image = "rbxassetid://86577151715930";
-                ImageTransparency = 0;
-                ScaleType = Enum.ScaleType.Fit;
-                AnchorPoint = Vector2.new(1,0.5);
-                Position = UDim2.new(1,-10,0.5,0);
-                Size = UDim2.new(0,96,0,96);
-                ZIndex = 1;
             })
 
             local Label = CreateModule.Instance("TextLabel",{
@@ -714,11 +879,29 @@ InMain.Notification = InMain.Notification
                 Parent = Column;
                 Name = Text;
                 BackgroundColor3 = Color3.fromRGB(0,0,0);
+                BackgroundTransparency = 1;
                 BorderSizePixel = 0;
                 BorderColor3 = Color3.fromRGB(45,45,45);
                 Position = UDim2.new(0,0,0,0);
                 Size = UDim2.new(1,0,0,30);
                 AutomaticSize = Enum.AutomaticSize.Y;
+            })
+
+            local SectionBg = CreateModule.Instance("Frame",{
+                Parent = Section;
+                Name = "SectionBg";
+                BackgroundColor3 = Color3.fromRGB(0,0,0);
+                BackgroundTransparency = AevryxLib["Theme"]["SectionTransparency"];
+                BorderSizePixel = 0;
+                Position = UDim2.new(0,0,0,0);
+                Size = UDim2.new(1,0,1,0);
+                ZIndex = 1;
+            })
+
+            local SectionBgBlur = CreateModule.Instance("BlurEffect",{
+                Parent = SectionBg;
+                Name = "Blur";
+                Size = AevryxLib["Theme"]["SectionBlur"];
             })
 
             local Corner = CreateModule.Instance("UICorner",{
@@ -790,6 +973,7 @@ InMain.Notification = InMain.Notification
                     Parent = SectionElements;
                     Name = Text;
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 1;
                     BorderColor3 = Color3.fromRGB(20,20,20);
                     Position = UDim2.new(0,0,0,0);
@@ -837,7 +1021,8 @@ InMain.Notification = InMain.Notification
                 local Keybind = CreateModule.Instance("TextLabel",{
                     Parent = SectionElements;
                     Name = Text or "Keybind";
-                    BackgroundTransparency = 1;
+                    BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(0.95,0,0,25);
@@ -956,6 +1141,7 @@ InMain.Notification = InMain.Notification
                 local Keybinder = CreateModule.Instance("TextButton",{
                     Parent = Keybind;
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     AnchorPoint = Vector2.new(0,0.5);
                     Position = UDim2.new(0,0,0.5,0);
@@ -1017,7 +1203,8 @@ InMain.Notification = InMain.Notification
                 local Checkbox = CreateModule.Instance("TextButton",{
                     Parent = SectionElements;
                     Name = Text;
-                    BackgroundTransparency = 1;
+                    BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     BorderColor3 = Color3.fromRGB(30,30,30);
                     Position = UDim2.new(0,0,0,0);
@@ -1070,6 +1257,7 @@ InMain.Notification = InMain.Notification
                     Parent = Checkbox;
                     Name = 'Cube';
                     BackgroundTransparency = (IsActive.Value and 0 or 1);
+                    ClipsDescendants = false;
                     BackgroundColor3 = AevryxLib["Theme"]["AccentColor"];
                     BorderSizePixel = 0;
                     AnchorPoint = Vector2.new(0,0.5);
@@ -1150,7 +1338,8 @@ InMain.Notification = InMain.Notification
                 local TextBoxFrame = CreateModule.Instance("Frame",{
                     Parent = SectionElements;
                     Name = Text;
-                    BackgroundTransparency = 1;
+                    BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(0.95,0,0,25);
@@ -1160,6 +1349,7 @@ InMain.Notification = InMain.Notification
                     Parent = TextBoxFrame;
                     Name = "TextBox";
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     Position = UDim2.new(0,0,0,0);
                     Size = UDim2.new(1,0,1,0);
@@ -1242,7 +1432,7 @@ InMain.Notification = InMain.Notification
                 local Bar = CreateModule.Instance("Frame",{
                     Parent = Slider;
                     Name = 'Bar';
-                    BackgroundTransparency = 0;
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
                     BorderSizePixel = 0;
                     AnchorPoint = Vector2.new(0,0.5);
@@ -1272,7 +1462,7 @@ InMain.Notification = InMain.Notification
                 local Progress = CreateModule.Instance("Frame",{
                     Parent = Bar;
                     Name = 'Progress';
-                    BackgroundTransparency = 0;
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
                     BorderSizePixel = 0;
                     AnchorPoint = Vector2.new(0,0.5);
@@ -1302,7 +1492,6 @@ InMain.Notification = InMain.Notification
                 
 
                 local InputService = game:GetService("UserInputService")
-                local Mouse = game.Players.LocalPlayer:GetMouse()
 
 				local function UpdateSlider(val)
 					val = val or min or 0
@@ -1342,7 +1531,7 @@ InMain.Notification = InMain.Notification
 					if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 						Dragging = true
 						IsSliding = false
-                        Move(Mouse.X)
+                        Move(Input.Position.X)
                         TweenService:Create(Progress,TweenInfo.new(0.3),{BackgroundColor3 = Darker(AevryxLib["Theme"]["AccentColor"],1.2)}):Play()
 					end
 				end)
@@ -1384,6 +1573,7 @@ InMain.Notification = InMain.Notification
                     Parent = SectionElements;
                     Name = Text;
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     BorderColor3 = Color3.fromRGB(20,20,20);
                     Position = UDim2.new(0,0,0,0);
@@ -1394,6 +1584,7 @@ InMain.Notification = InMain.Notification
                     Parent = Dropdown;
                     Name = "DropdownButton";
                     BackgroundTransparency = 1;
+                    ZIndex = 1;
                     BorderSizePixel = 0;
                     BorderColor3 = Color3.fromRGB(20,20,20);
                     Position = UDim2.new(0,0,0,0);
@@ -1491,7 +1682,7 @@ InMain.Notification = InMain.Notification
                     local Selectable = CreateModule.Instance("TextButton",{
                         Parent = List;
                         Name = string;
-                        BackgroundTransparency = 1;
+                        BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                         BorderSizePixel = 0;
                         BorderColor3 = Color3.fromRGB(20,20,20);
                         Position = UDim2.new(0,0,0,0);
@@ -1596,6 +1787,7 @@ InMain.Notification = InMain.Notification
                     Parent = SectionElements;
                     Name = Text;
                     BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                     BorderSizePixel = 0;
                     BorderColor3 = Color3.fromRGB(20,20,20);
                     Position = UDim2.new(0,0,0,0);
@@ -1606,6 +1798,7 @@ InMain.Notification = InMain.Notification
                     Parent = Dropdown;
                     Name = "DropdownButton";
                     BackgroundTransparency = 1;
+                    ZIndex = 1;
                     BorderSizePixel = 0;
                     BorderColor3 = Color3.fromRGB(20,20,20);
                     Position = UDim2.new(0,0,0,0);
@@ -1705,7 +1898,7 @@ InMain.Notification = InMain.Notification
                     local Selectable = CreateModule.Instance("TextButton",{
                         Parent = List;
                         Name = string;
-                        BackgroundTransparency = 1;
+                        BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
                         BorderSizePixel = 0;
                         BorderColor3 = Color3.fromRGB(20,20,20);
                         Position = UDim2.new(0,0,0,0);
