@@ -326,7 +326,7 @@ function AevryxLib.Main(Name,X,Y)
         Position = UDim2.new(0,6,0,4);
         Size = UDim2.new(0,22,0,22);
         Font = Enum.Font.Arial;
-        Text = "\u2261";
+        Text = "+";
         TextSize = 16;
         TextColor3 = AevryxLib["Theme"]["AccentColor"];
         TextXAlignment = Enum.TextXAlignment.Center;
