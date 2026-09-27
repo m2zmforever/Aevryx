@@ -5,8 +5,8 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 27.09.2026 + 12:43:32
-  Total Code: 1982 (1982 Line of Code)
+  Build Date: 27.09.2026 + 13:03:24
+  Total Code: 1999 (1999 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
@@ -280,6 +280,7 @@ function AevryxLib.Main(Name,X,Y)
 
     Topbar:GetPropertyChangedSignal("Position"):Connect(function()
         Load.Position = Topbar.Position
+        DragButton.Position = UDim2.new(Topbar.Position.X.Scale, Topbar.Position.X.Offset + 6, Topbar.Position.Y.Scale, Topbar.Position.Y.Offset + 4)
     end)
 
     Topbar:GetPropertyChangedSignal("Size"):Connect(function()
@@ -319,21 +320,16 @@ function AevryxLib.Main(Name,X,Y)
 
     local DragButton = CreateModule.Instance("TextButton",{
         Name = "DragButton";
-        Parent = Topbar;
+        Parent = AevryxLib.ScreenGui;
         BackgroundColor3 = Color3.fromRGB(0,0,0);
         BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
         BorderSizePixel = 0;
-        Position = UDim2.new(0,6,0,4);
+        Position = Topbar.Position;
         Size = UDim2.new(0,22,0,22);
-        Font = Enum.Font.Arial;
         Text = "+";
-        TextSize = 16;
-        TextColor3 = AevryxLib["Theme"]["AccentColor"];
-        TextXAlignment = Enum.TextXAlignment.Center;
-        TextYAlignment = Enum.TextYAlignment.Center;
         AutoButtonColor = false;
         Active = true;
-        ZIndex = 4;
+        ZIndex = 21;
     })
 
     local DragCorner = CreateModule.Instance("UICorner",{
@@ -350,19 +346,40 @@ function AevryxLib.Main(Name,X,Y)
         ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
     })
 
+    for i = 1, 3 do
+        CreateModule.Instance("Frame",{
+            Parent = DragButton;
+            Name = "Grip";
+            BackgroundColor3 = AevryxLib["Theme"]["AccentColor"];
+            BackgroundTransparency = 0;
+            BorderSizePixel = 0;
+            AnchorPoint = Vector2.new(0.5,0.5);
+            Position = UDim2.new(0.5,0,0.5,(i - 2) * 5);
+            Size = UDim2.new(0,12,0,2);
+            ZIndex = 22;
+        })
+    end
+
     DragButton.MouseEnter:Connect(function()
-        TweenService:Create(DragButton, TweenInfo.new(0.3), {TextColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
+        for _, grip in pairs(DragButton:GetChildren()) do
+            if grip.Name == "Grip" then
+                TweenService:Create(grip, TweenInfo.new(0.3), {BackgroundColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
+            end
+        end
     end)
 
     DragButton.MouseLeave:Connect(function()
-        TweenService:Create(DragButton, TweenInfo.new(0.3), {TextColor3 = AevryxLib["Theme"]["AccentColor"]}):Play()
+        for _, grip in pairs(DragButton:GetChildren()) do
+            if grip.Name == "Grip" then
+                TweenService:Create(grip, TweenInfo.new(0.3), {BackgroundColor3 = AevryxLib["Theme"]["AccentColor"]}):Play()
+            end
+        end
     end)
 
     do
         local dragging = false
         local dragStart = nil
         local startPos = nil
-        local mouse = game:GetService("UserInputService"):GetMouse()
 
         DragButton.InputBegan:Connect(function(input)
             if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
@@ -400,8 +417,8 @@ function AevryxLib.Main(Name,X,Y)
         Active = true;
         BackgroundTransparency = 1;
         BorderSizePixel = 0;
-        Position = UDim2.new(0,32,0,0);
-        Size = UDim2.new(1,-38,1,0);
+        Position = UDim2.new(0,6,0,0);
+        Size = UDim2.new(1,-12,1,0);
         ZIndex = 3;
         CanvasSize = UDim2.new(0,0,0,0);
         AutomaticCanvasSize = Enum.AutomaticSize.X;
@@ -412,7 +429,7 @@ function AevryxLib.Main(Name,X,Y)
 
     local TabsPadding = CreateModule.Instance("UIPadding",{
         Parent = TabsButtons;
-        PaddingLeft = UDim.new(0,4);
+        PaddingLeft = UDim.new(0,8);
         PaddingRight = UDim.new(0,8);
     })
 
@@ -467,6 +484,7 @@ function AevryxLib.Main(Name,X,Y)
                 TweenService:Create(Load,TweenInfo.new(0.3),{BackgroundTransparency = 1}):Play()
                 Topbar.Visible = not Topbar.Visible
                 Load.Visible = not Load.Visible
+                DragButton.Visible = not DragButton.Visible
             end)
         end
     end)
@@ -1471,7 +1489,6 @@ InMain.Notification = InMain.Notification
                 
 
                 local InputService = game:GetService("UserInputService")
-                local Mouse = game.Players.LocalPlayer:GetMouse()
 
 				local function UpdateSlider(val)
 					val = val or min or 0
@@ -1511,7 +1528,7 @@ InMain.Notification = InMain.Notification
 					if Input.UserInputType == Enum.UserInputType.MouseButton1 or Input.UserInputType == Enum.UserInputType.Touch then
 						Dragging = true
 						IsSliding = false
-                        Move(Mouse.X)
+                        Move(Input.Position.X)
                         TweenService:Create(Progress,TweenInfo.new(0.3),{BackgroundColor3 = Darker(AevryxLib["Theme"]["AccentColor"],1.2)}):Play()
 					end
 				end)
