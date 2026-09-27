@@ -5,7 +5,7 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 27.09.2026 + 13:17:33
+  Build Date: 27.09.2026 + 13:22:18
   Total Code: 2002 (2002 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
@@ -796,7 +796,7 @@ InMain.Notification = InMain.Notification
                 BorderSizePixel = 0;
                 Position = UDim2.new(0,0,0,0);
                 Size = UDim2.new(1,0,1,0);
-                ZIndex = 0;
+                ZIndex = 1;
             })
 
             local SectionBgBlur = CreateModule.Instance("BlurEffect",{
@@ -895,7 +895,7 @@ InMain.Notification = InMain.Notification
                 BorderSizePixel = 0;
                 Position = UDim2.new(0,0,0,0);
                 Size = UDim2.new(1,0,1,0);
-                ZIndex = 0;
+                ZIndex = 1;
             })
 
             local SectionBgBlur = CreateModule.Instance("BlurEffect",{
