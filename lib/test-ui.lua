@@ -5,7 +5,7 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 27.09.2026 + 13:08:14
+  Build Date: 27.09.2026 + 13:17:33
   Total Code: 2002 (2002 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
@@ -278,46 +278,6 @@ function AevryxLib.Main(Name,X,Y)
     BgImage.Size = Border.Size
     Topbar.Visible = true
 
-    Topbar:GetPropertyChangedSignal("Position"):Connect(function()
-        Load.Position = Topbar.Position
-        DragButton.Position = UDim2.new(Topbar.Position.X.Scale, Topbar.Position.X.Offset + 6, Topbar.Position.Y.Scale, Topbar.Position.Y.Offset + 4)
-    end)
-
-    Topbar:GetPropertyChangedSignal("Size"):Connect(function()
-        Load.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5)
-        Border.Size = Load.Size
-        BgImage.Size = Load.Size
-    end)
-
-    local Corner = CreateModule.Instance("UICorner",{
-        Parent = Container;
-        Name = "Corner";
-        CornerRadius = UDim.new(0,0);
-    })
-
-    local Pages = CreateModule.Instance("Frame",{
-		Parent = Container;
-		Name = "Tabs";
-        BackgroundTransparency = 1;
-		BorderSizePixel = 0;
-		Position = UDim2.new(0,0,0,0);
-		Size = UDim2.new(1,0,1,0);
-        ZIndex = 2;
-	})
-
-    local PageLayout = CreateModule.Instance("UIPageLayout",{
-        Parent = Pages;
-        Name = "PagesLayout";
-        Padding = UDim.new(0,10);
-        TweenTime = 0;
-        EasingDirection = Enum.EasingDirection.Out;
-        EasingStyle = Enum.EasingStyle.Sine;
-        FillDirection = Enum.FillDirection.Vertical;
-        HorizontalAlignment = Enum.HorizontalAlignment.Center;
-        ScrollWheelInputEnabled = false;
-    })
-
-
     local DragButton = CreateModule.Instance("TextButton",{
         Name = "DragButton";
         Parent = AevryxLib.ScreenGui;
@@ -325,7 +285,7 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
         BorderSizePixel = 0;
         AnchorPoint = Vector2.new(0,0);
-        Position = UDim2.new(Topbar.Position.X.Scale, Topbar.Position.X.Offset + 6, Topbar.Position.Y.Scale, Topbar.Position.Y.Offset + 4);
+        Position = UDim2.new(Topbar.Position.X.Scale, Topbar.Position.X.Offset - 28, Topbar.Position.Y.Scale, Topbar.Position.Y.Offset + 4);
         Size = UDim2.new(0,22,0,22);
         Text = "";
         AutoButtonColor = false;
@@ -401,7 +361,7 @@ function AevryxLib.Main(Name,X,Y)
                     startPos.Y.Offset + delta.Y
                 )
                 Topbar.Position = newPos
-                DragButton.Position = UDim2.new(newPos.X.Scale, newPos.X.Offset + 6, newPos.Y.Scale, newPos.Y.Offset + 4)
+                DragButton.Position = UDim2.new(newPos.X.Scale, newPos.X.Offset - 28, newPos.Y.Scale, newPos.Y.Offset + 4)
             end
         end)
 
@@ -413,6 +373,46 @@ function AevryxLib.Main(Name,X,Y)
             end
         end)
     end
+
+    Topbar:GetPropertyChangedSignal("Position"):Connect(function()
+        Load.Position = Topbar.Position
+        DragButton.Position = UDim2.new(Topbar.Position.X.Scale, Topbar.Position.X.Offset - 28, Topbar.Position.Y.Scale, Topbar.Position.Y.Offset + 4)
+    end)
+
+    Topbar:GetPropertyChangedSignal("Size"):Connect(function()
+        Load.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5)
+        Border.Size = Load.Size
+        BgImage.Size = Load.Size
+    end)
+
+    local Corner = CreateModule.Instance("UICorner",{
+        Parent = Container;
+        Name = "Corner";
+        CornerRadius = UDim.new(0,0);
+    })
+
+    local Pages = CreateModule.Instance("Frame",{
+		Parent = Container;
+		Name = "Tabs";
+        BackgroundTransparency = 1;
+		BorderSizePixel = 0;
+		Position = UDim2.new(0,0,0,0);
+		Size = UDim2.new(1,0,1,0);
+        ZIndex = 2;
+	})
+
+    local PageLayout = CreateModule.Instance("UIPageLayout",{
+        Parent = Pages;
+        Name = "PagesLayout";
+        Padding = UDim.new(0,10);
+        TweenTime = 0;
+        EasingDirection = Enum.EasingDirection.Out;
+        EasingStyle = Enum.EasingStyle.Sine;
+        FillDirection = Enum.FillDirection.Vertical;
+        HorizontalAlignment = Enum.HorizontalAlignment.Center;
+        ScrollWheelInputEnabled = false;
+    })
+
 
     local TabsButtons = CreateModule.Instance("ScrollingFrame",{
         Parent = Topbar;
