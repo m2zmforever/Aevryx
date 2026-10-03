@@ -87,7 +87,7 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
         Position = UDim2.new(0.5,0,0.5,0);
-        Size = UDim2.new(0,X,0,110);
+        Size = UDim2.new(0.7,0,0,110);
         AnchorPoint = Vector2.new(0.5,0.5);
         ClipsDescendants = true;
         ZIndex = 100;
@@ -142,7 +142,7 @@ function AevryxLib.Main(Name,X,Y)
         BorderSizePixel = 0;
         AnchorPoint = Vector2.new(0.5,0.5);
         Position = UDim2.new(0.5,0,0.5,37);
-        Size = UDim2.new(0.7,0,0,6);
+        Size = UDim2.new(0.8,0,0,6);
         ZIndex = 101;
     })
 
