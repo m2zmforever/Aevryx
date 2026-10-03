@@ -5,7 +5,7 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 04.10.2026 + 00:04:17
+  Build Date: 04.10.2026 + 00:07:06
   Total Code: 2002 (2002 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
@@ -87,7 +87,7 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
         Position = UDim2.new(0.5,0,0.5,0);
-        Size = UDim2.new(0.7,0,0,110);
+        Size = UDim2.new(0,500,0,200);
         AnchorPoint = Vector2.new(0.5,0.5);
         ClipsDescendants = true;
         ZIndex = 100;
@@ -129,8 +129,8 @@ function AevryxLib.Main(Name,X,Y)
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0.5,0.5);
-        Position = UDim2.new(0.5,0,0.5,-15);
-        Size = UDim2.new(0,132,0,132);
+        Position = UDim2.new(0.5,0,0.5,-24);
+        Size = UDim2.new(0,180,0,180);
         ZIndex = 101;
     })
 
@@ -141,8 +141,8 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = 0.3;
         BorderSizePixel = 0;
         AnchorPoint = Vector2.new(0.5,0.5);
-        Position = UDim2.new(0.5,0,0.5,37);
-        Size = UDim2.new(0.8,0,0,6);
+        Position = UDim2.new(0.5,0,0.5,70);
+        Size = UDim2.new(0.7,0,0,6);
         ZIndex = 101;
     })
 
