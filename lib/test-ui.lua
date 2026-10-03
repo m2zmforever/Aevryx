@@ -129,8 +129,8 @@ function AevryxLib.Main(Name,X,Y)
         ImageTransparency = 0;
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0.5,0.5);
-        Position = UDim2.new(0.5,0,0.5,-24);
-        Size = UDim2.new(0,180,0,180);
+        Position = UDim2.new(0.5,0,0.5,-20);
+        Size = UDim2.new(0,200,0,200);
         ZIndex = 101;
     })
 
@@ -141,7 +141,7 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = 0.3;
         BorderSizePixel = 0;
         AnchorPoint = Vector2.new(0.5,0.5);
-        Position = UDim2.new(0.5,0,0.5,70);
+        Position = UDim2.new(0.5,0,0.5,87);
         Size = UDim2.new(0.7,0,0,6);
         ZIndex = 101;
     })
