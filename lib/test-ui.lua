@@ -5,7 +5,7 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 04.10.2026 + 00:07:06
+  Build Date: 16.10.2026 + 00:41:55
   Total Code: 2002 (2002 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
@@ -20,7 +20,7 @@ local AevryxLib = {
 		["AccentColor"] = Color3.fromRGB(60, 60, 60),
 		["FontColor"] = Color3.fromRGB(255,255,255),
 		["HideKey"] = "LeftControl",
-		["BackgroundImage"] = "rbxassetid://117083332437563",
+		["BackgroundImage"] = "rbxassetid://119420114338582",
 		["BackgroundTransparency"] = 0,
 		["SectionTransparency"] = 0.25,
 		["ElementTransparency"] = 0.5,
@@ -87,7 +87,7 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
         Position = UDim2.new(0.5,0,0.5,0);
-        Size = UDim2.new(0,500,0,200);
+        Size = UDim2.new(0,350,0,140);
         AnchorPoint = Vector2.new(0.5,0.5);
         ClipsDescendants = true;
         ZIndex = 100;
@@ -130,7 +130,7 @@ function AevryxLib.Main(Name,X,Y)
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0.5,0.5);
         Position = UDim2.new(0.5,0,0.5,-20);
-        Size = UDim2.new(0,200,0,200);
+        Size = UDim2.new(0,120,0,120);
         ZIndex = 101;
     })
 
@@ -141,7 +141,7 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = 0.3;
         BorderSizePixel = 0;
         AnchorPoint = Vector2.new(0.5,0.5);
-        Position = UDim2.new(0.5,0,0.5,87);
+        Position = UDim2.new(0.5,0,0.5,57);
         Size = UDim2.new(0.7,0,0,6);
         ZIndex = 101;
     })
