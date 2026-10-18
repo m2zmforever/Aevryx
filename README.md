@@ -29,7 +29,7 @@ Aevryx is one of the good free, no-key script for Murder Mystery 2, offering goo
       Name ESP<br>
       Gun ESP<br>
       Gun ESP Text<br>
-      Trap ESP (Need Full Test)<br>
+      Trap ESP<br>
     </td>
     <td valign="top">
       Grap Dropped Gun<br>
@@ -39,7 +39,7 @@ Aevryx is one of the good free, no-key script for Murder Mystery 2, offering goo
       Auto Kill All when Murderer<br>
       Keybind Shoot Murderer<br>
       Teleport behind and Shoot Murderer<br>
-      Keybind Throw Knife<br>
+      Keybind Throw Knife
     </td>
     <td valign="top">
       Walkspeed Changer<br>
@@ -81,8 +81,7 @@ Aevryx is one of the good free, no-key script for Murder Mystery 2, offering goo
       Auto-Prestige<br>
       Auto-Gamepass-Tier<br>
       Auto Mystery Box<br>
-      Discord Webhook Status Sender<br>
-      
+      Discord Webhook Status Sender
     </td>
     <td valign="top">
       X-ray<br>
