@@ -37,8 +37,9 @@ Aevryx is one of the good free, no-key script for Murder Mystery 2, offering goo
       KillAura<br>
       Kill All<br>
       Auto Kill All when Murderer<br>
-      Shoot Murderer<br>
-      Teleport behind and Shoot Murderer
+      Keybind Shoot Murderer<br>
+      Teleport behind and Shoot Murderer<br>
+      Keybind Throw Knife<br>
     </td>
     <td valign="top">
       Walkspeed Changer<br>
@@ -78,8 +79,10 @@ Aevryx is one of the good free, no-key script for Murder Mystery 2, offering goo
       Auto-Salvage<br>
       Auto-Craft<br>
       Auto-Prestige<br>
+      Auto-Gamepass-Tier<br>
       Auto Mystery Box<br>
-      Discord Webhook Status Sender
+      Discord Webhook Status Sender<br>
+      
     </td>
     <td valign="top">
       X-ray<br>
