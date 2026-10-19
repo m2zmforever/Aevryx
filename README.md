@@ -79,7 +79,6 @@ Aevryx is one of the good free, no-key script for Murder Mystery 2, offering goo
       Auto-Salvage<br>
       Auto-Craft<br>
       Auto-Prestige<br>
-      Auto-Gamepass-Tier<br>
       Auto Mystery Box<br>
       Discord Webhook Status Sender
     </td>
@@ -87,7 +86,8 @@ Aevryx is one of the good free, no-key script for Murder Mystery 2, offering goo
       X-ray<br>
       Round Timer<br>
       Send Roles to Chat<br>
-      Map Vote Spam
+      Map Vote Spam<br>
+      Role Notify
     </td>
     <td valign="top">
       Touch Fling<br>
