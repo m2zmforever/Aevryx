@@ -5,7 +5,7 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 19.10.2026 + 23:54:36
+  Build Date: 19.10.2026 + 23:56:36
   Total Code: 1725 (1725 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
@@ -21,7 +21,7 @@ local AevryxLib = {
 		["AccentColor"] = Color3.fromRGB(60, 60, 60),
 		["FontColor"] = Color3.fromRGB(255,255,255),
 		["HideKey"] = "LeftControl",
-		["BackgroundImage"] = "rbxassetid://94274229304350",
+		["BackgroundImage"] = "rbxassetid://117083332437563",
 		["BackgroundTransparency"] = 0,
 		["SectionTransparency"] = 0.25,
 		["ElementTransparency"] = 0.5,
