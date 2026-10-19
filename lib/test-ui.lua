@@ -5,14 +5,15 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 19.10.2026 + 21:47:28
-  Total Code: 1723 (1723 Line of Code)
+  Build Date: 19.10.2026 + 23:27:23
+  Total Code: 1724 (1724 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
 
 local TweenService = game:GetService("TweenService")
 local InputService = game:GetService("UserInputService")
+local CoreGui = game:GetService("CoreGui")
 
 local AevryxLib = {
 	["Theme"] = {
@@ -87,7 +88,7 @@ end
 
 function AevryxLib.Main(Name,X,Y)
 
-	for i,v in next,game.CoreGui:GetChildren() do
+	for i,v in next,CoreGui:GetChildren() do
 		if v.Name == "AevryxLib" then
 			v:Destroy()
 		end
@@ -95,7 +96,7 @@ function AevryxLib.Main(Name,X,Y)
 
     AevryxLib.ScreenGui = CreateModule.Instance("ScreenGui",{
         Name = "AevryxLib";
-        Parent = game.CoreGui;
+        Parent = CoreGui;
         IgnoreGuiInset = true;
         ResetOnSpawn = false;
     })
