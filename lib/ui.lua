@@ -5,14 +5,15 @@
    dP__Yb  88""     YbdP   88"Yb    8P    dPYb      Y8   8P 88 
   dP""""Yb 888888    YP    88  Yb  dP    dP  Yb     `YbodP' 88 
 
-  Build Date: 27.09.2026 + 13:22:18
-  Total Code: 2002 (2002 Line of Code)
+  Build Date: 20.10.2026 + 11:22:35
+  Total Code: 1725 (1725 Line of Code)
   Orginal UI: Ocerium Project by SALFIIN (slf0Dev)
 
 --]]
 
 local TweenService = game:GetService("TweenService")
 local InputService = game:GetService("UserInputService")
+local CoreGui = game:GetService("CoreGui")
 
 local AevryxLib = {
 	["Theme"] = {
@@ -59,6 +60,26 @@ local function Brighter(Col,coe)
     return Color3.fromHSV(H,S,V * (coe or 1.5));
 end
 
+local function makeCorner(parent)
+    return CreateModule.Instance("UICorner",{
+        Parent = parent;
+        Name = "Corner";
+        CornerRadius = UDim.new(0,0);
+    })
+end
+
+local function makeStroke(parent, thickness, color, transparency, borderMode)
+    local props = {
+        Parent = parent;
+        Name = "Stroke";
+        Thickness = thickness or 1;
+        Color = color or Color3.fromRGB(20,20,20);
+    }
+    if transparency ~= nil then props.Transparency = transparency end
+    if borderMode then props.ApplyStrokeMode = Enum.ApplyStrokeMode.Border end
+    return CreateModule.Instance("UIStroke", props)
+end
+
 local function getEnumMember(enumType, memberName)
     local ok, res = pcall(function() return enumType[memberName] end)
     if ok then return res end
@@ -67,7 +88,7 @@ end
 
 function AevryxLib.Main(Name,X,Y)
 
-	for i,v in next,game.CoreGui:GetChildren() do
+	for i,v in next,CoreGui:GetChildren() do
 		if v.Name == "AevryxLib" then
 			v:Destroy()
 		end
@@ -75,7 +96,7 @@ function AevryxLib.Main(Name,X,Y)
 
     AevryxLib.ScreenGui = CreateModule.Instance("ScreenGui",{
         Name = "AevryxLib";
-        Parent = game.CoreGui;
+        Parent = CoreGui;
         IgnoreGuiInset = true;
         ResetOnSpawn = false;
     })
@@ -87,25 +108,15 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = 0;
         BorderSizePixel = 0;
         Position = UDim2.new(0.5,0,0.5,0);
-        Size = UDim2.new(0,X,0,150);
+        Size = UDim2.new(0,350,0,140);
         AnchorPoint = Vector2.new(0.5,0.5);
         ClipsDescendants = true;
         ZIndex = 100;
     })
 
-    local LoadingCorner = CreateModule.Instance("UICorner",{
-        Parent = LoadingScreen;
-        Name = "Corner";
-        CornerRadius = UDim.new(0,0);
-    })
+    local LoadingCorner = makeCorner(LoadingScreen)
 
-    local LoadingStroke = CreateModule.Instance("UIStroke",{
-        Parent = LoadingScreen;
-        Name = "Stroke";
-        Thickness = 2;
-        Color = AevryxLib["Theme"]["AccentColor"];
-        Transparency = 0;
-    })
+    local LoadingStroke = makeStroke(LoadingScreen, 2, AevryxLib["Theme"]["AccentColor"], 0)
 
     local LoadingImage = CreateModule.Instance("ImageLabel",{
         Parent = LoadingScreen;
@@ -130,7 +141,7 @@ function AevryxLib.Main(Name,X,Y)
         ScaleType = Enum.ScaleType.Fit;
         AnchorPoint = Vector2.new(0.5,0.5);
         Position = UDim2.new(0.5,0,0.5,-20);
-        Size = UDim2.new(0,180,0,180);
+        Size = UDim2.new(0,120,0,120);
         ZIndex = 101;
     })
 
@@ -141,7 +152,7 @@ function AevryxLib.Main(Name,X,Y)
         BackgroundTransparency = 0.3;
         BorderSizePixel = 0;
         AnchorPoint = Vector2.new(0.5,0.5);
-        Position = UDim2.new(0.5,0,0.5,50);
+        Position = UDim2.new(0.5,0,0.5,57);
         Size = UDim2.new(0.7,0,0,6);
         ZIndex = 101;
     })
@@ -191,11 +202,7 @@ function AevryxLib.Main(Name,X,Y)
         ClipsDescendants = true;
 	})
 
-    local LoadCorner = CreateModule.Instance("UICorner",{
-        Parent = Load;
-        Name = "Corner";
-        CornerRadius = UDim.new(0,0);
-    })
+    local LoadCorner = makeCorner(Load)
 
     local Topbar = CreateModule.Instance("Frame",{
         Name = "Topbar";
@@ -211,11 +218,7 @@ function AevryxLib.Main(Name,X,Y)
         ZIndex = 3;
 	})
 
-    local Corner = CreateModule.Instance("UICorner",{
-        Parent = Topbar;
-        Name = "Corner";
-        CornerRadius = UDim.new(0,0);
-    })
+    local Corner = makeCorner(Topbar)
 
     Topbar.Changed:Connect(function(Property)
         if Property == "Position" then
@@ -259,19 +262,9 @@ function AevryxLib.Main(Name,X,Y)
         ZIndex = 5;
 	})
 
-    local StrokeBorder = CreateModule.Instance("UIStroke",{
-        Parent = Border;
-        Name = "Stroke";
-        Thickness = 1;
-        Color = AevryxLib["Theme"]["AccentColor"];
-        Transparency = 0.5;
-    })
+    local StrokeBorder = makeStroke(Border, 1, AevryxLib["Theme"]["AccentColor"], 0.5)
 
-    local CornerBorder = CreateModule.Instance("UICorner",{
-        Parent = Border;
-        Name = "Corner";
-        CornerRadius = UDim.new(0,0);
-    })
+    local CornerBorder = makeCorner(Border)
 
     Load.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
     Border.Size = UDim2.new(0,Topbar.Size.X.Offset,0,Topbar.Size.Y.Offset + Container.Size.Y.Offset -5);
@@ -293,19 +286,9 @@ function AevryxLib.Main(Name,X,Y)
         ZIndex = 21;
     })
 
-    local DragCorner = CreateModule.Instance("UICorner",{
-        Parent = DragButton;
-        Name = "Corner";
-        CornerRadius = UDim.new(0,0);
-    })
+    local DragCorner = makeCorner(DragButton)
 
-    local DragStroke = CreateModule.Instance("UIStroke",{
-        Parent = DragButton;
-        Name = "Stroke";
-        Thickness = 1;
-        Color = Color3.fromRGB(20,20,20);
-        ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-    })
+    local DragStroke = makeStroke(DragButton, nil, nil, nil, true)
 
     for i = 1, 3 do
         CreateModule.Instance("Frame",{
@@ -385,11 +368,7 @@ function AevryxLib.Main(Name,X,Y)
         BgImage.Size = Load.Size
     end)
 
-    local Corner = CreateModule.Instance("UICorner",{
-        Parent = Container;
-        Name = "Corner";
-        CornerRadius = UDim.new(0,0);
-    })
+    local Corner = makeCorner(Container)
 
     local Pages = CreateModule.Instance("Frame",{
 		Parent = Container;
@@ -522,19 +501,9 @@ function AevryxLib.Main(Name,X,Y)
             ZIndex = 10 + #ActiveNotifications;
         })
 
-        local Corner = CreateModule.Instance("UICorner",{
-            Parent = Bar;
-            Name = "Corner";
-            CornerRadius = UDim.new(0,0);
-        })
+        local Corner = makeCorner(Bar)
 
-        local Stroke = CreateModule.Instance("UIStroke",{
-            Parent = Bar;
-            Name = "Stroke";
-            Thickness = 1;
-            Color = AevryxLib["Theme"]["AccentColor"];
-            Transparency = 0.5;
-        })
+        local Stroke = makeStroke(Bar, 1, AevryxLib["Theme"]["AccentColor"], 0.5)
 
         local HeaderLabel = CreateModule.Instance("TextLabel",{
             Parent = Bar;
@@ -805,19 +774,9 @@ InMain.Notification = InMain.Notification
                 Size = AevryxLib["Theme"]["SectionBlur"];
             })
 
-            local Corner = CreateModule.Instance("UICorner",{
-                Parent = Section;
-                Name = "Corner";
-                CornerRadius = UDim.new(0,0);
-            })
+            local Corner = makeCorner(Section)
 
-            local Stroke = CreateModule.Instance("UIStroke",{
-                Parent = Section;
-                Name = "Stroke";
-                Thickness = 1;
-                Color = Color3.fromRGB(20,20,20);
-                ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-            })
+            local Stroke = makeStroke(Section, nil, nil, nil, true)
 
             local Avatar = CreateModule.Instance("ImageLabel",{
                 Parent = Section;
@@ -829,11 +788,7 @@ InMain.Notification = InMain.Notification
                 Image = ImageId or "";
                 ScaleType = Enum.ScaleType.Fit;
             })
-            local AvatarCorner = CreateModule.Instance("UICorner",{
-                Parent = Avatar;
-                Name = "Corner";
-                CornerRadius = UDim.new(0,0);
-            })
+            local AvatarCorner = makeCorner(Avatar)
 
             local Label = CreateModule.Instance("TextLabel",{
                 Parent = Section;
@@ -904,19 +859,9 @@ InMain.Notification = InMain.Notification
                 Size = AevryxLib["Theme"]["SectionBlur"];
             })
 
-            local Corner = CreateModule.Instance("UICorner",{
-                Parent = Section;
-                Name = "Corner";
-                CornerRadius = UDim.new(0,0);
-            })
+            local Corner = makeCorner(Section)
 
-            local Stroke = CreateModule.Instance("UIStroke",{
-                Parent = Section;
-                Name = "Stroke";
-                Thickness = 1;
-                Color = Color3.fromRGB(20,20,20);
-                ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-            })
+            local Stroke = makeStroke(Section, nil, nil, nil, true)
 
             local SectionLabel = CreateModule.Instance("TextLabel",{
                 Parent = Section;
@@ -988,19 +933,9 @@ InMain.Notification = InMain.Notification
                 })
 
 
-                local Corner = CreateModule.Instance("UICorner",{
-                    Parent = Button;
-                    Name = "Corner";
-                    CornerRadius = UDim.new(0,0);
-                })
+                local Corner = makeCorner(Button)
 
-                local Stroke = CreateModule.Instance("UIStroke",{
-                    Parent = Button;
-                    Name = "Stroke";
-                    Thickness = 1;
-                    Color = Color3.fromRGB(20,20,20);
-                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-                })
+                local Stroke = makeStroke(Button, nil, nil, nil, true)
 
                 Button.MouseEnter:Connect(function()
                     TweenService:Create(Button,TweenInfo.new(0.3),{TextColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
@@ -1154,19 +1089,9 @@ InMain.Notification = InMain.Notification
                     AutoButtonColor = false;
                 })
 
-                local Corner = CreateModule.Instance("UICorner",{
-                    Parent = Keybinder;
-                    Name = "Corner";
-                    CornerRadius = UDim.new(0,0);
-                })
+                local Corner = makeCorner(Keybinder)
 
-                local Stroke = CreateModule.Instance("UIStroke",{
-                    Parent = Keybinder;
-                    Name = "Stroke";
-                    Thickness = 1;
-                    Color = Color3.fromRGB(20,20,20);
-                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-                })
+                local Stroke = makeStroke(Keybinder, nil, nil, nil, true)
 
                 local Picked,Picking = false
 
@@ -1216,19 +1141,9 @@ InMain.Notification = InMain.Notification
                     AutoButtonColor = false;
                 })
 
-                local Corner1 = CreateModule.Instance("UICorner",{
-                    Parent = Checkbox;
-                    Name = "Corner";
-                    CornerRadius = UDim.new(0,0);
-                })
+                local Corner1 = makeCorner(Checkbox)
 
-                local Stroke1 = CreateModule.Instance("UIStroke",{
-                    Parent = Checkbox;
-                    Name = "Stroke";
-                    Thickness = 1;
-                    Color = Color3.fromRGB(20,20,20);
-                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-                })
+                local Stroke1 = makeStroke(Checkbox, nil, nil, nil, true)
 
                 local Label = CreateModule.Instance("TextLabel",{
                     Parent = Checkbox;
@@ -1265,18 +1180,9 @@ InMain.Notification = InMain.Notification
                     Size = UDim2.new(0,15,0,15);
                 })
 
-                local Corner = CreateModule.Instance("UICorner",{
-                    Parent = Checked;
-                    Name = "Corner";
-                    CornerRadius = UDim.new(0,0);
-                })
+                local Corner = makeCorner(Checked)
 
-                local Stroke = CreateModule.Instance("UIStroke",{
-                    Parent = Checked;
-                    Name = "Stroke";
-                    Thickness = 1;
-                    Color = Color3.fromRGB(20,20,20);
-                })
+                local Stroke = makeStroke(Checked)
 
                 IsActive.Changed:Connect(function()
                     if IsActive.Value then
@@ -1325,11 +1231,7 @@ InMain.Notification = InMain.Notification
                     Image = ImageId or "";
                     ScaleType = Enum.ScaleType.Fit;
                 })
-                local Corner = CreateModule.Instance("UICorner",{
-                    Parent = Img;
-                    Name = "Corner";
-                    CornerRadius = UDim.new(0,0);
-                })
+                local Corner = makeCorner(Img)
                 AddToReg(Img)
                 return Img;
             end
@@ -1370,19 +1272,9 @@ InMain.Notification = InMain.Notification
                     Name = "Padding";
                     PaddingLeft = UDim.new(0,5);
                 })
-                local Corner = CreateModule.Instance("UICorner",{
-                    Parent = TextBox;
-                    Name = "Corner";
-                    CornerRadius = UDim.new(0,0);
-                })
+                local Corner = makeCorner(TextBox)
 
-                local Stroke = CreateModule.Instance("UIStroke",{
-                    Parent = TextBox;
-                    Name = "Stroke";
-                    Thickness = 1;
-                    Color = Color3.fromRGB(20,20,20);
-                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-                })
+                local Stroke = makeStroke(TextBox, nil, nil, nil, true)
 
                 TextBox.FocusLost:Connect(function()
                     TweenService:Create(TextBox, TweenInfo.new(0.3), {
@@ -1470,24 +1362,11 @@ InMain.Notification = InMain.Notification
                     Size = UDim2.new(0,0,1,0);
                 })
 
-                local Corner = CreateModule.Instance("UICorner",{
-                    Parent = Bar;
-                    Name = "Corner";
-                    CornerRadius = UDim.new(0,0);
-                })
+                local Corner = makeCorner(Bar)
 
-                local Stroke = CreateModule.Instance("UIStroke",{
-                    Parent = Bar;
-                    Name = "Stroke";
-                    Thickness = 1;
-                    Color = Color3.fromRGB(20,20,20);
-                })
+                local Stroke = makeStroke(Bar)
 
-                local Corner2 = CreateModule.Instance("UICorner",{
-                    Parent = Progress;
-                    Name = "Corner";
-                    CornerRadius = UDim.new(0,0);
-                })
+                local Corner2 = makeCorner(Progress)
 
                 
 
@@ -1568,7 +1447,7 @@ InMain.Notification = InMain.Notification
                 AddToReg(Slider)
                 return Slider;
             end
-            function InSection.Dropdown(Text,Selectables,ind,func)
+            local function BuildDropdownWidget(Text)
                 local Dropdown = CreateModule.Instance("Frame",{
                     Parent = SectionElements;
                     Name = Text;
@@ -1597,7 +1476,6 @@ InMain.Notification = InMain.Notification
                     TextYAlignment = Enum.TextYAlignment.Center;
                     AutoButtonColor = false;
                 })
-
                 local DropdownImage = CreateModule.Instance("ImageLabel",{
                     Parent = DropdownButton;
                     AnchorPoint = Vector2.new(0, 0.5);
@@ -1612,8 +1490,6 @@ InMain.Notification = InMain.Notification
                     ImageRectSize = Vector2.new(36, 36);
                     Rotation = 0;
                 })
-
-
                 local List = CreateModule.Instance("ScrollingFrame",{
                     Parent = Dropdown;
                     Name = 'List';
@@ -1627,15 +1503,12 @@ InMain.Notification = InMain.Notification
                     ScrollBarThickness = 4;
                     ScrollBarImageTransparency = 0.5;
                 })
-
-                
                 local DropdownList = CreateModule.Instance("UIListLayout",{
                     Parent = List;
                     Padding = UDim.new(0,5);
                     HorizontalAlignment = Enum.HorizontalAlignment.Center;
                     SortOrder = Enum.SortOrder.LayoutOrder;
                 })
-
                 CreateModule.Instance("Frame",{
                     Parent = List;
                     Name = 'ign';
@@ -1645,22 +1518,17 @@ InMain.Notification = InMain.Notification
                     Size = UDim2.new(0,0,0,0);
                     LayoutOrder = -99999;
                 })
-
-                local Corner = CreateModule.Instance("UICorner",{
-                    Parent = Dropdown;
-                    Name = "Corner";
-                    CornerRadius = UDim.new(0,0);
-                })
-
-                local Stroke = CreateModule.Instance("UIStroke",{
-                    Parent = Dropdown;
-                    Name = "Stroke";
-                    Thickness = 1;
-                    Color = Color3.fromRGB(20,20,20);
-                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-                })
+                local Corner = makeCorner(Dropdown)
+                local Stroke = makeStroke(Dropdown, nil, nil, nil, true)
 
                 local IsOpened = false
+
+                local function CloseDropdown()
+                    Dropdown:TweenSize(UDim2.new(0.95,0,0,20),"Out","Quart",0.3,true)
+                    List:TweenSize(UDim2.new(1,0,0,0),"Out","Quart",0.3,true)
+                    TweenService:Create(DropdownImage,TweenInfo.new(0.3),{Rotation = 0}):Play()
+                    IsOpened = false
+                end
 
                 local function ToggleDropdown()
                     IsOpened = not IsOpened
@@ -1669,65 +1537,83 @@ InMain.Notification = InMain.Notification
                         List:TweenSize(UDim2.new(1,0,0,100),"Out","Quart",0.3,true)
                         TweenService:Create(DropdownImage,TweenInfo.new(0.3),{Rotation = 180}):Play()
                     else
-                        Dropdown:TweenSize(UDim2.new(0.95,0,0,20),"Out","Quart",0.3,true)
-                        List:TweenSize(UDim2.new(1,0,0,0),"Out","Quart",0.3,true)
-                        TweenService:Create(DropdownImage,TweenInfo.new(0.3),{Rotation = 0}):Play()
+                        CloseDropdown()
                     end
                 end
 
                 DropdownButton.MouseButton1Click:Connect(ToggleDropdown)
                 DropdownButton.TouchTap:Connect(ToggleDropdown)
 
-                local function NewSelectable(string,value)
-                    local Selectable = CreateModule.Instance("TextButton",{
-                        Parent = List;
-                        Name = string;
-                        BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
+                return Dropdown, DropdownButton, List, CloseDropdown
+            end
+
+            local function BuildSelectable(List,string,value,onClick,withCheck)
+                local Selectable = CreateModule.Instance("TextButton",{
+                    Parent = List;
+                    Name = string;
+                    BackgroundColor3 = Color3.fromRGB(0,0,0);
+                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
+                    BorderSizePixel = 0;
+                    BorderColor3 = Color3.fromRGB(20,20,20);
+                    Position = UDim2.new(0,0,0,0);
+                    Size = UDim2.new(0.95,0,0,20);
+                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
+                    Text = "  " .. string;
+                    TextSize = 16;
+                    TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
+                    TextXAlignment = Enum.TextXAlignment.Left;
+                    TextYAlignment = Enum.TextYAlignment.Center;
+                    AutoButtonColor = false;
+                })
+
+                local Check = nil
+                if withCheck then
+                    Check = CreateModule.Instance("TextLabel",{
+                        Parent = Selectable;
+                        Name = "Check";
+                        BackgroundTransparency = 1;
                         BorderSizePixel = 0;
-                        BorderColor3 = Color3.fromRGB(20,20,20);
-                        Position = UDim2.new(0,0,0,0);
-                        Size = UDim2.new(0.95,0,0,20);
+                        Position = UDim2.new(0.88, 0, 0, 0);
+                        Size = UDim2.new(0.1,0,0,20);
                         Font = Enum.Font[AevryxLib["Theme"]["Font"]];
-                        Text = "  " .. string;
+                        Text = "";
                         TextSize = 16;
                         TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
-                        TextXAlignment = Enum.TextXAlignment.Left;
+                        TextXAlignment = Enum.TextXAlignment.Center;
                         TextYAlignment = Enum.TextYAlignment.Center;
-                        AutoButtonColor = false;
                     })
+                end
 
-                    local Corner = CreateModule.Instance("UICorner",{
-                        Parent = Selectable;
-                        Name = "Corner";
-                        CornerRadius = UDim.new(0,0);
-                    })
-    
-                    local Stroke = CreateModule.Instance("UIStroke",{
-                        Parent = Selectable;
-                        Name = "Stroke";
-                        Thickness = 1;
-                        Color = Color3.fromRGB(20,20,20);
-                        ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-                    })
+                local Corner = makeCorner(Selectable)
 
-                    Selectable.MouseEnter:Connect(function()
-                        TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
-                        TweenService:Create(Selectable,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(0,0,0)}):Play()
-                    end)
-            
-                    Selectable.MouseLeave:Connect(function()
-                        TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5)}):Play()
-                        TweenService:Create(Selectable,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(0,0,0)}):Play()
-                    end)
+                local Stroke = makeStroke(Selectable, nil, nil, nil, true)
 
-                    Selectable.MouseButton1Click:Connect(function()
+                Selectable.MouseEnter:Connect(function()
+                    TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
+                    TweenService:Create(Selectable,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(0,0,0)}):Play()
+                end)
+
+                Selectable.MouseLeave:Connect(function()
+                    TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5)}):Play()
+                    TweenService:Create(Selectable,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(0,0,0)}):Play()
+                end)
+
+                Selectable.MouseButton1Click:Connect(function()
+                    onClick(Selectable, Check)
+                end)
+
+                return Selectable
+            end
+
+            function InSection.Dropdown(Text,Selectables,ind,func)
+                local Dropdown, DropdownButton, List, CloseDropdown = BuildDropdownWidget(Text)
+
+                local function NewSelectable(string,value)
+                    BuildSelectable(List, string, value, function()
                         pcall(func, string, value)
                         DropdownButton.Text = "  " .. string
-                        Dropdown:TweenSize(UDim2.new(0.95,0,0,20),"Out","Quart",0.3,true)
-                        List:TweenSize(UDim2.new(1,0,0,0),"Out","Quart",0.3,true)
-                        TweenService:Create(DropdownImage,TweenInfo.new(0.3),{Rotation = 0}):Play()
-                        IsOpened = false
-                    end)
+                        CloseDropdown()
+                    end, false)
                 end
 
                 local valueToDisplay = {}
@@ -1783,175 +1669,12 @@ InMain.Notification = InMain.Notification
             end
 
             function InSection.MultiDropdown(Text,Selectables,ind,func)
-                local Dropdown = CreateModule.Instance("Frame",{
-                    Parent = SectionElements;
-                    Name = Text;
-                    BackgroundColor3 = Color3.fromRGB(0,0,0);
-                    BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
-                    BorderSizePixel = 0;
-                    BorderColor3 = Color3.fromRGB(20,20,20);
-                    Position = UDim2.new(0,0,0,0);
-                    Size = UDim2.new(0.95,0,0,20);
-                    ClipsDescendants = true;
-                })
-                local DropdownButton = CreateModule.Instance("TextButton",{
-                    Parent = Dropdown;
-                    Name = "DropdownButton";
-                    BackgroundTransparency = 1;
-                    ZIndex = 1;
-                    BorderSizePixel = 0;
-                    BorderColor3 = Color3.fromRGB(20,20,20);
-                    Position = UDim2.new(0,0,0,0);
-                    Size = UDim2.new(1,0,0,20);
-                    Font = Enum.Font[AevryxLib["Theme"]["Font"]];
-                    Text = "  " .. Text;
-                    TextSize = 16;
-                    TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
-                    TextXAlignment = Enum.TextXAlignment.Left;
-                    TextYAlignment = Enum.TextYAlignment.Center;
-                    AutoButtonColor = false;
-                })
-
-                local DropdownImage = CreateModule.Instance("ImageLabel",{
-                    Parent = DropdownButton;
-                    AnchorPoint = Vector2.new(0, 0.5);
-                    BackgroundColor3 = Color3.fromRGB(255, 255, 255);
-                    BackgroundTransparency = 1.000;
-                    BorderSizePixel = 0;
-                    Position = UDim2.new(0.9, 0, 0.5, 0);
-                    Size = UDim2.new(0, 20, 0, 20);
-                    Image = "rbxassetid://3926305904";
-                    ImageColor3 = Color3.fromRGB(136, 136, 136);
-                    ImageRectOffset = Vector2.new(44, 404);
-                    ImageRectSize = Vector2.new(36, 36);
-                    Rotation = 0;
-                })
-
-
-                local List = CreateModule.Instance("ScrollingFrame",{
-                    Parent = Dropdown;
-                    Name = 'List';
-                    Active = true;
-                    BackgroundTransparency = 1;
-                    BorderSizePixel = 0;
-                    Position = UDim2.new(0,0,0,20);
-                    Size = UDim2.new(1,0,0,0);
-                    CanvasSize = UDim2.new(0,0,0,0);
-                    AutomaticCanvasSize = Enum.AutomaticSize.Y;
-                    ScrollBarThickness = 4;
-                    ScrollBarImageTransparency = 0.5;
-                })
-
-
-                local DropdownList = CreateModule.Instance("UIListLayout",{
-                    Parent = List;
-                    Padding = UDim.new(0,5);
-                    HorizontalAlignment = Enum.HorizontalAlignment.Center;
-                    SortOrder = Enum.SortOrder.LayoutOrder;
-                })
-
-                CreateModule.Instance("Frame",{
-                    Parent = List;
-                    Name = 'ign';
-                    BackgroundTransparency = 1;
-                    BorderSizePixel = 0;
-                    Position = UDim2.new(0,0,0,0);
-                    Size = UDim2.new(0,0,0,0);
-                    LayoutOrder = -99999;
-                })
-
-                local Corner = CreateModule.Instance("UICorner",{
-                    Parent = Dropdown;
-                    Name = "Corner";
-                    CornerRadius = UDim.new(0,0);
-                })
-
-                local Stroke = CreateModule.Instance("UIStroke",{
-                    Parent = Dropdown;
-                    Name = "Stroke";
-                    Thickness = 1;
-                    Color = Color3.fromRGB(20,20,20);
-                    ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-                })
-
-                local IsOpened = false
-
-                local function ToggleDropdown()
-                    IsOpened = not IsOpened
-                    if IsOpened then
-                        Dropdown:TweenSize(UDim2.new(0.95,0,0,120),"Out","Quart",0.3,true)
-                        List:TweenSize(UDim2.new(1,0,0,100),"Out","Quart",0.3,true)
-                        TweenService:Create(DropdownImage,TweenInfo.new(0.3),{Rotation = 180}):Play()
-                    else
-                        Dropdown:TweenSize(UDim2.new(0.95,0,0,20),"Out","Quart",0.3,true)
-                        List:TweenSize(UDim2.new(1,0,0,0),"Out","Quart",0.3,true)
-                        TweenService:Create(DropdownImage,TweenInfo.new(0.3),{Rotation = 0}):Play()
-                    end
-                end
-
-                DropdownButton.MouseButton1Click:Connect(ToggleDropdown)
-                DropdownButton.TouchTap:Connect(ToggleDropdown)
+                local Dropdown, DropdownButton, List, CloseDropdown = BuildDropdownWidget(Text)
 
                 local Selected = {}
 
                 local function NewSelectable(string,value)
-                    local Selectable = CreateModule.Instance("TextButton",{
-                        Parent = List;
-                        Name = string;
-                        BackgroundTransparency = AevryxLib["Theme"]["ElementTransparency"];
-                        BorderSizePixel = 0;
-                        BorderColor3 = Color3.fromRGB(20,20,20);
-                        Position = UDim2.new(0,0,0,0);
-                        Size = UDim2.new(0.95,0,0,20);
-                        Font = Enum.Font[AevryxLib["Theme"]["Font"]];
-                        Text = "  " .. string;
-                        TextSize = 16;
-                        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
-                        TextXAlignment = Enum.TextXAlignment.Left;
-                        TextYAlignment = Enum.TextYAlignment.Center;
-                        AutoButtonColor = false;
-                    })
-
-                    local Check = CreateModule.Instance("TextLabel",{
-                        Parent = Selectable;
-                        Name = "Check";
-                        BackgroundTransparency = 1;
-                        BorderSizePixel = 0;
-                        Position = UDim2.new(0.88, 0, 0, 0);
-                        Size = UDim2.new(0.1,0,0,20);
-                        Font = Enum.Font[AevryxLib["Theme"]["Font"]];
-                        Text = "";
-                        TextSize = 16;
-                        TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5);
-                        TextXAlignment = Enum.TextXAlignment.Center;
-                        TextYAlignment = Enum.TextYAlignment.Center;
-                    })
-
-                    local Corner = CreateModule.Instance("UICorner",{
-                        Parent = Selectable;
-                        Name = "Corner";
-                        CornerRadius = UDim.new(0,0);
-                    })
-    
-                    local Stroke = CreateModule.Instance("UIStroke",{
-                        Parent = Selectable;
-                        Name = "Stroke";
-                        Thickness = 1;
-                        Color = Color3.fromRGB(20,20,20);
-                        ApplyStrokeMode = Enum.ApplyStrokeMode.Border;
-                    })
-
-                    Selectable.MouseEnter:Connect(function()
-                        TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = AevryxLib["Theme"]["FontColor"]}):Play()
-                        TweenService:Create(Selectable,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(0,0,0)}):Play()
-                    end)
-            
-                    Selectable.MouseLeave:Connect(function()
-                        TweenService:Create(Selectable,TweenInfo.new(0.3),{TextColor3 = Darker(AevryxLib["Theme"]["FontColor"],1.5)}):Play()
-                        TweenService:Create(Selectable,TweenInfo.new(0.3),{BackgroundColor3 = Color3.fromRGB(0,0,0)}):Play()
-                    end)
-
-                    Selectable.MouseButton1Click:Connect(function()
+                    BuildSelectable(List, string, value, function(_, Check)
                         Selected[string] = not Selected[string]
                         if Selected[string] then
                             Check.Text = "●"
@@ -1959,7 +1682,7 @@ InMain.Notification = InMain.Notification
                             Check.Text = ""
                         end
                         pcall(func, string, value)
-                    end)
+                    end, true)
                 end
 
                 for string,value in next,Selectables do
